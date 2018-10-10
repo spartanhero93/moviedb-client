@@ -27,6 +27,14 @@ class HandlePosts extends Component {
 
   deletePost = async id => {
     const response = await axios.delete(`${DOMAIN}/posts/${id}`)
+
+    if (response.error) return alert('Error')
+    else {
+      const posts = [...this.state.posts].filter(
+        item => item._id !== response.data
+      )
+      this.setState({ posts })
+    }
   }
 
   handleInputs = event => {
@@ -38,9 +46,12 @@ class HandlePosts extends Component {
     const { name, link, posts } = this.state
 
     try {
-      const response = axios.post(`${DOMAIN}/posts`, { name, link })
-      console.log(response)
-      // this.setState({ posts: [...posts, response.data], name: '', link: '' })
+      const response = await axios.post(`${DOMAIN}/posts`, { name, link })
+      if (response.data.error) console.log(response.data.error)
+      else {
+        const { newPost } = response.data
+        this.setState({ posts: [...posts, newPost], name: '', link: '' })
+      }
     } catch (error) {
       console.error(error)
     }

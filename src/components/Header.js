@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Header = props => (
   <Wrapper>
-    <h1>Post & Sell</h1>
+    <h1>Streaming Service</h1>
     <Navbar>
       <ul>
         <a href='/login'>Login</a>
