@@ -1,55 +1,28 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
-import { connect } from 'react-redux';
+/**redux */
+import { connect } from 'react-redux'
 
-class ConnectedApp extends Component {
-	state = {
-		data: {}
-	};
+/** components */
+import MovieMapper from './components/movieMapper'
+import Sidebar from './Containers/Sidebar/index'
 
-	fetchTopRated = async event => {
-		try {
-			const { name } = await event.target;
-			const response = await axios.get(`http://localhost:3001/api/movies/${name}`);
-			const { data } = await response.data;
-			console.log(data);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	render() {
-		const { test } = this.props;
-		return (
-			<div>
-				<h1>Hello World</h1>
-				<button onClick={this.fetchTopRated} name="top_rated">
-					Fetch Top Rated
-				</button>
-				<button onClick={this.fetchTopRated} name="popular">
-					Fetch Popular
-				</button>
-				<button onClick={this.fetchTopRated} name="now_playing">
-					Fetch now playing
-				</button>
-				<button onClick={this.fetchTopRated} name="upcoming">
-					Fetch upcoming
-				</button>
-				<button onClick={this.fetchTopRated} name="latest">
-					Fetch latest
-				</button>
-			</div>
-		);
-	}
+const ConnectedApp = ({ state }) => {
+  return (
+    <Wrapper>
+      <Sidebar />
+      <MovieMapper {...state} />
+    </Wrapper>
+  )
 }
-const click = () => ({
-	type: 'TEST'
-});
-const mapDispatchToProps = dispatch => ({
-	test: () => dispatch(click())
-});
 
-const App = connect(null, mapDispatchToProps)(ConnectedApp);
+const Wrapper = styled.div`display: flex;`
 
-export default App;
+const mapStateToProps = state => ({
+  state,
+})
+
+const App = connect(mapStateToProps)(ConnectedApp)
+
+export default App
