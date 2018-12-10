@@ -1,10 +1,8 @@
-import { fetchDB } from '../API'
-
 const initialState = {
   page: 1,
   results: [],
   total_pages: 1,
-  total_results: 1,
+  total_results: 1
 }
 
 const reducer = (state = initialState, action) => {
