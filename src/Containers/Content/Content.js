@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 export default class Content extends Component {
   render() {
+    console.log(this.props)
     const { results, page } = this.props
-    console.log(results)
-    if (!results) return <div>Loading...</div>
+    if (!results) return <Wrapper>Loading...</Wrapper>
     return (
       <Wrapper>
         <h1>Current page: {page}</h1>
@@ -20,7 +20,8 @@ export default class Content extends Component {
 }
 
 const Wrapper = styled.div`
-  background: #5a757b;
   color: white;
   height: 100%;
+  width: 100%;
+  padding: 2rem 3rem;
 `

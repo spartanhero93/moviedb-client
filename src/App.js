@@ -8,23 +8,21 @@ import { connect } from 'react-redux'
 // import MovieMapper from './components/movieMapper'
 import Sidebar from './Containers/Sidebar/Sidebar'
 import Navbar from './Containers/Navbar/Navbar'
-import Content from './Containers/Content/Content'
 const ConnectedApp = ({ state }) => {
   return (
     <Wrapper>
+      <Navbar />
       <Sidebar />
-      <Container>
-        <Navbar />
-        <Content {...state} />
-      </Container>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.div`display: flex;`
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 `
 
 const mapStateToProps = (state) => ({

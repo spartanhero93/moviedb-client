@@ -1,7 +1,7 @@
 import { fetchDB } from '../API'
 
 /** Thunk */
-export const fetchData = urlName => async dispatch => {
+export const fetchData = (urlName) => async (dispatch) => {
   try {
     const data = await fetchDB(urlName)
     dispatch(getData(data))
@@ -12,7 +12,12 @@ export const fetchData = urlName => async dispatch => {
 
 /** Regular action */
 
-export const getData = data => ({
+export const getData = (data) => ({
   type: 'FETCH_DATA',
-  data,
+  data
+})
+
+export const Test = (data) => ({
+  type: 'TEST',
+  data
 })

@@ -11,6 +11,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, ...action.data }
     case 'CHANGE_PAGE':
       return console.log('CHANGE_PAGE called')
+    case 'TEST':
+      return console.log(action.data)
     default:
       return state
   }
