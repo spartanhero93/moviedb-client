@@ -1,31 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-export default class Navbar extends Component {
-  render() {
-    return (
-      <Wrapper className='navbar'>
-        <div>
-          <h1>Movie Now!</h1>
-        </div>
-        <div>
-          <input type='text' placeholder='Search...' />
-        </div>
-        <div id='account'>
-          <span>Sign in</span>
-
-          <span>Sign up</span>
-        </div>
-      </Wrapper>
-    )
-  }
-}
-
 const Wrapper = styled.header`
   display: flex;
   justify-content: space-between;
-  background-color: #de5357;
-  color: white;
+  background-color: #20232a;
+  color: #61dafb;
   line-height: 4rem;
   text-align: center;
 
@@ -46,3 +26,40 @@ const Wrapper = styled.header`
     }
   }
 `
+
+const Account = styled.div`
+  display: flex;
+  > span {
+    margin: 0 1rem;
+  }
+`
+
+export default class Navbar extends Component {
+  state = {
+    open: false
+  }
+
+  handleClickOpen = () => {
+    this.setState({ open: true })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
+  render() {
+    const { open } = this.state
+    return (
+      <React.Fragment>
+        <Wrapper className='navbar'>
+          <div>
+            <h1>Movie Now!</h1>
+          </div>
+          <div>
+            <input type='text' placeholder='Search...' />
+          </div>
+        </Wrapper>
+      </React.Fragment>
+    )
+  }
+}

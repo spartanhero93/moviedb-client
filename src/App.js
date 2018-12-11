@@ -22,7 +22,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
 `
 
 const mapStateToProps = (state) => ({
