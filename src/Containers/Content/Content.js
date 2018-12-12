@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { genreList } from './genres'
+import Hero from '../Hero'
 
 function getGenreFromId(itemGeneres) {
   let genres = []
@@ -27,6 +28,7 @@ export default class Content extends Component {
     return (
       <Wrapper>
         <Title>{type}</Title>
+        <Hero />
         {results.map((item) => (
           <Movie key={item.id}>
             <MovieImg src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
@@ -53,7 +55,6 @@ const fadeIn = keyframes`
 const Wrapper = styled.div`
   color: white;
   height: 100%;
-  width: 90%;
   padding: 2rem 3rem;
   animation: ${fadeIn} 2s;
   display: flex;

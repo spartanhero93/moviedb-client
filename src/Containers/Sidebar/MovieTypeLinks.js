@@ -7,19 +7,19 @@ export default function MovieTypeLinks(props) {
     <Links>
       <Toggle onChange={() => fetchMovies('now_playing', 'Now Playing')}>
         <input id='a' type='radio' name='radio' />
-        <label for='a'>Now Playing</label>
+        <label htmlFor='a'>Now Playing</label>
       </Toggle>
       <Toggle>
         <input onChange={() => fetchMovies('top_rated', 'Top Rated')} id='b' type='radio' name='radio' />
-        <label for='b'>Top Rated</label>
+        <label htmlFor='b'>Top Rated</label>
       </Toggle>
       <Toggle onChange={() => fetchMovies('upcoming', 'Upcoming')}>
         <input id='c' type='radio' name='radio' />
-        <label for='c'>Upcoming</label>
+        <label htmlFor='c'>Upcoming</label>
       </Toggle>
       <Toggle onChange={() => fetchMovies('popular', 'Popular')}>
         <input id='d' type='radio' name='radio' />
-        <label for='d'>Popular</label>
+        <label htmlFor='d'>Popular</label>
       </Toggle>
     </Links>
   )

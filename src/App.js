@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 // import MovieMapper from './components/movieMapper'
 import Sidebar from './Containers/Sidebar/Sidebar'
 import Navbar from './Containers/Navbar/Navbar'
+import Hero from './Containers/Hero'
 const ConnectedApp = ({ state }) => {
   return (
     <Wrapper>
