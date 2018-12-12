@@ -4,12 +4,18 @@ import styled, { keyframes } from 'styled-components'
 import { genreList } from './genres'
 
 function getGenreFromId(itemGeneres) {
+  let genres = []
   itemGeneres.sort((a, b) => a - b)
   genreList.map((obj) => {
     itemGeneres.map((item) => {
-      if (obj.id === item) return obj.name
+      if (obj.id === item) return genres.push(obj)
     })
   })
+  if (genres.length > 3) {
+    return genres.splice(0, 3)
+  } else {
+    return genres
+  }
 }
 
 export default class Content extends Component {
@@ -20,11 +26,14 @@ export default class Content extends Component {
     if (!results) return <div>Loading...</div>
     return (
       <Wrapper>
+        <Title>{type}</Title>
         {results.map((item) => (
           <Movie key={item.id}>
             <MovieImg src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
             <MovieTitle>{item.title}</MovieTitle>
-            <MovieRating>{getGenreFromId(item.genre_ids)}</MovieRating>
+            <MovieGenre>
+              {getGenreFromId(item.genre_ids).map((item) => <span key={item.id}>{item.name}</span>)}
+            </MovieGenre>
           </Movie>
         ))}
       </Wrapper>
@@ -54,9 +63,10 @@ const Wrapper = styled.div`
 const Movie = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin: 1rem;
-  height: 18rem;
-  width: 10rem;
+  height: 26rem;
+  width: 14rem;
   box-shadow: 3px 3px 5px 2px black;
   transition: all .3s ease-in-out;
   :hover {
@@ -69,5 +79,21 @@ const Movie = styled.div`
   }
 `
 const MovieImg = styled.img`height: 80%;`
-const MovieTitle = styled.span``
-const MovieRating = styled.span``
+const MovieTitle = styled.span`
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+`
+const MovieGenre = styled.div`
+  padding: .5rem 1rem;
+  display: flex;
+  justify-content: space-around;
+  > span {
+    font-size: .8rem;
+  }
+`
+const Title = styled.div`
+  font-size: 2rem;
+  font-weight: 200;
+  width: 100%;
+`

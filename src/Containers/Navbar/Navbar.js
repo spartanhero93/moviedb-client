@@ -27,28 +27,8 @@ const Wrapper = styled.header`
   }
 `
 
-const Account = styled.div`
-  display: flex;
-  > span {
-    margin: 0 1rem;
-  }
-`
-
 export default class Navbar extends Component {
-  state = {
-    open: false
-  }
-
-  handleClickOpen = () => {
-    this.setState({ open: true })
-  }
-
-  handleClose = () => {
-    this.setState({ open: false })
-  }
-
   render() {
-    const { open } = this.state
     return (
       <React.Fragment>
         <Wrapper className='navbar'>

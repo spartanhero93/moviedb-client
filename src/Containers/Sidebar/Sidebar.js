@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Content from '../Content/Content'
 import { fetchDB } from '../../redux/API'
+import MovieTypeLinks from './MovieTypeLinks'
+import UserIcon from '../../icons/user.svg'
 
 export default class Sidebar extends Component {
   state = {
@@ -22,30 +24,22 @@ export default class Sidebar extends Component {
     return (
       <Wrapper className='sidebar'>
         <Container>
-          <div className='User'>
-            <div>Picture</div>
-            <div>Luis Lopez</div>
-          </div>
-          <Links className='links'>
-            <div onClick={() => this.fetchMovies('now_playing', 'Now Playing')}>Now Playing</div>
-            <div onClick={() => this.fetchMovies('top_rated', 'Top Rated')}>Top Rated</div>
-            <div onClick={() => this.fetchMovies('upcoming', 'Upcoming')}>Upcoming</div>
-            <div onClick={() => this.fetchMovies('popular', 'Popular')}>Popular</div>
-          </Links>
-          <div className='genres'>
+          <User className='User'>
+            <img src={UserIcon} />
+            <div>Hello, Guest</div>
+          </User>
+          <MovieTypeLinks current={this.state.type} fetchMovies={this.fetchMovies} />
+          <OtherLinks className='genres'>
+            <div>
+              <h4>TV Shows</h4>
+            </div>
+            <div>
+              <h4>Reviews</h4>
+            </div>
             <div>
               <h4>Genres</h4>
             </div>
-            <div>Action</div>
-            <div>Adventure</div>
-            <div>Comedy</div>
-            <div>Documentary</div>
-            <div>Horror</div>
-            <div>Suspense</div>
-            <div>Drama</div>
-            <div>Romance</div>
-            <div>Thriller</div>
-          </div>
+          </OtherLinks>
         </Container>
         <Content {...this.state} />
       </Wrapper>
@@ -66,22 +60,16 @@ const Container = styled.div`
   background: #1e2328;
   color: white;
   text-align: center;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
 
   > div {
-    padding: 2rem 1rem;
     > div {
-      padding: .5rem 0;
     }
   }
 `
-const Links = styled.div`
-  > div {
-    transition: all .5s ease-in-out;
-    &:hover {
-      color: #61dafb;
-      transform: scale(1.1);
-    }
+const User = styled.div`
+  img {
+    height: 3rem;
   }
 `
+
+const OtherLinks = styled.div``
