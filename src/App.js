@@ -3,18 +3,21 @@ import styled from 'styled-components'
 
 /**redux */
 import { connect } from 'react-redux'
-
+import { BrowserRouter } from 'react-router-dom'
 /** components */
 // import MovieMapper from './components/movieMapper'
 import Sidebar from './Containers/Sidebar/Sidebar'
 import Navbar from './Containers/Navbar/Navbar'
-import Hero from './Containers/Hero'
-const ConnectedApp = ({ state }) => {
+const ConnectedApp = () => {
   return (
-    <Wrapper>
-      <Navbar />
-      <Sidebar />
-    </Wrapper>
+    <React.Fragment>
+      <BrowserRouter>
+        <Wrapper>
+          <Navbar />
+          <Sidebar />
+        </Wrapper>
+      </BrowserRouter>
+    </React.Fragment>
   )
 }
 

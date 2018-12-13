@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 export default function MovieTypeLinks(props) {
-  const { current, fetchMovies } = props
+  const { fetchMovies } = props
   return (
     <Links>
       <Toggle onChange={() => fetchMovies('now_playing', 'Now Playing')}>

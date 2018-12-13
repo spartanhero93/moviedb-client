@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-import styled, { keyframes } from 'styled-components'
-import Content from '../Content/Content'
+import styled from 'styled-components'
 import { fetchDB } from '../../redux/API'
 import MovieTypeLinks from './MovieTypeLinks'
-import UserIcon from '../../icons/user.svg'
-import Hero from '../Hero'
+import Main from '../Main'
+//import {Switch, Link, Route} from 'react-router-dom'
 
 export default class Sidebar extends Component {
   state = {
     data: {},
     type: '',
     sideBarToggled: false
+  }
+
+  componentDidMount() {
+    this.fetchMovies('now_playing', 'Now Playing')
   }
 
   fetchMovies = async (name, type) => {
@@ -27,14 +30,10 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const { type, sideBarToggled } = this.state
+    const { data, type } = this.state
     return (
       <Wrapper className='sidebar'>
-        <Container sideBarToggled={sideBarToggled}>
-          <User className='User'>
-            <img src={UserIcon} />
-            <div>Hello, Guest</div>
-          </User>
+        <Container>
           <MovieTypeLinks current={type} fetchMovies={this.fetchMovies} />
           <OtherLinks className='genres'>
             <div>
@@ -48,21 +47,11 @@ export default class Sidebar extends Component {
             </div>
           </OtherLinks>
         </Container>
-        <input type='checkbox' name='checkbox' onChange={this.toggleSidebar} />
-        <Content {...this.state} />
+        <Main movies={data} />
       </Wrapper>
     )
   }
 }
-
-const fade = keyframes`
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0);
-  }
-`
 
 const Wrapper = styled.div`
   display: flex;
@@ -70,20 +59,16 @@ const Wrapper = styled.div`
 `
 
 const Container = styled.div`
-  display: ${(props) => (props.sideBarToggled ? 'none' : 'flex')};
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
   background: #1e2328;
   color: white;
   text-align: center;
+  width: 10rem;
   @media (max-width: 900px) {
     font-size: .8rem;
     width: 25vw;
-  }
-`
-const User = styled.div`
-  img {
-    height: 3rem;
   }
 `
 
