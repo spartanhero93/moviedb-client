@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const fetchDB = async (name, pageNum = 1) => {
+export const fetchFromDatabase = async (name, pageNum = 1) => {
   try {
     const response = await axios.get(`http://localhost:3001/api/movies/${name}/${pageNum}`)
     const { data } = await response.data

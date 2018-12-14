@@ -14,12 +14,21 @@ function getGenreFromId(itemGeneres) {
   }
 }
 
-export default class Content extends Component {
+export default class MoviesMapper extends Component {
+  state = {
+    currentList: []
+  }
+
+  componentDidUpdate(props) {
+    console.log(props)
+  }
+  componentWillReceiveProps(props) {
+    console.log(props)
+  }
+
   render() {
-    console.log(this.props)
     const { results } = this.props
     const { type } = this.props
-    if (!results) return <span style={{ width: '0', height: '0' }} />
     return (
       <Wrapper>
         <Title>{type}</Title>
@@ -49,12 +58,10 @@ const fadeIn = keyframes`
 
 const Wrapper = styled.div`
   color: white;
-  height: 100%;
   padding: 2rem 3rem;
   animation: ${fadeIn} 2s;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   @media (max-width: 900px) {
     padding: 0;
   }

@@ -1,32 +1,19 @@
 import React from 'react'
-import styled from 'styled-components'
 
 /**redux */
 import { connect } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 /** components */
-// import MovieMapper from './components/movieMapper'
-import Sidebar from './Containers/Sidebar/Sidebar'
-import Navbar from './Containers/Navbar/Navbar'
+import SideBar from './Containers/SideBar'
 const ConnectedApp = () => {
   return (
-    <React.Fragment>
+    <div>
       <BrowserRouter>
-        <Wrapper>
-          <Navbar />
-          <Sidebar />
-        </Wrapper>
+        <SideBar />
       </BrowserRouter>
-    </React.Fragment>
+    </div>
   )
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-`
 
 const mapStateToProps = (state) => ({
   state
