@@ -2,60 +2,61 @@ import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 
-import NowPlaying from './NowPlaying'
-import TopRated from './TopRated'
-import Popular from './Popular'
-import Upcoming from './Upcoming'
+const AiringToday = () => <div>Airing TV Shows Today</div>
+const Popular = () => <div>Popular</div>
+const TopRated = () => <div>Top Rated</div>
+const CurrentlyOnAir = () => <div>Currently on Air</div>
 
 const Routes = [
   {
-    path: '/movies/top_rated',
+    path: '/tv/airing_today',
     exact: true,
-    component: TopRated
+    component: AiringToday
   },
   {
-    path: '/movies/popular',
+    path: '/tv/popular',
     exact: true,
     component: Popular
   },
   {
-    path: '/movies/upcoming',
+    path: '/tv/top_rated',
     exact: true,
-    component: Upcoming
+    component: TopRated
   },
   {
-    path: '/movies/now_playing',
+    path: '/tv/currently_on_air',
     exact: true,
-    component: NowPlaying
+    component: CurrentlyOnAir
   }
 ]
 
 const Links = [
   {
-    to: '/movies/top_rated',
-    title: 'Top Rated'
+    to: '/tv/airing_today',
+    title: 'Airing Today'
   },
   {
-    to: '/movies/popular',
+    to: '/tv/popular',
     title: 'Popular'
   },
   {
-    to: '/movies/upcoming',
-    title: 'Upcoming'
+    to: '/tv/top_rated',
+    title: 'Top Rated'
   },
   {
-    to: '/movies/now_playing',
-    title: 'Now Playing'
+    to: '/tv/currently_on_air',
+    title: 'Currently on Air'
   }
 ]
-export const mapMovieLinksToNavLinks = (styles) =>
+
+export const mapTVLinksToNavLinks = (styles) =>
   Links.map((item) => (
     <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
       <Button className={styles.button}>{item.title}</Button>
     </NavLink>
   ))
 
-export const mapMovieRoutesToRouter = () =>
+export const mapTVRoutesToRouter = () =>
   Routes.map((item) => (
     <Route
       key={item.path}

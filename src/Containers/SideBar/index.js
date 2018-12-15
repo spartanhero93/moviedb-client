@@ -13,8 +13,10 @@ import { withStyles } from '@material-ui/core/styles'
 /** Routes */
 import {
   mapMovieLinksToNavLinks,
-  mapRoutesToRouter
+  mapMovieRoutesToRouter
 } from '../Movies/Routes'
+import { mapTVLinksToNavLinks, mapTVRoutesToRouter } from '../TVShows/Routes'
+import { Divider, Button } from '@material-ui/core'
 
 const drawerWidth = 220
 
@@ -74,7 +76,19 @@ class SideBar extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar}>Hello</div>
+        <Divider />
+        <div style={{ textAlign: 'center' }}>Movies</div>
         {mapMovieLinksToNavLinks(classes)}
+        <Divider />
+        <div style={{ textAlign: 'center' }}>TV Shows</div>
+        {mapTVLinksToNavLinks(classes)}
+        <Divider />
+        <div style={{ textAlign: 'center' }}>Discover</div>
+        <Button className={classes.button}>Movies</Button>
+        <Button className={classes.button}>TV Shows</Button>
+        <Divider />
+        <div style={{ textAlign: 'center' }}>People</div>
+        <Divider />
       </div>
     )
 
@@ -102,9 +116,7 @@ class SideBar extends React.Component {
             <Drawer
               container={this.props.container}
               variant='temporary'
-              anchor={
-                theme.direction === 'rtl' ? 'right' : 'left'
-              }
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
@@ -131,7 +143,8 @@ class SideBar extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {mapRoutesToRouter()}
+          {mapMovieRoutesToRouter()}
+          {mapTVRoutesToRouter()}
         </main>
       </div>
     )
@@ -146,6 +159,4 @@ SideBar.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(
-  SideBar
-)
+export default withStyles(styles, { withTheme: true })(SideBar)
