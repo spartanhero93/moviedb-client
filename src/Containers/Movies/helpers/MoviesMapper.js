@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import styled, { keyframes } from 'styled-components'
-
-import { genreList } from './genres'
+import { genreList } from './genreList'
 
 function getGenreFromId(itemGeneres) {
   let genres = []
   itemGeneres.sort((a, b) => a - b)
-  genreList.map((obj) => itemGeneres.map((item) => (obj.id === item ? genres.push(obj) : null)))
+  genreList.map((obj) =>
+    itemGeneres.map(
+      (item) => (obj.id === item ? genres.push(obj) : null)
+    )
+  )
   if (genres.length > 3) {
     return genres.splice(0, 3)
   } else {
@@ -15,34 +18,31 @@ function getGenreFromId(itemGeneres) {
 }
 
 export default class MoviesMapper extends Component {
-  state = {
-    currentList: []
-  }
-
-  componentDidUpdate(props) {
-    console.log(props)
-  }
-  componentWillReceiveProps(props) {
-    console.log(props)
-  }
-
   render() {
     const { results } = this.props
     const { type } = this.props
     return (
-      <Wrapper>
+      <div>
         <Title>{type}</Title>
-        {results.map((item) => (
-          <Movie key={item.id}>
-            <MovieImg src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} />
-            <MovieTitle>{item.title}</MovieTitle>
-            <MovieGenre>
-              {getGenreFromId(item.genre_ids).map((item) => <span key={item.id}>{item.name}</span>)}
-            </MovieGenre>
-            <MovieRating>{item.vote_average}</MovieRating>
-          </Movie>
-        ))}
-      </Wrapper>
+        <Wrapper>
+          {results.map((item) => (
+            <Movie key={item.id}>
+              <MovieImg
+                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+              />
+              <MovieTitle>{item.title}</MovieTitle>
+              <MovieGenre>
+                {getGenreFromId(
+                  item.genre_ids
+                ).map((item) => (
+                  <span key={item.id}>{item.name}</span>
+                ))}
+              </MovieGenre>
+              <MovieRating>{item.vote_average}</MovieRating>
+            </Movie>
+          ))}
+        </Wrapper>
+      </div>
     )
   }
 }
@@ -62,6 +62,7 @@ const Wrapper = styled.div`
   animation: ${fadeIn} 2s;
   display: flex;
   flex-wrap: wrap;
+  /* overflow-x: scroll; */
   @media (max-width: 900px) {
     padding: 0;
   }

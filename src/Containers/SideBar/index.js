@@ -1,28 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { NavLink, Route } from 'react-router-dom'
-
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
-// import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
-// import InboxIcon from '@material-ui/icons/MoveToInbox'
-// import List from '@material-ui/core/List'
-// import ListItem from '@material-ui/core/ListItem'
-// import ListItemIcon from '@material-ui/core/ListItemIcon'
-// import ListItemText from '@material-ui/core/ListItemText'
-// import MailIcon from '@material-ui/icons/Mail'
 import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import { Button } from '@material-ui/core'
 
-import Movies from '../Movies'
+/** Routes */
+import {
+  mapMovieLinksToNavLinks,
+  mapRoutesToRouter
+} from '../Movies/Routes'
 
-const drawerWidth = 240
+const drawerWidth = 220
 
 const styles = (theme) => ({
   root: {
@@ -63,53 +57,15 @@ const styles = (theme) => ({
   }
 })
 
-const Test = () => (
-  <div>
-    <h1>This is a Test</h1>
-  </div>
-)
-
-const Links = [
-  {
-    to: '/test',
-    title: 'Testing'
-    // Link: Test
-  },
-  {
-    to: '/movies',
-    title: 'Movies'
-    // Link: Test2
-  }
-]
-const mapLinksToNavLinks = (styles) =>
-  Links.map((item) => (
-    <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
-      <Button className={styles.button}>{item.title}</Button>
-    </NavLink>
-  ))
-
-const Routes = [
-  {
-    path: '/test',
-    exact: true,
-    component: Test
-  },
-  {
-    path: '/movies',
-    exact: true,
-    component: Movies
-  }
-]
-const mapRoutesToRouter = () =>
-  Routes.map((item) => <Route key={item.path} exact={item.exact} path={item.path} component={item.component} />)
-
 class SideBar extends React.Component {
   state = {
     mobileOpen: false
   }
 
   handleDrawerToggle = () => {
-    this.setState((state) => ({ mobileOpen: !state.mobileOpen }))
+    this.setState((state) => ({
+      mobileOpen: !state.mobileOpen
+    }))
   }
 
   render() {
@@ -118,7 +74,7 @@ class SideBar extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar}>Hello</div>
-        {mapLinksToNavLinks(classes)}
+        {mapMovieLinksToNavLinks(classes)}
       </div>
     )
 
@@ -146,7 +102,9 @@ class SideBar extends React.Component {
             <Drawer
               container={this.props.container}
               variant='temporary'
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              anchor={
+                theme.direction === 'rtl' ? 'right' : 'left'
+              }
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
@@ -188,4 +146,6 @@ SideBar.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(SideBar)
+export default withStyles(styles, { withTheme: true })(
+  SideBar
+)
