@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchMovies } from '../../../redux/actions'
-import { Button } from '@material-ui/core'
+import { fetchTVShows } from '../../../redux/actions'
 import ResultsMapper from '../../../helpers/ResultsMapper'
+import { Button } from '@material-ui/core'
 
-class Popular extends Component {
+class CurrentlyOnAir extends Component {
   componentDidMount() {
-    this.props.fetchMovies('popular')
+    this.props.fetchTVShows('on_the_air')
   }
 
   render() {
-    const { state, fetchMovies } = this.props
+    const { state, fetchTVShows } = this.props
     if (!state.results[1]) return <div>Loading...</div>
     return (
       <div>
         <ResultsMapper {...state} />
-        <Button onClick={() => fetchMovies('popular', state.page - 1)}>
+        <Button onClick={() => fetchTVShows('on_the_air', state.page - 1)}>
           Previous Page
         </Button>
         <span>
           Current page {state.page} of {state.total_pages} pages
         </span>
-        <Button onClick={() => fetchMovies('popular', state.page + 1)}>
+        <Button onClick={() => fetchTVShows('on_the_air', state.page + 1)}>
           Next Page
         </Button>
       </div>
@@ -34,8 +34,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMovies: (type, pageNum) => dispatch(fetchMovies(type, pageNum))
+  fetchTVShows: (type, pageNum) => dispatch(fetchTVShows(type, pageNum))
 })
 
-const ConnectedPopular = connect(mapStateToProps, mapDispatchToProps)(Popular)
-export default ConnectedPopular
+const ConnectedCurrentlyOnAir = connect(mapStateToProps, mapDispatchToProps)(
+  CurrentlyOnAir
+)
+export default ConnectedCurrentlyOnAir

@@ -6,9 +6,7 @@ function getGenreFromId(itemGeneres) {
   let genres = []
   itemGeneres.sort((a, b) => a - b)
   genreList.map((obj) =>
-    itemGeneres.map(
-      (item) => (obj.id === item ? genres.push(obj) : null)
-    )
+    itemGeneres.map((item) => (obj.id === item ? genres.push(obj) : null))
   )
   if (genres.length > 3) {
     return genres.splice(0, 3)
@@ -32,9 +30,7 @@ export default class MoviesMapper extends Component {
               />
               <MovieTitle>{item.title}</MovieTitle>
               <MovieGenre>
-                {getGenreFromId(
-                  item.genre_ids
-                ).map((item) => (
+                {getGenreFromId(item.genre_ids).map((item) => (
                   <span key={item.id}>{item.name}</span>
                 ))}
               </MovieGenre>
@@ -47,19 +43,9 @@ export default class MoviesMapper extends Component {
   }
 }
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`
-
 const Wrapper = styled.div`
   color: white;
   padding: 2rem 3rem;
-  animation: ${fadeIn} 2s;
   display: flex;
   flex-wrap: wrap;
   /* overflow-x: scroll; */

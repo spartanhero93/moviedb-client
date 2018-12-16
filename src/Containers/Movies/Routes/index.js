@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Button } from '@material-ui/core'
 
 import NowPlaying from './NowPlaying'
@@ -48,12 +49,6 @@ const Links = [
     title: 'Now Playing'
   }
 ]
-export const mapMovieLinksToNavLinks = (styles) =>
-  Links.map((item) => (
-    <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
-      <Button className={styles.button}>{item.title}</Button>
-    </NavLink>
-  ))
 
 export const mapMovieRoutesToRouter = () =>
   Routes.map((item) => (
@@ -63,4 +58,11 @@ export const mapMovieRoutesToRouter = () =>
       path={item.path}
       component={item.component}
     />
+  ))
+
+export const mapMovieLinksToNavLinks = (styles) =>
+  Links.map((item) => (
+    <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
+      <Button className={styles.button}>{item.title}</Button>
+    </NavLink>
   ))

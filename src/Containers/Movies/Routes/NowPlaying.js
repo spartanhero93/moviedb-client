@@ -1,51 +1,43 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchMovies } from '../../../redux/actions'
 import { Button } from '@material-ui/core'
+import ResultsMapper from '../../../helpers/ResultsMapper'
 
-import MoviesMapper from '../helpers/MoviesMapper'
-import { fetchFromDatabase } from '../../../API'
-
-export default class NowPlaying extends Component {
-  state = {
-    data: {},
-    currentPage: 1
-  }
-
-  async componentDidMount() {
-    this.fetchMovies()
-  }
-
-  fetchMovies = async (pageNum) => {
-    try {
-      if (pageNum === 0 || pageNum >= this.state.data.total_pages) {
-        return alert('Stop')
-      } else {
-        const data = await fetchFromDatabase('now_playing', pageNum)
-        this.setState({ data })
-        if (pageNum) {
-          this.setState({ currentPage: pageNum })
-        }
-      }
-    } catch (error) {
-      console.error(error)
-    }
+class NowPlaying extends Component {
+  componentDidMount() {
+    this.props.fetchMovies('now_playing')
   }
 
   render() {
-    const { data, currentPage } = this.state
-    if (!data.results) return <div>Loading...</div>
+    const { state, fetchMovies } = this.props
+    if (!state.results[1]) return <div>Loading...</div>
     return (
       <div>
-        <MoviesMapper {...data} />
-        <Button onClick={() => this.fetchMovies(currentPage - 1)}>
+        <ResultsMapper {...state} />
+        <Button onClick={() => fetchMovies('now_playing', state.page - 1)}>
           Previous Page
         </Button>
         <span>
-          Current page {data.page} of {data.total_pages} pages
+          Current page {state.page} of {state.total_pages} pages
         </span>
-        <Button onClick={() => this.fetchMovies(currentPage + 1)}>
+        <Button onClick={() => fetchMovies('now_playing', state.page + 1)}>
           Next Page
         </Button>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchMovies: (type, pageNum) => dispatch(fetchMovies(type, pageNum))
+})
+
+const ConnectedNowPlaying = connect(mapStateToProps, mapDispatchToProps)(
+  NowPlaying
+)
+export default ConnectedNowPlaying

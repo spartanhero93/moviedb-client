@@ -2,10 +2,12 @@ import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 
-const AiringToday = () => <div>Airing TV Shows Today</div>
+/** Pages */
+import AiringToday from './AiringToday'
+import CurrentlyOnAir from './CurrentlyOnAir'
+
 const Popular = () => <div>Popular</div>
 const TopRated = () => <div>Top Rated</div>
-const CurrentlyOnAir = () => <div>Currently on Air</div>
 
 const Routes = [
   {

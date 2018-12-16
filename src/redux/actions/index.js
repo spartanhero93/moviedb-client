@@ -1,9 +1,20 @@
-import { fetchDB } from '../API'
+import { fetchMoviesFromDatabase, fetchTVFromDatabase } from '../../API'
 
 /** Thunk */
-export const fetchData = (urlName) => async (dispatch) => {
+export const fetchMovies = (urlName, pageNum = 1) => async (dispatch) => {
   try {
-    const data = await fetchDB(urlName)
+    if (pageNum < 1) return alert('Stop')
+    const data = await fetchMoviesFromDatabase(urlName, pageNum)
+    dispatch(getData(data))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const fetchTVShows = (urlName, pageNum = 1) => async (dispatch) => {
+  try {
+    if (pageNum < 1) return alert('stop')
+    const data = await fetchTVFromDatabase(urlName, pageNum)
     dispatch(getData(data))
   } catch (error) {
     console.log(error)
@@ -14,10 +25,5 @@ export const fetchData = (urlName) => async (dispatch) => {
 
 export const getData = (data) => ({
   type: 'FETCH_DATA',
-  data
-})
-
-export const Test = (data) => ({
-  type: 'TEST',
   data
 })
