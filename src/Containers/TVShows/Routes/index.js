@@ -5,9 +5,8 @@ import { Button } from '@material-ui/core'
 /** Pages */
 import AiringToday from './AiringToday'
 import CurrentlyOnAir from './CurrentlyOnAir'
-
-const Popular = () => <div>Popular</div>
-const TopRated = () => <div>Top Rated</div>
+import Popular from './Popular'
+import TopRated from './TopRated'
 
 const Routes = [
   {
