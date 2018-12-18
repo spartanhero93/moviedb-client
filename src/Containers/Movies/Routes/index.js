@@ -1,6 +1,5 @@
 import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { Button } from '@material-ui/core'
 
 import NowPlaying from './NowPlaying'
@@ -60,7 +59,7 @@ export const mapMovieRoutesToRouter = () =>
     />
   ))
 
-export const mapMovieLinksToNavLinks = (styles) =>
+export const mapMovieLinksToNavLinks = (styles, handleDrawerToggle) =>
   Links.map((item) => (
     <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
       <Button className={styles.button}>{item.title}</Button>

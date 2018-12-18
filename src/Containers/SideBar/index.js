@@ -17,6 +17,7 @@ import {
 } from '../Movies/Routes'
 import { mapTVLinksToNavLinks, mapTVRoutesToRouter } from '../TVShows/Routes'
 import { Divider, Button } from '@material-ui/core'
+import styled from 'styled-components'
 
 const drawerWidth = 220
 
@@ -56,6 +57,15 @@ const styles = (theme) => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
     color: 'white'
+  },
+  titles: {
+    color: 'white',
+    fontSize: '1.5rem',
+    fontWeight: '200',
+    textAlign: 'center'
+  },
+  sidebar: {
+    background: '#20232a'
   }
 })
 
@@ -77,17 +87,17 @@ class SideBar extends React.Component {
       <div>
         <div className={classes.toolbar}>Hello</div>
         <Divider />
-        <div style={{ textAlign: 'center' }}>Movies</div>
-        {mapMovieLinksToNavLinks(classes)}
+        <div className={classes.titles}>Movies</div>
+        {mapMovieLinksToNavLinks(classes, this.handleDrawerToggle)}
         <Divider />
-        <div style={{ textAlign: 'center' }}>TV Shows</div>
+        <div className={classes.titles}>TV Shows</div>
         {mapTVLinksToNavLinks(classes)}
         <Divider />
-        <div style={{ textAlign: 'center' }}>Discover</div>
+        <div className={classes.titles}>Discover</div>
         <Button className={classes.button}>Movies</Button>
         <Button className={classes.button}>TV Shows</Button>
         <Divider />
-        <div style={{ textAlign: 'center' }}>People</div>
+        <div className={classes.titles}>People</div>
         <Divider />
       </div>
     )
@@ -95,7 +105,7 @@ class SideBar extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position='fixed' className={classes.appBar}>
+        <AppBar position='fixed' color='primary' className={classes.appBar}>
           <Toolbar>
             <IconButton
               color='inherit'
@@ -106,7 +116,7 @@ class SideBar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant='h6' color='inherit' noWrap>
-              Responsive drawer
+              MediaInfo Now
             </Typography>
           </Toolbar>
         </AppBar>
@@ -143,6 +153,10 @@ class SideBar extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
+          <Hero>
+            <h1>Welcome to the MovieDB app</h1>
+            <p>Browse all kinds of media using MDAPI</p>
+          </Hero>
           {mapMovieRoutesToRouter()}
           {mapTVRoutesToRouter()}
         </main>
@@ -150,6 +164,16 @@ class SideBar extends React.Component {
     )
   }
 }
+
+const Hero = styled.div`
+  height: 50vh;
+  width: 100%;
+  border: 2px solid;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
