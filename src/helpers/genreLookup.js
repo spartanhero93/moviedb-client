@@ -1,4 +1,4 @@
-export const genreList = [
+const genreList = [
   {
     id: 28,
     name: 'Action'
@@ -76,3 +76,16 @@ export const genreList = [
     name: 'Western'
   }
 ]
+
+export const getGenreFromId = (itemGeneres) => {
+  let genres = []
+  itemGeneres.sort((a, b) => a - b)
+  genreList.map((obj) =>
+    itemGeneres.map((item) => (obj.id === item ? genres.push(obj) : null))
+  )
+  if (genres.length > 3) {
+    return genres.splice(0, 3)
+  } else {
+    return genres
+  }
+}

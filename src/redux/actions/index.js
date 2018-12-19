@@ -29,6 +29,8 @@ export const searchAPI = (query, pageNum = 1) => async (dispatch) => {
   try {
     if (pageNum < 1) return alert('stop')
     const data = await querySearch(query, pageNum)
+    // console.log(query)
+    // console.log(data)
     dispatch(getData(data))
   } catch (error) {
     console.error(error)

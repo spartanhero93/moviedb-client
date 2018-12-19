@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchTVShows } from '../../../redux/actions'
-import ResultsMapper from '../../../helpers/ResultsMapper'
+import TVResultsMapper from '../../../helpers/TVResultsMapper'
 import { Button } from '@material-ui/core'
 
 class TopRated extends Component {
@@ -14,7 +14,7 @@ class TopRated extends Component {
     if (!state.results[1]) return <div>Loading...</div>
     return (
       <div>
-        <ResultsMapper {...state} />
+        <TVResultsMapper {...state} />
         <Button onClick={() => fetchTVShows('top_rated', state.page - 1)}>
           Previous Page
         </Button>

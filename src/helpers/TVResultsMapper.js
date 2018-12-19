@@ -1,28 +1,37 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { getGenreFromId } from './genreLookup'
+import NoImage from '../icons/noImage.png'
+import NoImage2 from '../icons/404-notfound.png'
 
-export default class MoviesMapper extends Component {
+export default class TVResultsMapper extends Component {
   render() {
     const { results } = this.props
     const { type } = this.props
+    console.log(results)
     return (
       <div>
         <Title>{type}</Title>
         <Wrapper>
           {results.map((item) => (
-            <Movie key={item.id}>
-              <MovieImg
-                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+            <TV key={item.id}>
+              <TVImg
+                src={
+                  item.poster_path ? (
+                    `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                  ) : (
+                    NoImage2
+                  )
+                }
               />
-              <MovieTitle>{item.title}</MovieTitle>
-              <MovieGenre>
+              <TVTitle>{item.name}</TVTitle>
+              <TVGenre>
                 {getGenreFromId(item.genre_ids).map((item) => (
                   <span key={item.id}>{item.name}</span>
                 ))}
-              </MovieGenre>
-              <MovieRating>{item.vote_average}</MovieRating>
-            </Movie>
+              </TVGenre>
+              <TVRating>{item.vote_average}</TVRating>
+            </TV>
           ))}
         </Wrapper>
       </div>
@@ -44,7 +53,7 @@ const Title = styled.div`
   font-weight: 200;
   width: 100%;
 `
-const Movie = styled.div`
+const TV = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -68,18 +77,18 @@ const Movie = styled.div`
     width: 7rem;
   }
 `
-const MovieImg = styled.img`height: 80%;`
-const MovieTitle = styled.span`
+const TVImg = styled.img`height: 80%;`
+const TVTitle = styled.span`
   text-align: center;
   font-weight: 400;
 `
-const MovieGenre = styled.div`
+const TVGenre = styled.div`
   display: flex;
   justify-content: space-around;
   font-size: .8rem;
 `
 
-const MovieRating = styled.span`
+const TVRating = styled.span`
   height: 2rem;
   width: 2rem;
   background: white;

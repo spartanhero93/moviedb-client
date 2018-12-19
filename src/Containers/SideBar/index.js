@@ -16,8 +16,10 @@ import {
   mapMovieRoutesToRouter
 } from '../Movies/Routes'
 import { mapTVLinksToNavLinks, mapTVRoutesToRouter } from '../TVShows/Routes'
-import { Divider, Button } from '@material-ui/core'
+import { SearchBarRoute } from './SearchBar/SearchBarRoute'
 import styled from 'styled-components'
+import { Divider, Button } from '@material-ui/core'
+import SearchBar from './SearchBar/index'
 
 const drawerWidth = 220
 
@@ -80,11 +82,15 @@ class SideBar extends React.Component {
     }))
   }
 
+  handleDrawerCloseOnTabClick = () => {
+    this.setState((state) => ({ mobileOpen: (state.mobileOpen = false) }))
+  }
+
   render() {
     const { classes, theme } = this.props
 
     const drawer = (
-      <div>
+      <div onClick={this.handleDrawerCloseOnTabClick}>
         <div className={classes.toolbar}>Hello</div>
         <Divider />
         <div className={classes.titles}>Movies</div>
@@ -118,6 +124,7 @@ class SideBar extends React.Component {
             <Typography variant='h6' color='inherit' noWrap>
               MediaInfo Now
             </Typography>
+            <SearchBar />
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
@@ -159,6 +166,7 @@ class SideBar extends React.Component {
           </Hero>
           {mapMovieRoutesToRouter()}
           {mapTVRoutesToRouter()}
+          <SearchBarRoute />
         </main>
       </div>
     )
