@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import _ from 'lodash'
 import { searchAPI } from '../../../redux/actions'
 
 class SearchBar extends Component {

@@ -1,28 +1,48 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { getGenreFromId } from './genreLookup'
+import NoImage2 from '../icons/404-notfound.png'
 
-export default class MoviesMapper extends Component {
+// const movies = item.poster_path
+// const person = item.profile_path
+
+export default class ResultsMapper extends Component {
   render() {
     const { results } = this.props
     const { type } = this.props
+    const imgURL = 'https://image.tmdb.org/t/p/w500'
+    console.log(results)
     return (
       <div>
         <Title>{type}</Title>
         <Wrapper>
           {results.map((item) => (
-            <Movie key={item.id}>
-              <MovieImg
-                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+            <Result key={item.id}>
+              <ResultImg
+                src={
+                  item.poster_path ? (
+                    imgURL + item.poster_path
+                  ) : item.profile_path ? (
+                    imgURL + item.profile_path
+                  ) : (
+                    NoImage2
+                  )
+                }
               />
-              <MovieTitle>{item.title}</MovieTitle>
-              <MovieGenre>
-                {getGenreFromId(item.genre_ids).map((item) => (
-                  <span key={item.id}>{item.name}</span>
-                ))}
-              </MovieGenre>
-              <MovieRating>{item.vote_average}</MovieRating>
-            </Movie>
+              <ResultTitle>{item.title ? item.title : item.name}</ResultTitle>
+              {item.genre_ids ? (
+                <ResultGenre>
+                  {getGenreFromId(item.genre_ids).map((item) => (
+                    <span key={item.id ? item.id : ''}>
+                      {item.name ? item.name : item.popularity}
+                    </span>
+                  ))}
+                </ResultGenre>
+              ) : (
+                ''
+              )}
+              <ResultRating>{item.vote_average}</ResultRating>
+            </Result>
           ))}
         </Wrapper>
       </div>
@@ -44,7 +64,7 @@ const Title = styled.div`
   font-weight: 200;
   width: 100%;
 `
-const Movie = styled.div`
+const Result = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -68,18 +88,18 @@ const Movie = styled.div`
     width: 7rem;
   }
 `
-const MovieImg = styled.img`height: 80%;`
-const MovieTitle = styled.span`
+const ResultImg = styled.img`height: 80%;`
+const ResultTitle = styled.span`
   text-align: center;
   font-weight: 400;
 `
-const MovieGenre = styled.div`
+const ResultGenre = styled.div`
   display: flex;
   justify-content: space-around;
   font-size: .8rem;
 `
 
-const MovieRating = styled.span`
+const ResultRating = styled.span`
   height: 2rem;
   width: 2rem;
   background: white;

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchTVShows } from '../../../redux/actions'
-import TVResultsMapper from '../../../helpers/TVResultsMapper'
+import ResultsMapper from '../../../helpers/ResultsMapper'
+
 import { Button } from '@material-ui/core'
 
 class Popular extends Component {
@@ -14,7 +15,7 @@ class Popular extends Component {
     if (!state.results[1]) return <div>Loading...</div>
     return (
       <div>
-        <TVResultsMapper {...state} />
+        <ResultsMapper {...state} />
         <Button onClick={() => fetchTVShows('popular', state.page - 1)}>
           Previous Page
         </Button>
