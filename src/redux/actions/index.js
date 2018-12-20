@@ -31,7 +31,7 @@ export const searchAPI = (query, pageNum = 1) => async (dispatch) => {
     const data = await querySearch(query, pageNum)
     // console.log(query)
     // console.log(data)
-    dispatch(getData(data))
+    dispatch(getResultsFromQuerySearch(data, query))
   } catch (error) {
     console.error(error)
   }
@@ -42,4 +42,10 @@ export const searchAPI = (query, pageNum = 1) => async (dispatch) => {
 export const getData = (data) => ({
   type: 'FETCH_DATA',
   data
+})
+
+export const getResultsFromQuerySearch = (data, query) => ({
+  type: 'FETCH_QUERY_RESULTS',
+  data,
+  query
 })
