@@ -16,13 +16,19 @@ class AiringToday extends Component {
     return (
       <div>
         <ResultsMapper {...state} />
-        <Button onClick={() => fetchTVShows('airing_today', state.page - 1)}>
+        <Button
+          onClick={() =>
+            fetchTVShows('airing_today', state.page - 1, state.total_pages)}
+        >
           Previous Page
         </Button>
         <span>
           Current page {state.page} of {state.total_pages} pages
         </span>
-        <Button onClick={() => fetchTVShows('airing_today', state.page + 1)}>
+        <Button
+          onClick={() =>
+            fetchTVShows('airing_today', state.page + 1, state.total_pages)}
+        >
           Next Page
         </Button>
       </div>

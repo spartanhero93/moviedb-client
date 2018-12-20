@@ -11,17 +11,24 @@ class TopRated extends Component {
 
   render() {
     const { state, fetchMovies } = this.props
+    console.log(state)
     if (!state.results[1]) return <div>Loading...</div>
     return (
       <div>
         <ResultsMapper {...state} />
-        <Button onClick={() => fetchMovies('top_rated', state.page - 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies('top_rated', state.page - 1, state.total_pages)}
+        >
           Previous Page
         </Button>
         <span>
           Current page {state.page} of {state.total_pages} pages
         </span>
-        <Button onClick={() => fetchMovies('top_rated', state.page + 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies('top_rated', state.page + 1, state.total_pages)}
+        >
           Next Page
         </Button>
       </div>

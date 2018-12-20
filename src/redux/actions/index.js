@@ -5,9 +5,11 @@ import {
 } from '../../API'
 
 /** Thunk */
-export const fetchMovies = (urlName, pageNum = 1) => async (dispatch) => {
+export const fetchMovies = (urlName, pageNum = 1, total_pages) => async (
+  dispatch
+) => {
   try {
-    if (pageNum < 1) return alert('Stop')
+    if (pageNum < 1 || pageNum > total_pages) return
     const data = await fetchMoviesFromDatabase(urlName, pageNum)
     dispatch(getData(data))
   } catch (error) {
@@ -15,9 +17,11 @@ export const fetchMovies = (urlName, pageNum = 1) => async (dispatch) => {
   }
 }
 
-export const fetchTVShows = (urlName, pageNum = 1) => async (dispatch) => {
+export const fetchTVShows = (urlName, pageNum = 1, total_pages) => async (
+  dispatch
+) => {
   try {
-    if (pageNum < 1) return alert('stop')
+    if (pageNum < 1 || pageNum > total_pages) return
     const data = await fetchTVFromDatabase(urlName, pageNum)
     dispatch(getData(data))
   } catch (error) {
@@ -25,12 +29,14 @@ export const fetchTVShows = (urlName, pageNum = 1) => async (dispatch) => {
   }
 }
 
-export const searchAPI = (query, pageNum = 1) => async (dispatch) => {
+/** handle query NEEDS MORE LOGIC */
+export const searchAPI = (query, pageNum = 1, total_pages) => async (
+  dispatch
+) => {
   try {
-    if (pageNum < 1) return alert('stop')
+    if (pageNum < 1 || pageNum > total_pages) return
+    if (!query) return
     const data = await querySearch(query, pageNum)
-    // console.log(query)
-    // console.log(data)
     dispatch(getResultsFromQuerySearch(data, query))
   } catch (error) {
     console.error(error)

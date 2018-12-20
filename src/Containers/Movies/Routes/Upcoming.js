@@ -15,13 +15,19 @@ class Upcoming extends Component {
     return (
       <div>
         <MoviesMapper {...state} />
-        <Button onClick={() => fetchMovies('upcoming', state.page - 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies('upcoming', state.page - 1, state.total_pages)}
+        >
           Previous Page
         </Button>
         <span>
           Current page {state.page} of {state.total_pages} pages
         </span>
-        <Button onClick={() => fetchMovies('upcoming', state.page + 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies('upcoming', state.page + 1, state.total_pages)}
+        >
           Next Page
         </Button>
       </div>

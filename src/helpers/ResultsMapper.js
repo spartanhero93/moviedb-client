@@ -12,7 +12,6 @@ export default class ResultsMapper extends Component {
     const { results } = this.props
     const { type } = this.props
     const imgURL = 'https://image.tmdb.org/t/p/w500'
-    console.log(results)
     return (
       <div>
         <Title>{type}</Title>

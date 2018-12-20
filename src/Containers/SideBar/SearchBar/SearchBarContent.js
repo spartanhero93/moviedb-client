@@ -7,18 +7,23 @@ import { Button } from '@material-ui/core'
 class SearchBarContent extends Component {
   render() {
     const { state, fetchMovies } = this.props
-    console.log(state.query)
     if (!state.results[1]) return <div>Loading...</div>
     return (
       <div>
         <ResultsMapper {...state} />
-        <Button onClick={() => fetchMovies(state.query, state.page - 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies(state.query, state.page - 1, state.total_pages)}
+        >
           Previous Page
         </Button>
         <span>
           Current page {state.page} of {state.total_pages} pages
         </span>
-        <Button onClick={() => fetchMovies(state.query, state.page + 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies(state.query, state.page + 1, state.total_pages)}
+        >
           Next Page
         </Button>
       </div>
@@ -28,7 +33,8 @@ class SearchBarContent extends Component {
 
 const mapStateToProps = (state) => ({ state })
 const mapDispatchToProps = (dispatch) => ({
-  fetchMovies: (query, pageNum) => dispatch(searchAPI(query, pageNum))
+  fetchMovies: (query, pageNum, total_pages) =>
+    dispatch(searchAPI(query, pageNum, total_pages))
 })
 const ConnectedSearchBarContent = connect(mapStateToProps, mapDispatchToProps)(
   SearchBarContent

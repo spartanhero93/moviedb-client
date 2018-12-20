@@ -15,13 +15,19 @@ class Popular extends Component {
     return (
       <div>
         <ResultsMapper {...state} />
-        <Button onClick={() => fetchMovies('popular', state.page - 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies('popular', state.page - 1, state.total_pages)}
+        >
           Previous Page
         </Button>
         <span>
           Current page {state.page} of {state.total_pages} pages
         </span>
-        <Button onClick={() => fetchMovies('popular', state.page + 1)}>
+        <Button
+          onClick={() =>
+            fetchMovies('popular', state.page + 1, state.total_pages)}
+        >
           Next Page
         </Button>
       </div>
