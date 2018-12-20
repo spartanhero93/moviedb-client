@@ -1,8 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { SearchResultsMapper } from '../../../helpers/SearchResultsMapper'
+import { SearchResultsMapper } from '../../../helpers/PersonMapper'
 
-const SearchBarContent = ({ state }) => <SearchResultsMapper {...state} />
+const SearchBarContent = ({ state }) => {
+  console.log(state)
+
+  return <div>TESTING</div>
+}
 
 const mapStateToProps = (state) => ({ state })
 

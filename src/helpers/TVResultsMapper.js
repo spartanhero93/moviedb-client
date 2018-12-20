@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { getGenreFromId } from './genreLookup'
-import NoImage from '../icons/noImage.png'
 import NoImage2 from '../icons/404-notfound.png'
 
 export default class TVResultsMapper extends Component {
