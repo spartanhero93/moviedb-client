@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { getGenreFromId } from './genreLookup'
 import NoImage2 from '../icons/404-notfound.png'
+import Tooltip from '@material-ui/core/Tooltip'
 
 // const movies = item.poster_path
 // const person = item.profile_path
@@ -17,32 +18,39 @@ export default class ResultsMapper extends Component {
         <Title>{type}</Title>
         <Wrapper>
           {results.map((item) => (
-            <Result key={item.id}>
-              <ResultImg
-                src={
-                  item.poster_path ? (
-                    imgURL + item.poster_path
-                  ) : item.profile_path ? (
-                    imgURL + item.profile_path
-                  ) : (
-                    NoImage2
-                  )
-                }
-              />
-              <ResultTitle>{item.title ? item.title : item.name}</ResultTitle>
-              {item.genre_ids ? (
-                <ResultGenre>
-                  {getGenreFromId(item.genre_ids).map((item) => (
-                    <span key={item.id ? item.id : ''}>
-                      {item.name ? item.name : item.popularity}
-                    </span>
-                  ))}
-                </ResultGenre>
-              ) : (
-                ''
-              )}
-              <ResultRating>{item.vote_average}</ResultRating>
-            </Result>
+            <Tooltip
+              key={item.id}
+              title={item.overview ? item.overview : ''}
+              disableFocusListener
+              disableTouchListener
+            >
+              <Result>
+                <ResultImg
+                  src={
+                    item.poster_path ? (
+                      imgURL + item.poster_path
+                    ) : item.profile_path ? (
+                      imgURL + item.profile_path
+                    ) : (
+                      NoImage2
+                    )
+                  }
+                />
+                <ResultTitle>{item.title ? item.title : item.name}</ResultTitle>
+                {item.genre_ids ? (
+                  <ResultGenre>
+                    {getGenreFromId(item.genre_ids).map((item) => (
+                      <span key={item.id ? item.id : ''}>
+                        {item.name ? item.name : item.popularity}
+                      </span>
+                    ))}
+                  </ResultGenre>
+                ) : (
+                  ''
+                )}
+                <ResultRating>{item.vote_average}</ResultRating>
+              </Result>
+            </Tooltip>
           ))}
         </Wrapper>
       </div>
