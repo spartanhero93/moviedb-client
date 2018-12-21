@@ -16,8 +16,8 @@ import {
   mapMovieRoutesToRouter
 } from '../Movies/Routes'
 import { mapTVLinksToNavLinks, mapTVRoutesToRouter } from '../TVShows/Routes'
+import { HeroRoute } from '../../components/Hero'
 import { SearchBarRoute } from './SearchBar/SearchBarRoute'
-import styled from 'styled-components'
 import { Divider, Button } from '@material-ui/core'
 import SearchBar from './SearchBar/index'
 
@@ -160,10 +160,7 @@ class SideBar extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Hero>
-            <h1>Welcome to the MovieDB app</h1>
-            <p>Browse all kinds of media using MDAPI</p>
-          </Hero>
+          <HeroRoute />
           {mapMovieRoutesToRouter()}
           {mapTVRoutesToRouter()}
           <SearchBarRoute />
@@ -172,16 +169,6 @@ class SideBar extends React.Component {
     )
   }
 }
-
-const Hero = styled.div`
-  height: 50vh;
-  width: 100%;
-  border: 2px solid;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
 
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
