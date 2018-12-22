@@ -8,10 +8,20 @@ import Tooltip from '@material-ui/core/Tooltip'
 // const person = item.profile_path
 
 export default class ResultsMapper extends Component {
+  getImageUrl = (item) => {
+    const imgURL = 'https://image.tmdb.org/t/p/w500'
+
+    if (item.poster_path) {
+      return imgURL + item.poster_path
+    } else if (item.profile_path) {
+      return imgURL + item.profile_path
+    } else {
+      return NoImage2
+    }
+  }
   render() {
     const { results } = this.props
     const { type } = this.props
-    const imgURL = 'https://image.tmdb.org/t/p/w500'
     return (
       <div>
         <Title>{type}</Title>
@@ -24,17 +34,7 @@ export default class ResultsMapper extends Component {
               disableTouchListener
             >
               <Result>
-                <ResultImg
-                  src={
-                    item.poster_path ? (
-                      imgURL + item.poster_path
-                    ) : item.profile_path ? (
-                      imgURL + item.profile_path
-                    ) : (
-                      NoImage2
-                    )
-                  }
-                />
+                <ResultImg src={this.getImageUrl(item)} />
                 <ResultTitle>{item.title ? item.title : item.name}</ResultTitle>
                 {item.genre_ids ? (
                   <ResultGenre>
@@ -78,12 +78,12 @@ const Result = styled.div`
   margin: 1rem;
   height: 26rem;
   width: 14rem;
-  box-shadow: 3px 3px 5px 2px black;
-  transition: all .3s ease-in-out;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s ease-in-out;
   font-size: 1.2rem;
   :hover {
-    box-shadow: 3px 3px 10px 4px black;
-    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    /* transform: scale(1.05); */
   }
   :active {
     transform: scale(1);
@@ -95,7 +95,9 @@ const Result = styled.div`
     width: 7rem;
   }
 `
-const ResultImg = styled.img`height: 80%;`
+const ResultImg = styled.img`
+  height: 80%;
+`
 const ResultTitle = styled.span`
   text-align: center;
   font-weight: 400;
@@ -103,7 +105,7 @@ const ResultTitle = styled.span`
 const ResultGenre = styled.div`
   display: flex;
   justify-content: space-around;
-  font-size: .8rem;
+  font-size: 0.8rem;
 `
 
 const ResultRating = styled.span`

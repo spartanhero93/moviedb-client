@@ -11,10 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 /** Routes */
-import {
-  mapMovieLinksToNavLinks,
-  mapMovieRoutesToRouter
-} from '../Movies/Routes'
+import { mapMovieLinksToNavLinks, MovieRoutes } from '../Movies/Routes'
 import { mapTVLinksToNavLinks, mapTVRoutesToRouter } from '../TVShows/Routes'
 import { HeroRoute } from '../../components/Hero'
 import { SearchBarRoute } from './SearchBar/SearchBarRoute'
@@ -25,60 +22,60 @@ const drawerWidth = 220
 
 const styles = (theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   button: {
     width: '100%',
     height: '3rem',
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   appBar: {
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   menuButton: {
     marginRight: 20,
     [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    color: 'white'
+    color: 'white',
   },
   titles: {
     color: 'white',
     fontSize: '1.5rem',
     fontWeight: '200',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   sidebar: {
-    background: '#20232a'
-  }
+    background: '#20232a',
+  },
 })
 
 class SideBar extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
   }
 
   handleDrawerToggle = () => {
     this.setState((state) => ({
-      mobileOpen: !state.mobileOpen
+      mobileOpen: !state.mobileOpen,
     }))
   }
 
@@ -111,17 +108,17 @@ class SideBar extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position='fixed' color='primary' className={classes.appBar}>
+        <AppBar position="fixed" color="primary" className={classes.appBar}>
           <Toolbar>
             <IconButton
-              color='inherit'
-              aria-label='Open drawer'
+              color="inherit"
+              aria-label="Open drawer"
               onClick={this.handleDrawerToggle}
               className={classes.menuButton}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant='h6' color='inherit' noWrap>
+            <Typography variant="h6" color="inherit" noWrap>
               MediaInfo Now
             </Typography>
             <SearchBar />
@@ -129,29 +126,29 @@ class SideBar extends React.Component {
         </AppBar>
         <nav className={classes.drawer}>
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation='css'>
+          <Hidden smUp implementation="css">
             <Drawer
               container={this.props.container}
-              variant='temporary'
+              variant="temporary"
               anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               ModalProps={{
-                keepMounted: true // Better open performance on mobile.
+                keepMounted: true, // Better open performance on mobile.
               }}
             >
               {drawer}
             </Drawer>
           </Hidden>
-          <Hidden xsDown implementation='css'>
+          <Hidden xsDown implementation="css">
             <Drawer
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
-              variant='permanent'
+              variant="permanent"
               open
             >
               {drawer}
@@ -161,7 +158,7 @@ class SideBar extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <HeroRoute />
-          {mapMovieRoutesToRouter()}
+          {MovieRoutes()}
           {mapTVRoutesToRouter()}
           <SearchBarRoute />
         </main>
@@ -175,7 +172,7 @@ SideBar.propTypes = {
   // Injected by the documentation to work in an iframe.
   // You won't need it on your project.
   container: PropTypes.object,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(SideBar)
