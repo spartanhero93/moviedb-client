@@ -22,7 +22,6 @@ class AiringToday extends Component {
 
   render() {
     const { TVState, fetchTVShows } = this.props
-    console.log(this.props.match.params.list)
     if (!TVState.results[1]) return <div>Loading...</div>
     return (
       <div>
@@ -33,8 +32,7 @@ class AiringToday extends Component {
               this.props.match.params.list,
               TVState.page - 1,
               TVState.total_pages
-            )
-          }
+            )}
         >
           Previous Page
         </Button>
@@ -47,8 +45,7 @@ class AiringToday extends Component {
               this.props.match.params.list,
               TVState.page + 1,
               TVState.total_pages
-            )
-          }
+            )}
         >
           Next Page
         </Button>
@@ -58,14 +55,11 @@ class AiringToday extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  TVState: state,
+  TVState: state
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchTVShows: (type, pageNum) => dispatch(fetchTVShows(type, pageNum)),
+  fetchTVShows: (type, pageNum) => dispatch(fetchTVShows(type, pageNum))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AiringToday)
+export default connect(mapStateToProps, mapDispatchToProps)(AiringToday)

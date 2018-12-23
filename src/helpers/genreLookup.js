@@ -1,4 +1,4 @@
-const genreList = [
+export const genreList = [
   {
     id: 28,
     name: 'Action'
