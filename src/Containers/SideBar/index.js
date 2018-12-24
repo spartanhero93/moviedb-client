@@ -42,7 +42,10 @@ const styles = (theme) => ({
     background: '#20232a'
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`
+    }
   },
   menuButton: {
     marginRight: 20,
@@ -61,7 +64,7 @@ const styles = (theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing.unit * 5
   },
   titles: {
     color: 'white',
@@ -129,7 +132,7 @@ class SideBar extends React.Component {
               My App
             </Typography>
             <SearchBar />
-            <Button>Account</Button>
+            <Button style={{ color: 'white' }}>Account</Button>
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
@@ -178,8 +181,6 @@ class SideBar extends React.Component {
 
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  // Injected by the documentation to work in an iframe.
-  // You won't need it on your project.
   container: PropTypes.object,
   theme: PropTypes.object.isRequired
 }

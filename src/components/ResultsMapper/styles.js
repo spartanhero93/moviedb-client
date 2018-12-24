@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 2rem 3rem;
+  padding: 3rem 1rem;
   display: flex;
   flex-wrap: wrap;
   /* overflow-x: scroll; */
   @media (max-width: 900px) {
-    padding: 0;
+    padding: 1.5rem 0;
   }
 `
 
@@ -30,7 +30,7 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 1rem;
+  margin: .5rem;
   height: 26rem;
   width: 14rem;
   transition: all 0.3s ease-in-out;

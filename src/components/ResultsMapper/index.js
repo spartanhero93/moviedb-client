@@ -37,13 +37,24 @@ export default class ResultsMapper extends Component {
     const Title = (item) => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
-        <ToolTipReleaseDate>
-          {item.release_date ? (
-            this.returnOnlyYear(item.release_date)
-          ) : (
-            this.returnOnlyYear(item.first_air_date)
-          )}
-        </ToolTipReleaseDate>
+        {item.release_date || item.first_air_date ? (
+          <ToolTipReleaseDate>
+            {item.release_date ? (
+              this.returnOnlyYear(item.release_date)
+            ) : (
+              this.returnOnlyYear(item.first_air_date)
+            )}
+          </ToolTipReleaseDate>
+        ) : (
+          <div>
+            {item.known_for ? (
+              item.known_for.map((item) => <span>{item.name}</span>)
+            ) : (
+              ''
+            )}
+          </div>
+        )}
+
         <p>{item.overview}</p>
       </StyledToolTip>
     )
@@ -72,7 +83,7 @@ export default class ResultsMapper extends Component {
                   <CardGenre>
                     {getGenreFromId(item.genre_ids).map((item) => (
                       <span key={item.id ? item.id : ''}>
-                        {item.name ? item.name : item.popularity}
+                        {item.name ? item.name + ',  ' : item.popularity}
                       </span>
                     ))}
                   </CardGenre>
