@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchTVShows } from '../../../redux/actions'
-import ResultsMapper from '../../../helpers/ResultsMapper'
+import ResultsMapper from '../../../components/ResultsMapper/'
 
 import { Button } from '@material-ui/core'
 
@@ -25,7 +25,7 @@ class AiringToday extends Component {
     if (!TVState.results[1]) return <div>Loading...</div>
     return (
       <div>
-        <ResultsMapper {...TVState} />
+        <ResultsMapper {...TVState} mediaType='tv' />
         <Button
           onClick={() =>
             fetchTVShows(

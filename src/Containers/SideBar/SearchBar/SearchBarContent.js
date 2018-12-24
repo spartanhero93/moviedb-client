@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ResultsMapper from '../../../helpers/ResultsMapper'
+import ResultsMapper from '../../../components/ResultsMapper'
 import { searchAPI } from '../../../redux/actions'
 import { Button } from '@material-ui/core'
 

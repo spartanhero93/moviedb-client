@@ -2,7 +2,6 @@ import { createMuiTheme } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
     primary: {
       // light: will be calculated from palette.primary.main,
       main: '#20232a'
@@ -16,7 +15,7 @@ const theme = createMuiTheme({
       contrastText: '#ffcc00'
     },
     text: {
-      primary: '#ffffff'
+      primary: '#20232a'
     }
     // error: will use the default color
   }

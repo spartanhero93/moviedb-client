@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovies } from '../../../redux/actions'
 import { Button } from '@material-ui/core'
-import ResultsMapper from '../../../helpers/ResultsMapper'
+import ResultsMapper from '../../../components/ResultsMapper'
 
 class MovieList extends Component {
   componentDidMount() {
@@ -24,15 +24,14 @@ class MovieList extends Component {
     if (!movieState.results[1]) return <div>Loading...</div>
     return (
       <div>
-        <ResultsMapper {...movieState} />
+        <ResultsMapper {...movieState} mediaType='movie' />
         <Button
           onClick={() =>
             fetchMovies(
               this.props.match.params.list,
               movieState.page - 1,
               movieState.total_pages
-            )
-          }
+            )}
         >
           Previous Page
         </Button>
@@ -45,8 +44,7 @@ class MovieList extends Component {
               this.props.match.params.list,
               movieState.page + 1,
               movieState.total_pages
-            )
-          }
+            )}
         >
           Next Page
         </Button>
@@ -56,14 +54,11 @@ class MovieList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  movieState: state,
+  movieState: state
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMovies: (type, pageNum) => dispatch(fetchMovies(type, pageNum)),
+  fetchMovies: (type, pageNum) => dispatch(fetchMovies(type, pageNum))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MovieList)
+export default connect(mapStateToProps, mapDispatchToProps)(MovieList)

@@ -15,7 +15,7 @@ import { mapMovieLinksToNavLinks, MovieRoutes } from '../Movies/Routes'
 import { mapTVLinksToNavLinks, mapTVRoutesToRouter } from '../TVShows/Routes'
 import { HeroRoute } from '../../components/Hero'
 import { SearchBarRoute } from './SearchBar/SearchBarRoute'
-import { Divider, Button } from '@material-ui/core'
+import { Divider, Button, Typography } from '@material-ui/core'
 import SearchBar from './SearchBar/index'
 import DiscoverMovies from '../Discover'
 
@@ -29,7 +29,8 @@ const styles = (theme) => ({
     width: '100%',
     height: '3rem',
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    color: 'white'
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
@@ -37,11 +38,11 @@ const styles = (theme) => ({
       flexShrink: 0
     }
   },
+  drawerStyles: {
+    background: '#20232a'
+  },
   appBar: {
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+    zIndex: theme.zIndex.drawer + 1
   },
   menuButton: {
     marginRight: 20,
@@ -54,12 +55,13 @@ const styles = (theme) => ({
     justifyContent: 'space-between'
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    background: '#20232a',
+    paddingTop: '4rem'
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    color: 'white'
+    padding: theme.spacing.unit * 3
   },
   titles: {
     color: 'white',
@@ -92,7 +94,6 @@ class SideBar extends React.Component {
 
     const drawer = (
       <div onClick={this.handleDrawerCloseOnTabClick}>
-        <div className={classes.toolbar}>MediaInfo Now</div>
         <Divider />
         <div className={classes.titles}>Movies</div>
         {mapMovieLinksToNavLinks(classes, this.handleDrawerToggle)}
@@ -124,7 +125,9 @@ class SideBar extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-
+            <Typography variant='h6' color='inherit' noWrap>
+              My App
+            </Typography>
             <SearchBar />
             <Button>Account</Button>
           </Toolbar>
