@@ -13,6 +13,8 @@ import {
 import { getGenreFromId } from '../../helpers/genreLookup'
 import NoImage2 from '../../icons/404-notfound.png'
 import Tooltip from '@material-ui/core/Tooltip'
+import Zoom from '@material-ui/core/Zoom'
+import Fade from '@material-ui/core/Fade'
 
 export default class ResultsMapper extends Component {
   getImageUrl = (item) => {
@@ -32,7 +34,6 @@ export default class ResultsMapper extends Component {
 
   render() {
     const { results } = this.props
-    const { mediaType } = this.props
 
     const Title = (item) => (
       <StyledToolTip>
@@ -69,6 +70,9 @@ export default class ResultsMapper extends Component {
               title={Title(item)}
               disableFocusListener
               disableTouchListener
+              TransitionComponent={Fade}
+              enterDelay={200}
+              leaveDelay={200}
             >
               <Card>
                 <CardImg src={this.getImageUrl(item)} />

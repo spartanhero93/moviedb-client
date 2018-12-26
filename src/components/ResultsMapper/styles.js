@@ -31,7 +31,7 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: .5rem;
-  height: 26rem;
+  height: 24rem;
   width: 14rem;
   transition: all 0.3s ease-in-out;
   font-size: 1.2rem;
@@ -44,7 +44,8 @@ export const Card = styled.div`
   }
 `
 export const CardImg = styled.img`
-  height: 80%;
+  height: 90%;
+  transition: box-shadow .5s ease-in-out;
   :hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
@@ -56,14 +57,17 @@ export const CardGenre = styled.div`
 `
 
 export const CardRating = styled.span`
+  text-align: center;
   height: 2rem;
   width: 2rem;
   background: white;
   display: block;
   position: relative;
   bottom: 80%;
-  left: 90%;
+  left: 92%;
   z-index: 2;
   line-height: 2rem;
   border-radius: 5rem;
+  background: #20232a;
+  color: white;
 `
