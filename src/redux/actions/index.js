@@ -1,7 +1,8 @@
 import {
   fetchMoviesFromDatabase,
   fetchTVFromDatabase,
-  querySearch
+  querySearch,
+  newGuestSession,
 } from '../../API'
 
 /** Thunk */
@@ -29,7 +30,6 @@ export const fetchTVShows = (urlName, pageNum = 1, total_pages) => async (
   }
 }
 
-/** handle query NEEDS MORE LOGIC */
 export const searchAPI = (query, pageNum = 1, total_pages) => async (
   dispatch
 ) => {
@@ -43,15 +43,32 @@ export const searchAPI = (query, pageNum = 1, total_pages) => async (
   }
 }
 
+export const createGuestSession = () => async (dispatch) => {
+  try {
+    const data = await newGuestSession()
+    dispatch(createNewGuestSession)
+  } catch (error) {}
+}
+
 /** Regular action */
 
 export const getData = (data) => ({
   type: 'FETCH_DATA',
-  data
+  data,
 })
 
 export const getResultsFromQuerySearch = (data, query) => ({
   type: 'FETCH_QUERY_RESULTS',
   data,
-  query
+  query,
+})
+
+export const createNewGuestSession = (data) => ({
+  type: 'CREATE_NEW_GUEST_SESSION',
+  data,
+})
+
+export const fetchUserAccount = (data) => ({
+  type: 'FETCH_USER_ACCOUNT',
+  data,
 })

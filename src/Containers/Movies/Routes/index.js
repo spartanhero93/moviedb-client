@@ -35,7 +35,7 @@ export const MovieRoutes = () =>
     <Route key={item.path} path={item.path} component={item.component} />
   ))
 
-export const mapMovieLinksToNavLinks = (styles, handleDrawerToggle) =>
+export const mapMovieLinksToNavLinks = (styles) =>
   Links.map((item) => (
     <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
       <Button className={styles.button}>{item.title}</Button>

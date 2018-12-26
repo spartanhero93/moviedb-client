@@ -31,3 +31,12 @@ export const querySearch = async (query, pageNum) => {
     console.error(error)
   }
 }
+
+export const newGuestSession = async () => {
+  try {
+    const { data } = await axios.get(`${URL}/auth/new_guest_session`)
+    return await data
+  } catch (error) {
+    console.error(error)
+  }
+}

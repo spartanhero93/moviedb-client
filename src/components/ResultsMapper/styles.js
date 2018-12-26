@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
   display: flex;
   flex-wrap: wrap;
   /* overflow-x: scroll; */

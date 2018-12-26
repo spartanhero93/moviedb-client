@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Route } from 'react-router-dom'
+import { NavLink, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -9,82 +9,84 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar'
 import { withStyles } from '@material-ui/core/styles'
+import { Divider, Button, Typography } from '@material-ui/core'
 
 /** Routes */
 import { mapMovieLinksToNavLinks, MovieRoutes } from '../Movies/Routes'
 import { mapTVLinksToNavLinks, mapTVRoutesToRouter } from '../TVShows/Routes'
 import { HeroRoute } from '../../components/Hero'
 import { SearchBarRoute } from './SearchBar/SearchBarRoute'
-import { Divider, Button, Typography } from '@material-ui/core'
 import SearchBar from './SearchBar/index'
 import DiscoverMovies from '../Discover'
+import { UserAccountRoute } from '../UserAccount'
 
 const drawerWidth = 220
 
 const styles = (theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   button: {
     width: '100%',
     height: '3rem',
     display: 'flex',
     justifyContent: 'space-around',
-    color: 'white'
+    color: 'white',
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   drawerStyles: {
-    background: '#20232a'
+    background: '#20232a',
   },
   appBar: {
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   menuButton: {
     marginRight: 20,
     [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   toolbar: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    height: '3rem',
   },
   drawerPaper: {
     width: drawerWidth,
     background: '#20232a',
-    paddingTop: '4rem'
+    paddingTop: '4rem',
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 5
+    padding: theme.spacing.unit * 5,
   },
   titles: {
     color: 'white',
     fontSize: '1.5rem',
     fontWeight: '200',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   sidebar: {
-    background: '#20232a'
-  }
+    background: '#20232a',
+  },
 })
 
 class SideBar extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
   }
 
   handleDrawerToggle = () => {
     this.setState((state) => ({
-      mobileOpen: !state.mobileOpen
+      mobileOpen: !state.mobileOpen,
     }))
   }
 
@@ -105,9 +107,9 @@ class SideBar extends React.Component {
         {mapTVLinksToNavLinks(classes)}
         <Divider />
         <div className={classes.titles}>Discover</div>
-        <Link to='/discover/movies' exact='true'>
+        <NavLink to="/discover/movies" exact>
           <Button className={classes.button}>Discover</Button>
-        </Link>
+        </NavLink>
         <Button className={classes.button}>TV Shows</Button>
         <Divider />
         <div className={classes.titles}>People</div>
@@ -118,48 +120,50 @@ class SideBar extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position='fixed' color='primary' className={classes.appBar}>
+        <AppBar position="fixed" color="primary" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <IconButton
-              color='inherit'
-              aria-label='Open drawer'
+              color="inherit"
+              aria-label="Open drawer"
               onClick={this.handleDrawerToggle}
               className={classes.menuButton}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant='h6' color='inherit' noWrap>
+            <Typography variant="h6" color="inherit" noWrap>
               My App
             </Typography>
             <SearchBar />
-            <Button style={{ color: 'white' }}>Account</Button>
+            <NavLink to="/user/account" exact>
+              <Button style={{ color: 'white' }}>Account</Button>
+            </NavLink>
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation='css'>
+          <Hidden smUp implementation="css">
             <Drawer
               container={this.props.container}
-              variant='temporary'
+              variant="temporary"
               anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
               ModalProps={{
-                keepMounted: true // Better open performance on mobile.
+                keepMounted: true, // Better open performance on mobile.
               }}
             >
               {drawer}
             </Drawer>
           </Hidden>
-          <Hidden xsDown implementation='css'>
+          <Hidden xsDown implementation="css">
             <Drawer
               classes={{
-                paper: classes.drawerPaper
+                paper: classes.drawerPaper,
               }}
-              variant='permanent'
+              variant="permanent"
               open
             >
               {drawer}
@@ -172,7 +176,8 @@ class SideBar extends React.Component {
           {MovieRoutes()}
           {mapTVRoutesToRouter()}
           <SearchBarRoute />
-          <Route path='/discover/movies' component={DiscoverMovies} />
+          <Route path="/discover/movies" component={DiscoverMovies} />
+          <UserAccountRoute />
         </main>
       </div>
     )
@@ -182,7 +187,7 @@ class SideBar extends React.Component {
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
   container: PropTypes.object,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(SideBar)

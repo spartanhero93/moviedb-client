@@ -8,12 +8,11 @@ import {
   CardGenre,
   CardImg,
   CardRating,
-  CardTitle
+  CardTitle,
 } from './styles'
 import { getGenreFromId } from '../../helpers/genreLookup'
 import NoImage2 from '../../icons/404-notfound.png'
 import Tooltip from '@material-ui/core/Tooltip'
-import Zoom from '@material-ui/core/Zoom'
 import Fade from '@material-ui/core/Fade'
 
 export default class ResultsMapper extends Component {
@@ -30,7 +29,12 @@ export default class ResultsMapper extends Component {
   }
   returnOnlyYear = (date) => date.split('').splice(0, 4)
   returnOnly20Chars = (title) =>
-    title.length > 20 ? title.split('').splice(0, 20).join('') + '...' : title
+    title.length > 20
+      ? title
+          .split('')
+          .splice(0, 20)
+          .join('') + '...'
+      : title
 
   render() {
     const { results } = this.props
@@ -40,19 +44,15 @@ export default class ResultsMapper extends Component {
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
         {item.release_date || item.first_air_date ? (
           <ToolTipReleaseDate>
-            {item.release_date ? (
-              this.returnOnlyYear(item.release_date)
-            ) : (
-              this.returnOnlyYear(item.first_air_date)
-            )}
+            {item.release_date
+              ? this.returnOnlyYear(item.release_date)
+              : this.returnOnlyYear(item.first_air_date)}
           </ToolTipReleaseDate>
         ) : (
           <div>
-            {item.known_for ? (
-              item.known_for.map((item) => <span>{item.name}</span>)
-            ) : (
-              ''
-            )}
+            {item.known_for
+              ? item.known_for.map((item) => <span>{item.name}</span>)
+              : ''}
           </div>
         )}
 
@@ -77,11 +77,9 @@ export default class ResultsMapper extends Component {
               <Card>
                 <CardImg src={this.getImageUrl(item)} />
                 <CardTitle>
-                  {item.title ? (
-                    this.returnOnly20Chars(item.title)
-                  ) : (
-                    this.returnOnly20Chars(item.name)
-                  )}
+                  {item.title
+                    ? this.returnOnly20Chars(item.title)
+                    : this.returnOnly20Chars(item.name)}
                 </CardTitle>
                 {item.genre_ids ? (
                   <CardGenre>
