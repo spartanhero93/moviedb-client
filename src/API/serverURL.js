@@ -1,1 +1,2 @@
-export const URL = `https://movie-db-server.herokuapp.com`
+export const URL = ' http://localhost:3001'
+//`https://movie-db-server.herokuapp.com`

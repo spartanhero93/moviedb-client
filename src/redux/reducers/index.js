@@ -3,7 +3,8 @@ const initialState = {
   results: [],
   total_pages: 1,
   total_results: 1,
-  query: ''
+  details: {},
+  query: '',
 }
 
 const reducer = (state = initialState, action) => {
@@ -14,10 +15,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        query: action.query
+        query: action.query,
       }
-    case 'TEST':
-      return console.log(action.data)
+    case 'DETAILED_DATA':
+      return { ...state.details, ...action.data }
     default:
       return state
   }

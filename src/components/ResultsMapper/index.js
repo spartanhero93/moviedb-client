@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import {
   Wrapper,
   StyledToolTip,
@@ -10,13 +12,14 @@ import {
   CardRating,
   CardTitle,
 } from './styles'
+import { fetchDetails } from '../../redux/actions'
 import { getGenreFromId } from '../../helpers/genreLookup'
 import NoImage2 from '../../icons/404-notfound.png'
 import Tooltip from '@material-ui/core/Tooltip'
 import Fade from '@material-ui/core/Fade'
 
-export default class ResultsMapper extends Component {
-  getImageUrl = (item) => {
+class ResultsMapper extends Component {
+  getImageUrl = item => {
     const imgURL = 'https://image.tmdb.org/t/p/w500'
 
     if (item.poster_path) {
@@ -27,8 +30,8 @@ export default class ResultsMapper extends Component {
       return NoImage2
     }
   }
-  returnOnlyYear = (date) => date.split('').splice(0, 4)
-  returnOnly12Chars = (title) =>
+  returnOnlyYear = date => date.split('').splice(0, 4)
+  returnOnly12Chars = title =>
     title.length > 12
       ? title
           .split('')
@@ -38,8 +41,7 @@ export default class ResultsMapper extends Component {
 
   render() {
     const { results } = this.props
-
-    const Title = (item) => (
+    const Title = item => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
         {item.release_date || item.first_air_date ? (
@@ -51,13 +53,13 @@ export default class ResultsMapper extends Component {
         ) : (
           <div>
             {item.known_for
-              ? item.known_for.map((item) => <span>{item.name}</span>)
+              ? item.known_for.map(item => <span>{item.name}</span>)
               : ''}
           </div>
         )}
         {item.genre_ids ? (
           <CardGenre>
-            {getGenreFromId(item.genre_ids).map((item) => (
+            {getGenreFromId(item.genre_ids).map(item => (
               <span key={item.id ? item.id : ''}>
                 {item.name ? item.name + ',  ' : item.popularity}
               </span>
@@ -74,7 +76,7 @@ export default class ResultsMapper extends Component {
     return (
       <div>
         <Wrapper>
-          {results.map((item) => (
+          {results.map(item => (
             <Tooltip
               key={item.id}
               title={Title(item)}
@@ -86,11 +88,20 @@ export default class ResultsMapper extends Component {
             >
               <Card>
                 <CardImg src={this.getImageUrl(item)} />
-                <CardTitle>
-                  {item.title
-                    ? this.returnOnly12Chars(item.title)
-                    : this.returnOnly12Chars(item.name)}
-                </CardTitle>
+                <NavLink
+                  to={`/item/${item.id}`}
+                  exact
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                  onClick={() =>
+                    this.props.getDetailedResults(this.props.mediaType, item.id)
+                  }
+                >
+                  <CardTitle>
+                    {item.title
+                      ? this.returnOnly12Chars(item.title)
+                      : this.returnOnly12Chars(item.name)}
+                  </CardTitle>
+                </NavLink>
 
                 <CardRating>{item.vote_average}</CardRating>
               </Card>
@@ -101,3 +112,12 @@ export default class ResultsMapper extends Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ResultsMapper)

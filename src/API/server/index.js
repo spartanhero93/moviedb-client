@@ -30,3 +30,15 @@ export const querySearch = async (query, pageNum) => {
     console.error(error)
   }
 }
+
+export const fetchDetailedResultsFromDatabase = async (
+  mediaType = 'person',
+  id
+) => {
+  try {
+    const { data } = await axios.get(`${URL}/api/detailed/${mediaType}/${id}`)
+    return await data
+  } catch (error) {
+    console.error(error)
+  }
+}
