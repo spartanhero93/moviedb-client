@@ -2,8 +2,8 @@ import {
   fetchMoviesFromDatabase,
   fetchTVFromDatabase,
   querySearch,
-  newGuestSession,
-} from '../../API'
+} from '../../API/server'
+import { newGuestSession } from '../../API/MovieDB'
 
 /** Thunk */
 export const fetchMovies = (urlName, pageNum = 1, total_pages) => async (
@@ -46,7 +46,7 @@ export const searchAPI = (query, pageNum = 1, total_pages) => async (
 export const createGuestSession = () => async (dispatch) => {
   try {
     const data = await newGuestSession()
-    dispatch(createNewGuestSession)
+    dispatch(createNewGuestSession(data))
   } catch (error) {}
 }
 

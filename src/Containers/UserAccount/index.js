@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
-import { newGuestSession } from '../../API'
+import { newGuestSession } from '../../API/MovieDB'
 
 export class UserAccount extends Component {
   state = {

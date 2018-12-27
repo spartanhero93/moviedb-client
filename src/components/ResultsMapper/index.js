@@ -60,7 +60,6 @@ export default class ResultsMapper extends Component {
       </StyledToolTip>
     )
 
-    console.log(this.props)
     return (
       <div>
         <Wrapper>
