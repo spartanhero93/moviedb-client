@@ -40,7 +40,8 @@ class ResultsMapper extends Component {
       : title
 
   render() {
-    const { results } = this.props
+    const { results, mediaType } = this.props
+
     const Title = item => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
@@ -89,7 +90,7 @@ class ResultsMapper extends Component {
               <Card>
                 <CardImg src={this.getImageUrl(item)} />
                 <NavLink
-                  to={`/item/${item.id}`}
+                  to={`/item/${mediaType}/${item.id}`}
                   exact
                   style={{ textDecoration: 'none', color: 'inherit' }}
                   onClick={() =>

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { URL } from '../serverURL'
 
+/** Have to remove this and implement it safely */
 const get_API_KEY_FROM_SERVER = async () => {
   try {
     const { data } = await axios.get(`${URL}/auth/key`)

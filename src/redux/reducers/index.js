@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
         query: action.query,
       }
     case 'DETAILED_DATA':
-      return { ...state.details, ...action.data }
+      return { ...state, ...state.details, ...action.data }
     default:
       return state
   }
