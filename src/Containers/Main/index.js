@@ -61,15 +61,15 @@ const styles = (theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    background: '#20232a',
-    paddingTop: '4rem',
+    background: '#282c34',
+    paddingTop: '1rem',
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 5,
+    padding: theme.spacing.unit * 2,
   },
   titles: {
-    color: 'white',
+    color: '#61dafb',
     fontSize: '1.5rem',
     fontWeight: '200',
     textAlign: 'center',
@@ -79,7 +79,7 @@ const styles = (theme) => ({
   },
 })
 
-class SideBar extends React.Component {
+class Main extends React.Component {
   state = {
     mobileOpen: false,
   }
@@ -184,10 +184,10 @@ class SideBar extends React.Component {
   }
 }
 
-SideBar.propTypes = {
+Main.propTypes = {
   classes: PropTypes.object.isRequired,
   container: PropTypes.object,
   theme: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles, { withTheme: true })(SideBar)
+export default withStyles(styles, { withTheme: true })(Main)

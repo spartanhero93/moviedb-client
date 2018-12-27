@@ -4,19 +4,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 /** components */
-import SideBar from './Containers/SideBar'
+import Main from './Containers/Main'
 const ConnectedApp = () => {
   return (
     <div>
       <BrowserRouter>
-        <SideBar />
+        <Main />
       </BrowserRouter>
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
-  state
+  state,
 })
 
 const App = connect(mapStateToProps)(ConnectedApp)

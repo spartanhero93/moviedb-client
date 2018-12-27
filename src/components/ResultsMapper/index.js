@@ -28,11 +28,11 @@ export default class ResultsMapper extends Component {
     }
   }
   returnOnlyYear = (date) => date.split('').splice(0, 4)
-  returnOnly20Chars = (title) =>
-    title.length > 20
+  returnOnly12Chars = (title) =>
+    title.length > 12
       ? title
           .split('')
-          .splice(0, 20)
+          .splice(0, 12)
           .join('') + '...'
       : title
 
@@ -54,6 +54,17 @@ export default class ResultsMapper extends Component {
               ? item.known_for.map((item) => <span>{item.name}</span>)
               : ''}
           </div>
+        )}
+        {item.genre_ids ? (
+          <CardGenre>
+            {getGenreFromId(item.genre_ids).map((item) => (
+              <span key={item.id ? item.id : ''}>
+                {item.name ? item.name + ',  ' : item.popularity}
+              </span>
+            ))}
+          </CardGenre>
+        ) : (
+          ''
         )}
 
         <p>{item.overview}</p>
@@ -77,20 +88,10 @@ export default class ResultsMapper extends Component {
                 <CardImg src={this.getImageUrl(item)} />
                 <CardTitle>
                   {item.title
-                    ? this.returnOnly20Chars(item.title)
-                    : this.returnOnly20Chars(item.name)}
+                    ? this.returnOnly12Chars(item.title)
+                    : this.returnOnly12Chars(item.name)}
                 </CardTitle>
-                {item.genre_ids ? (
-                  <CardGenre>
-                    {getGenreFromId(item.genre_ids).map((item) => (
-                      <span key={item.id ? item.id : ''}>
-                        {item.name ? item.name + ',  ' : item.popularity}
-                      </span>
-                    ))}
-                  </CardGenre>
-                ) : (
-                  ''
-                )}
+
                 <CardRating>{item.vote_average}</CardRating>
               </Card>
             </Tooltip>
