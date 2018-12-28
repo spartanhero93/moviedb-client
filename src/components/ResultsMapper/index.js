@@ -105,7 +105,11 @@ class ResultsMapper extends Component {
                   </CardTitle>
                 </NavLink>
 
-                <CardRating>{item.vote_average}</CardRating>
+                <CardRating>
+                  {item.vote_average
+                    ? item.vote_average
+                    : item.popularity.toFixed(1)}
+                </CardRating>
               </Card>
             </Tooltip>
           ))}
