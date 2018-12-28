@@ -1,13 +1,14 @@
+import { combineReducers } from 'redux'
+
 const initialState = {
   page: 1,
   results: [],
   total_pages: 1,
   total_results: 1,
-  details: {},
   query: '',
 }
 
-const reducer = (state = initialState, action) => {
+const mediaReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_DATA':
       return { ...state, ...action.data }
@@ -24,4 +25,13 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-export default reducer
+const detailsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'FETCH_DETAILS':
+      return { ...state, ...action.data }
+    default:
+      return state
+  }
+}
+
+export default combineReducers({ mediaReducer, detailsReducer })

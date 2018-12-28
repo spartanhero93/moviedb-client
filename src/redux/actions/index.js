@@ -7,11 +7,9 @@ import {
 import { newGuestSession } from '../../API/MovieDB'
 
 /** Thunk */
-export const fetchMovies = (
-  urlName,
-  pageNum = 1,
-  total_pages
-) => async dispatch => {
+export const fetchMovies = (urlName, pageNum = 1, total_pages) => async (
+  dispatch
+) => {
   try {
     if (pageNum < 1 || pageNum > total_pages) return
     const data = await fetchMoviesFromDatabase(urlName, pageNum)
@@ -21,11 +19,9 @@ export const fetchMovies = (
   }
 }
 
-export const fetchTVShows = (
-  urlName,
-  pageNum = 1,
-  total_pages
-) => async dispatch => {
+export const fetchTVShows = (urlName, pageNum = 1, total_pages) => async (
+  dispatch
+) => {
   try {
     if (pageNum < 1 || pageNum > total_pages) return
     const data = await fetchTVFromDatabase(urlName, pageNum)
@@ -35,18 +31,16 @@ export const fetchTVShows = (
   }
 }
 
-export const fetchDetails = (mediaType, id) => async dispatch => {
+export const fetchDetails = (mediaType, id) => async (dispatch) => {
   try {
     const { data } = await fetchDetailedResultsFromDatabase(mediaType, id)
     dispatch(getDetailedData(data))
   } catch (error) {}
 }
 
-export const searchAPI = (
-  query,
-  pageNum = 1,
-  total_pages
-) => async dispatch => {
+export const searchAPI = (query, pageNum = 1, total_pages) => async (
+  dispatch
+) => {
   try {
     if (pageNum < 1 || pageNum > total_pages) return
     if (!query) return
@@ -57,7 +51,7 @@ export const searchAPI = (
   }
 }
 
-export const createGuestSession = () => async dispatch => {
+export const createGuestSession = () => async (dispatch) => {
   try {
     const data = await newGuestSession()
     dispatch(createNewGuestSession(data))
@@ -66,13 +60,13 @@ export const createGuestSession = () => async dispatch => {
 
 /** Regular action */
 
-export const getData = data => ({
+export const getData = (data) => ({
   type: 'FETCH_DATA',
   data,
 })
 
-export const getDetailedData = data => ({
-  type: 'DETAILED_DATA',
+export const getDetailedData = (data) => ({
+  type: 'FETCH_DETAILS',
   data,
 })
 
@@ -82,12 +76,12 @@ export const getResultsFromQuerySearch = (data, query) => ({
   query,
 })
 
-export const createNewGuestSession = data => ({
+export const createNewGuestSession = (data) => ({
   type: 'CREATE_NEW_GUEST_SESSION',
   data,
 })
 
-export const fetchUserAccount = data => ({
+export const fetchUserAccount = (data) => ({
   type: 'FETCH_USER_ACCOUNT',
   data,
 })

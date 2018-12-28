@@ -25,14 +25,15 @@ class AiringToday extends Component {
     if (!TVState.results[1]) return <div>Loading...</div>
     return (
       <div>
-        <ResultsMapper {...TVState} mediaType='tv' />
+        <ResultsMapper {...TVState} mediaType="tv" />
         <Button
           onClick={() =>
             fetchTVShows(
               this.props.match.params.list,
               TVState.page - 1,
               TVState.total_pages
-            )}
+            )
+          }
         >
           Previous Page
         </Button>
@@ -45,7 +46,8 @@ class AiringToday extends Component {
               this.props.match.params.list,
               TVState.page + 1,
               TVState.total_pages
-            )}
+            )
+          }
         >
           Next Page
         </Button>
@@ -55,11 +57,14 @@ class AiringToday extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  TVState: state
+  TVState: state.mediaReducer,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchTVShows: (type, pageNum) => dispatch(fetchTVShows(type, pageNum))
+  fetchTVShows: (type, pageNum) => dispatch(fetchTVShows(type, pageNum)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AiringToday)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AiringToday)

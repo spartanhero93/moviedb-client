@@ -19,7 +19,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Fade from '@material-ui/core/Fade'
 
 class ResultsMapper extends Component {
-  getImageUrl = item => {
+  /** Helper functions */
+  getImageUrl = (item) => {
     const imgURL = 'https://image.tmdb.org/t/p/w500'
 
     if (item.poster_path) {
@@ -30,8 +31,8 @@ class ResultsMapper extends Component {
       return NoImage2
     }
   }
-  returnOnlyYear = date => date.split('').splice(0, 4)
-  returnOnly12Chars = title =>
+  returnOnlyYear = (date) => date.split('').splice(0, 4)
+  returnOnly12Chars = (title) =>
     title.length > 12
       ? title
           .split('')
@@ -42,7 +43,7 @@ class ResultsMapper extends Component {
   render() {
     const { results, mediaType } = this.props
 
-    const Title = item => (
+    const Title = (item) => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
         {item.release_date || item.first_air_date ? (
@@ -54,13 +55,13 @@ class ResultsMapper extends Component {
         ) : (
           <div>
             {item.known_for
-              ? item.known_for.map(item => <span>{item.name}</span>)
+              ? item.known_for.map((item) => <span>{item.name}</span>)
               : ''}
           </div>
         )}
         {item.genre_ids ? (
           <CardGenre>
-            {getGenreFromId(item.genre_ids).map(item => (
+            {getGenreFromId(item.genre_ids).map((item) => (
               <span key={item.id ? item.id : ''}>
                 {item.name ? item.name + ',  ' : item.popularity}
               </span>
@@ -77,7 +78,7 @@ class ResultsMapper extends Component {
     return (
       <div>
         <Wrapper>
-          {results.map(item => (
+          {results.map((item) => (
             <Tooltip
               key={item.id}
               title={Title(item)}
@@ -114,7 +115,7 @@ class ResultsMapper extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
 })
 
