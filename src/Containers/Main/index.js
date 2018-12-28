@@ -16,16 +16,16 @@ import { HeroRoute } from '../../components/Hero'
 import SearchBar from '../../components/SearchBar'
 
 /** Routes */
-import { MovieRoutes } from '../Movies/Routes'
-import { mapTVRoutesToRouter } from '../TVShows/Routes'
-import { SearchBarRoute } from './SearchBar/SearchBarRoute'
+import { MovieRoutes } from '../../components/Movies/Routes'
+import { mapTVRoutesToRouter } from '../../components/TVShows/Routes'
+import { SearchBarRoute } from '../../components/SearchBar/SearchBarRoute'
 import DiscoverMovies from '../Discover'
 import { UserAccountRoute } from '../UserAccount'
 import { DetailedResultsRoute } from '../../components/ResultsMapper/DetailedResults'
 
 const drawerWidth = 220
 
-const styles = (theme) => ({
+const styles = theme => ({
   root: {
     display: 'flex',
   },
@@ -60,13 +60,13 @@ class Main extends React.Component {
   }
 
   handleDrawerToggle = () => {
-    this.setState((state) => ({
+    this.setState(state => ({
       mobileOpen: !state.mobileOpen,
     }))
   }
 
   handleDrawerCloseOnTabClick = () => {
-    this.setState((state) => ({ mobileOpen: (state.mobileOpen = false) }))
+    this.setState(state => ({ mobileOpen: (state.mobileOpen = false) }))
   }
 
   render() {
@@ -75,17 +75,17 @@ class Main extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="fixed" color="primary" className={classes.appBar}>
+        <AppBar position='fixed' color='primary' className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <IconButton
-              color="inherit"
-              aria-label="Open drawer"
+              color='inherit'
+              aria-label='Open drawer'
               onClick={this.handleDrawerToggle}
               className={classes.menuButton}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant='h6' color='inherit' noWrap>
               My App
             </Typography>
             <SearchBar />
@@ -102,7 +102,7 @@ class Main extends React.Component {
           {MovieRoutes()}
           {mapTVRoutesToRouter()}
           <SearchBarRoute />
-          <Route path="/discover/movies" component={DiscoverMovies} />
+          <Route path='/discover/movies' component={DiscoverMovies} />
           <UserAccountRoute />
           <DetailedResultsRoute />
         </main>

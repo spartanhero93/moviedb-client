@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ResultsMapper from '../../../components/ResultsMapper'
-import { searchAPI } from '../../../redux/actions'
+import ResultsMapper from '../ResultsMapper'
+import { searchAPI } from '../../redux/actions'
 import { Button } from '@material-ui/core'
 
 class SearchBarContent extends Component {
@@ -13,7 +13,8 @@ class SearchBarContent extends Component {
         <ResultsMapper {...state} />
         <Button
           onClick={() =>
-            fetchMovies(state.query, state.page - 1, state.total_pages)}
+            fetchMovies(state.query, state.page - 1, state.total_pages)
+          }
         >
           Previous Page
         </Button>
@@ -22,7 +23,8 @@ class SearchBarContent extends Component {
         </span>
         <Button
           onClick={() =>
-            fetchMovies(state.query, state.page + 1, state.total_pages)}
+            fetchMovies(state.query, state.page + 1, state.total_pages)
+          }
         >
           Next Page
         </Button>
@@ -31,13 +33,14 @@ class SearchBarContent extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ state })
-const mapDispatchToProps = (dispatch) => ({
+const mapStateToProps = state => ({ state })
+const mapDispatchToProps = dispatch => ({
   fetchMovies: (query, pageNum, total_pages) =>
-    dispatch(searchAPI(query, pageNum, total_pages))
+    dispatch(searchAPI(query, pageNum, total_pages)),
 })
-const ConnectedSearchBarContent = connect(mapStateToProps, mapDispatchToProps)(
-  SearchBarContent
-)
+const ConnectedSearchBarContent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchBarContent)
 
 export default ConnectedSearchBarContent
