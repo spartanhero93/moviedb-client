@@ -28,7 +28,7 @@ const mediaReducer = (state = initialState, action) => {
 const detailsReducer = (state = {}, action) => {
   switch (action.type) {
     case 'FETCH_DETAILS':
-      return { ...state, ...action.data }
+      return { ...action.data }
     default:
       return state
   }

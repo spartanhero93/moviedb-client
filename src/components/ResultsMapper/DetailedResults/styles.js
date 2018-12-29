@@ -13,13 +13,13 @@ const fadeIn = keyframes`
 export const Wrapper = styled.div`
   animation: ${fadeIn} 1.5s ease-in-out;
 `
-const template = () => (
-  <div>
-    <div className="display flex">
-      <div>Image of item</div>
-      <div>
-        <h1>Name of item</h1>
-      </div>
-    </div>
-  </div>
-)
+// const template = () => (
+//   <div>
+//     <div className="display flex">
+//       <div>Image of item</div>
+//       <div>
+//         <h1>Name of item</h1>
+//       </div>
+//     </div>
+//   </div>
+// )

@@ -12,33 +12,18 @@ import {
   CardRating,
   CardTitle,
 } from './styles'
+import {
+  getGenreFromId,
+  getImageUrl,
+  returnOnly12Chars,
+  returnOnlyYear,
+} from '../../helpers'
 import { fetchDetails } from '../../redux/actions'
-import { getGenreFromId } from '../../helpers/genreLookup'
-import NoImage2 from '../../icons/404-notfound.png'
 import Tooltip from '@material-ui/core/Tooltip'
 import Fade from '@material-ui/core/Fade'
 
 class ResultsMapper extends Component {
   /** Helper functions */
-  getImageUrl = (item) => {
-    const imgURL = 'https://image.tmdb.org/t/p/w500'
-
-    if (item.poster_path) {
-      return imgURL + item.poster_path
-    } else if (item.profile_path) {
-      return imgURL + item.profile_path
-    } else {
-      return NoImage2
-    }
-  }
-  returnOnlyYear = (date) => date.split('').splice(0, 4)
-  returnOnly12Chars = (title) =>
-    title.length > 12
-      ? title
-          .split('')
-          .splice(0, 12)
-          .join('') + '...'
-      : title
 
   render() {
     const { results, mediaType, getDetailedResults } = this.props
@@ -48,8 +33,8 @@ class ResultsMapper extends Component {
         {item.release_date || item.first_air_date ? (
           <ToolTipReleaseDate>
             {item.release_date
-              ? this.returnOnlyYear(item.release_date)
-              : this.returnOnlyYear(item.first_air_date)}
+              ? returnOnlyYear(item.release_date)
+              : returnOnlyYear(item.first_air_date)}
           </ToolTipReleaseDate>
         ) : (
           <div>
@@ -88,7 +73,7 @@ class ResultsMapper extends Component {
               leaveDelay={200}
             >
               <Card>
-                <CardImg src={this.getImageUrl(item)} />
+                <CardImg src={getImageUrl(item)} />
                 <NavLink
                   to={`/item/${mediaType ? mediaType : item.media_type}/${
                     item.id
@@ -103,8 +88,8 @@ class ResultsMapper extends Component {
                 >
                   <CardTitle>
                     {item.title
-                      ? this.returnOnly12Chars(item.title)
-                      : this.returnOnly12Chars(item.name)}
+                      ? returnOnly12Chars(item.title)
+                      : returnOnly12Chars(item.name)}
                   </CardTitle>
                 </NavLink>
                 <CardRating>{item.vote_average}</CardRating>

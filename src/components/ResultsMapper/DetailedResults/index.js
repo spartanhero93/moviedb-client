@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchDetails } from '../../../redux/actions'
+import { Wrapper } from './styles'
 
 class DetailedResults extends Component {
   /** Renders the current selected item if page refreshes */
