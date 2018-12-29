@@ -42,7 +42,6 @@ class ResultsMapper extends Component {
 
   render() {
     const { results, mediaType, getDetailedResults } = this.props
-
     const Title = (item) => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
@@ -91,13 +90,15 @@ class ResultsMapper extends Component {
               <Card>
                 <CardImg src={this.getImageUrl(item)} />
                 <NavLink
-                  to={`/item/${mediaType ? mediaType : 'person'}/${item.id}`}
+                  to={`/item/${mediaType ? mediaType : item.media_type}/${
+                    item.id
+                  }`}
                   exact
                   style={{ textDecoration: 'none', color: 'inherit' }}
                   onClick={() =>
                     mediaType
                       ? getDetailedResults(mediaType, item.id)
-                      : getDetailedResults('person', item.id)
+                      : getDetailedResults(item.media_type, item.id)
                   }
                 >
                   <CardTitle>
@@ -106,7 +107,6 @@ class ResultsMapper extends Component {
                       : this.returnOnly12Chars(item.name)}
                   </CardTitle>
                 </NavLink>
-
                 <CardRating>{item.vote_average}</CardRating>
               </Card>
             </Tooltip>

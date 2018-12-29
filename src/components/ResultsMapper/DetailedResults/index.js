@@ -1,22 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import styled, { keyframes } from 'styled-components'
 import { fetchDetails } from '../../../redux/actions'
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`
-
-const Wrapper = styled.div`
-  animation: ${fadeIn} 1.5s ease-in-out;
-`
 
 class DetailedResults extends Component {
   /** Renders the current selected item if page refreshes */
@@ -43,7 +28,7 @@ class DetailedResults extends Component {
   render() {
     if (!this.props.details.id) return <div />
     const { details: item } = this.props
-    console.log(this.props.match.params)
+    console.log(item)
     return (
       <Wrapper>
         <h1>{item.original_title ? item.original_title : item.name}</h1>
