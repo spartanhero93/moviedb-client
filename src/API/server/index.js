@@ -31,10 +31,7 @@ export const querySearch = async (query, pageNum) => {
   }
 }
 
-export const fetchDetailedResultsFromDatabase = async (
-  mediaType = 'person',
-  id
-) => {
+export const fetchDetailedResultsFromDatabase = async (mediaType, id) => {
   try {
     const { data } = await axios.get(`${URL}/api/detailed/${mediaType}/${id}`)
     return await data

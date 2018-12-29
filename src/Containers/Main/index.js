@@ -16,9 +16,9 @@ import { HeroRoute } from '../../components/Hero'
 import SearchBar from '../../components/SearchBar'
 
 /** Routes */
-import { MovieRoutes } from '../Movies/Routes'
-import { mapTVRoutesToRouter } from '../TVShows/Routes'
-import { SearchBarRoute } from './SearchBar/SearchBarRoute'
+import { MovieRoutes } from '../../components/Movies/Routes'
+import { mapTVRoutesToRouter } from '../../components/TVShows/Routes'
+import { SearchBarRoute } from '../../components/SearchBar/SearchBarRoute'
 import DiscoverMovies from '../Discover'
 import { UserAccountRoute } from '../UserAccount'
 import { DetailedResultsRoute } from '../../components/ResultsMapper/DetailedResults'

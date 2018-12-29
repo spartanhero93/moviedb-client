@@ -41,7 +41,7 @@ class ResultsMapper extends Component {
       : title
 
   render() {
-    const { results, mediaType } = this.props
+    const { results, mediaType, getDetailedResults } = this.props
 
     const Title = (item) => (
       <StyledToolTip>
@@ -91,11 +91,13 @@ class ResultsMapper extends Component {
               <Card>
                 <CardImg src={this.getImageUrl(item)} />
                 <NavLink
-                  to={`/item/${mediaType}/${item.id}`}
+                  to={`/item/${mediaType ? mediaType : 'person'}/${item.id}`}
                   exact
                   style={{ textDecoration: 'none', color: 'inherit' }}
                   onClick={() =>
-                    this.props.getDetailedResults(this.props.mediaType, item.id)
+                    mediaType
+                      ? getDetailedResults(mediaType, item.id)
+                      : getDetailedResults('person', item.id)
                   }
                 >
                   <CardTitle>
@@ -116,7 +118,8 @@ class ResultsMapper extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
+  getDetailedResults: (mediaType = 'person', id) =>
+    dispatch(fetchDetails(mediaType, id)),
 })
 
 export default connect(

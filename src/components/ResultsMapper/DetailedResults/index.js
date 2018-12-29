@@ -43,7 +43,7 @@ class DetailedResults extends Component {
   render() {
     if (!this.props.details.id) return <div />
     const { details: item } = this.props
-    console.log(item)
+    console.log(this.props.match.params)
     return (
       <Wrapper>
         <h1>{item.original_title ? item.original_title : item.name}</h1>
