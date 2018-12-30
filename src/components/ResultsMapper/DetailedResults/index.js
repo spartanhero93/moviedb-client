@@ -1,8 +1,16 @@
-import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { fetchDetails } from '../../../redux/actions'
-import { Wrapper } from './styles'
+import React, { Component } from "react"
+import { Route } from "react-router-dom"
+import { connect } from "react-redux"
+import { fetchDetails } from "../../../redux/actions"
+import {
+  Wrapper,
+  Container,
+  ItemTitle,
+  ItemYearReleased,
+  ItemOverview,
+  TitleYearContainer
+} from "./styles"
+import { getImageUrl } from "../../../helpers"
 
 class DetailedResults extends Component {
   /** Renders the current selected item if page refreshes */
@@ -11,10 +19,6 @@ class DetailedResults extends Component {
   }
 
   componentWillReceiveProps = (prevProps) => {
-    if (this.props.location !== prevProps.location) {
-      console.log('Route changed')
-    }
-
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.fetchDetailedData()
     }
@@ -32,19 +36,30 @@ class DetailedResults extends Component {
     console.log(item)
     return (
       <Wrapper>
-        <h1>{item.original_title ? item.original_title : item.name}</h1>
-        <p>{item.overview}</p>
+        <TitleYearContainer>
+          <ItemTitle>
+            {item.original_title ? item.original_title : item.name}
+          </ItemTitle>
+          <ItemYearReleased>
+            {"- "}
+            {item.release_date ? item.release_date : item.first_air_date}
+          </ItemYearReleased>
+        </TitleYearContainer>
+        <Container>
+          <img src={getImageUrl(item)} alt={item.id} />
+          <ItemOverview>{item.overview}</ItemOverview>
+        </Container>
       </Wrapper>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  details: state.detailsReducer,
+  details: state.detailsReducer
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
+  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id))
 })
 
 const ConnectedDetailedResults = connect(
@@ -53,5 +68,5 @@ const ConnectedDetailedResults = connect(
 )(DetailedResults)
 
 export const DetailedResultsRoute = () => (
-  <Route path={'/item/:mediaType/:id'} component={ConnectedDetailedResults} />
+  <Route path={"/item/:mediaType/:id"} component={ConnectedDetailedResults} />
 )

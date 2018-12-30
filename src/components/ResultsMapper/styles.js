@@ -1,20 +1,21 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  padding: 2rem 1rem;
+  padding: 2rem 0rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   /* overflow-x: scroll; */
   @media (max-width: 900px) {
     padding: 0;
   }
-`
+`;
 
 export const StyledToolTip = styled.div`
   text-align: left;
   padding: 0.2rem 0.8rem;
   line-height: 1rem;
-`
+`;
 
 export const ToolTipTitle = styled.span`
   font-size: 1.2rem;
@@ -22,9 +23,9 @@ export const ToolTipTitle = styled.span`
   margin-right: 0.6rem;
   max-width: 15ch;
   text-overflow: ellipsis;
-`
+`;
 
-export const ToolTipReleaseDate = styled.span``
+export const ToolTipReleaseDate = styled.span``;
 
 export const Card = styled.div`
   display: flex;
@@ -43,27 +44,36 @@ export const Card = styled.div`
     width: 10rem;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     font-size: 1rem;
     height: 13rem;
     width: 7rem;
     margin: 1rem 0.8rem;
   }
-`
+
+  @media (max-width: 500px) {
+    height: 26rem;
+    width: 16rem;
+  }
+`;
 export const CardImg = styled.img`
   height: 90%;
   transition: box-shadow 0.5s ease-in-out;
   :hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
-`
-export const CardTitle = styled.span`
+`;
+export const CardTitle = styled.div`
   font-weight: 400;
-`
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 export const CardGenre = styled.div`
   display: flex;
   font-size: 0.8rem;
-`
+`;
 
 export const CardRating = styled.span`
   text-align: center;
@@ -79,4 +89,4 @@ export const CardRating = styled.span`
   border-radius: 5rem;
   background: #20232a;
   color: white;
-`
+`;
