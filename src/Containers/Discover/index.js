@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import { genreList } from '../../helpers/genreLookup'
+import { genreList } from '../../helpers/genresList'
 class DiscoverMovies extends Component {
   state = {
-    userData: {}
+    userData: {},
   }
 
   render() {
     return (
       <div>
-        <div>{genreList.map((item) => <p key={item.id}>{item.name}</p>)}</div>
+        <div>
+          {genreList.map((item) => (
+            <p key={item.id}>{item.name}</p>
+          ))}
+        </div>
       </div>
     )
   }

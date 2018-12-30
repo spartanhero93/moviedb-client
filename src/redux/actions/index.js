@@ -39,7 +39,9 @@ export const fetchDetails = (mediaType, id) => async dispatch => {
   try {
     const { data } = await fetchDetailedResultsFromDatabase(mediaType, id)
     dispatch(getDetailedData(data))
-  } catch (error) {}
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export const searchAPI = (

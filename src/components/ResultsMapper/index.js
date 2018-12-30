@@ -12,45 +12,24 @@ import {
   CardRating,
   CardTitle,
 } from './styles'
+import { getGenreFromId, getImageUrl, returnOnlyYear } from '../../helpers'
 import { fetchDetails } from '../../redux/actions'
-import { getGenreFromId } from '../../helpers/genreLookup'
-import NoImage2 from '../../icons/404-notfound.png'
 import Tooltip from '@material-ui/core/Tooltip'
 import Fade from '@material-ui/core/Fade'
 
 class ResultsMapper extends Component {
   /** Helper functions */
-  getImageUrl = item => {
-    const imgURL = 'https://image.tmdb.org/t/p/w500'
-
-    if (item.poster_path) {
-      return imgURL + item.poster_path
-    } else if (item.profile_path) {
-      return imgURL + item.profile_path
-    } else {
-      return NoImage2
-    }
-  }
-  returnOnlyYear = date => date.split('').splice(0, 4)
-  returnOnly14Chars = title =>
-    title.length > 14
-      ? title
-          .split('')
-          .splice(0, 14)
-          .join('') + '...'
-      : title
 
   render() {
-    const { results, mediaType } = this.props
-
+    const { results, mediaType, getDetailedResults } = this.props
     const Title = item => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
         {item.release_date || item.first_air_date ? (
           <ToolTipReleaseDate>
             {item.release_date
-              ? this.returnOnlyYear(item.release_date)
-              : this.returnOnlyYear(item.first_air_date)}
+              ? returnOnlyYear(item.release_date)
+              : returnOnlyYear(item.first_air_date)}
           </ToolTipReleaseDate>
         ) : (
           <div>
@@ -89,26 +68,23 @@ class ResultsMapper extends Component {
               leaveDelay={200}
             >
               <Card>
-                <CardImg src={this.getImageUrl(item)} />
+                <CardImg src={getImageUrl(item)} />
                 <NavLink
-                  to={`/item/${mediaType}/${item.id}`}
+                  to={`/item/${mediaType ? mediaType : item.media_type}/${
+                    item.id
+                  }`}
                   exact
                   style={{ textDecoration: 'none', color: 'inherit' }}
                   onClick={() =>
-                    this.props.getDetailedResults(this.props.mediaType, item.id)
+                    mediaType
+                      ? getDetailedResults(mediaType, item.id)
+                      : getDetailedResults(item.media_type, item.id)
                   }
                 >
-                  <CardTitle>
-                    {item.title
-                      ? this.returnOnly14Chars(item.title)
-                      : this.returnOnly14Chars(item.name)}
-                  </CardTitle>
+                  <CardTitle>{item.title ? item.title : item.name}</CardTitle>
                 </NavLink>
-
                 <CardRating>
-                  {item.vote_average
-                    ? item.vote_average
-                    : item.popularity.toFixed(1)}
+                  {item.vote_average ? item.vote_average : item.popularity}
                 </CardRating>
               </Card>
             </Tooltip>
@@ -120,7 +96,8 @@ class ResultsMapper extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
+  getDetailedResults: (mediaType = 'person', id) =>
+    dispatch(fetchDetails(mediaType, id)),
 })
 
 export default connect(

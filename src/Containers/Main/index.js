@@ -14,12 +14,12 @@ import { Typography } from '@material-ui/core'
 import MyDrawer from '../../components/MyDrawer'
 import { HeroRoute } from '../../components/Hero'
 import SearchBar from '../../components/SearchBar'
+import DiscoverMovies from '../Discover'
 
 /** Routes */
 import { MovieRoutes } from '../../components/Movies/Routes'
 import { mapTVRoutesToRouter } from '../../components/TVShows/Routes'
 import { SearchBarRoute } from '../../components/SearchBar/SearchBarRoute'
-import DiscoverMovies from '../Discover'
 import { UserAccountRoute } from '../UserAccount'
 import { DetailedResultsRoute } from '../../components/ResultsMapper/DetailedResults'
 

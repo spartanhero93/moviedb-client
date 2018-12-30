@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 2rem 1rem;
+  padding: 2rem 0rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   /* overflow-x: scroll; */
   @media (max-width: 900px) {
     padding: 0;
@@ -43,11 +44,16 @@ export const Card = styled.div`
     width: 10rem;
   }
 
-  @media (max-width: 900px) {
-    font-size: 0.7rem;
+  @media (max-width: 1000px) {
+    font-size: 1rem;
     height: 13rem;
     width: 7rem;
     margin: 1rem 0.8rem;
+  }
+
+  @media (max-width: 500px) {
+    height: 26rem;
+    width: 16rem;
   }
 `
 export const CardImg = styled.img`
@@ -57,8 +63,12 @@ export const CardImg = styled.img`
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 `
-export const CardTitle = styled.span`
+export const CardTitle = styled.div`
   font-weight: 400;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 export const CardGenre = styled.div`
   display: flex;
