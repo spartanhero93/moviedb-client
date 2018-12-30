@@ -39,9 +39,9 @@ class DetailedResults extends Component {
         <TitleYearContainer>
           <ItemTitle>
             {item.original_title ? item.original_title : item.name}
+            {", "}
           </ItemTitle>
           <ItemYearReleased>
-            {"- "}
             {item.release_date ? item.release_date : item.first_air_date}
           </ItemYearReleased>
         </TitleYearContainer>

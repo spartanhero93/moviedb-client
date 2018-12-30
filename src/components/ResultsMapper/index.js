@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { NavLink } from "react-router-dom"
 import {
   Wrapper,
   StyledToolTip,
@@ -11,17 +11,17 @@ import {
   CardImg,
   CardRating,
   CardTitle
-} from "./styles";
-import { getGenreFromId, getImageUrl, returnOnlyYear } from "../../helpers";
-import { fetchDetails } from "../../redux/actions";
-import Tooltip from "@material-ui/core/Tooltip";
-import Fade from "@material-ui/core/Fade";
+} from "./styles"
+import { getGenreFromId, getImageUrl, returnOnlyYear } from "../../helpers"
+import { fetchDetails } from "../../redux/actions"
+import Tooltip from "@material-ui/core/Tooltip"
+import Fade from "@material-ui/core/Fade"
 
 class ResultsMapper extends Component {
   /** Helper functions */
 
   render() {
-    const { results, mediaType, getDetailedResults } = this.props;
+    const { results, mediaType, getDetailedResults } = this.props
     const Title = (item) => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
@@ -52,7 +52,7 @@ class ResultsMapper extends Component {
 
         <p>{item.overview}</p>
       </StyledToolTip>
-    );
+    )
 
     return (
       <div>
@@ -83,22 +83,24 @@ class ResultsMapper extends Component {
                 >
                   <CardTitle>{item.title ? item.title : item.name}</CardTitle>
                 </NavLink>
-                <CardRating>{item.vote_average}</CardRating>
+                <CardRating>
+                  {item.vote_average ? item.vote_average : item.popularity}
+                </CardRating>
               </Card>
             </Tooltip>
           ))}
         </Wrapper>
       </div>
-    );
+    )
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   getDetailedResults: (mediaType = "person", id) =>
     dispatch(fetchDetails(mediaType, id))
-});
+})
 
 export default connect(
   null,
   mapDispatchToProps
-)(ResultsMapper);
+)(ResultsMapper)

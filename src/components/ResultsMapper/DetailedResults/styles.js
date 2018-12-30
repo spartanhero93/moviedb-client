@@ -16,19 +16,21 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   img {
-    height: 20rem;
+    height: 22rem;
     padding: 1rem;
+    width: 14rem;
   }
 `
 export const Container = styled.div`
   display: flex;
 `
 export const TitleYearContainer = styled.div`
+  text-align: center;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
 `
 export const ItemTitle = styled.span`
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 200;
 `
 export const ItemYearReleased = styled.span`
