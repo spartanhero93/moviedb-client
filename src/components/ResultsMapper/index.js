@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import {
   Wrapper,
   StyledToolTip,
@@ -19,6 +19,9 @@ import Fade from '@material-ui/core/Fade'
 
 class ResultsMapper extends Component {
   /** Helper functions */
+  componentWillReceiveProps() {
+    window.scrollTo(0, 0)
+  }
 
   render() {
     const { results, mediaType, getDetailedResults } = this.props
@@ -53,7 +56,7 @@ class ResultsMapper extends Component {
         <p>{item.overview}</p>
       </StyledToolTip>
     )
-
+    console.log(this.props.location)
     return (
       <div>
         <Wrapper>
@@ -103,4 +106,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(ResultsMapper)
+)(withRouter(ResultsMapper))

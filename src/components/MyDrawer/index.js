@@ -9,7 +9,7 @@ import { mapTVLinksToNavLinks } from '../TVShows/Routes'
 
 const drawerWidth = 220
 
-const styles = (theme) => ({
+const styles = theme => ({
   button: {
     width: '100%',
     height: '3rem',
@@ -24,11 +24,11 @@ const styles = (theme) => ({
     },
   },
   drawerStyles: {
-    background: '#20232a',
+    background: theme.primary,
   },
   drawerPaper: {
     width: drawerWidth,
-    background: '#282c34',
+    background: '#20232a',
     padding: '3rem 0rem',
   },
   titles: {
@@ -53,7 +53,7 @@ const MyDrawer = ({
       <Divider />
 
       <div className={classes.titles}>My Account</div>
-      <NavLink to="/user/account" exact>
+      <NavLink to='/user/account' exact>
         <Button className={classes.button}>Account</Button>
       </NavLink>
       <div className={classes.titles}>Movies</div>
@@ -63,7 +63,7 @@ const MyDrawer = ({
       {mapTVLinksToNavLinks(classes)}
       <Divider />
       <div className={classes.titles}>Discover</div>
-      <NavLink to="/discover/movies" exact>
+      <NavLink to='/discover/movies' exact>
         <Button className={classes.button}>Discover</Button>
       </NavLink>
       <Button className={classes.button}>TV Shows</Button>
@@ -74,10 +74,10 @@ const MyDrawer = ({
   return (
     <nav className={classes.drawer}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Hidden smUp implementation="css">
+      <Hidden smUp implementation='css'>
         <Drawer
           container={container}
-          variant="temporary"
+          variant='temporary'
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
           onClose={handleDrawerToggle}
@@ -88,12 +88,12 @@ const MyDrawer = ({
           {drawer}
         </Drawer>
       </Hidden>
-      <Hidden xsDown implementation="css">
+      <Hidden xsDown implementation='css'>
         <Drawer
           classes={{
             paper: classes.drawerPaper,
           }}
-          variant="permanent"
+          variant='permanent'
           open
         >
           {drawer}

@@ -47,10 +47,8 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 2,
-  },
-
-  sidebar: {
-    background: '#20232a',
+    background: '#282c34',
+    color: 'white',
   },
 })
 
@@ -85,9 +83,9 @@ class Main extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant='h6' color='inherit' noWrap>
+            {/* <Typography variant='h6' color='inherit' noWrap>
               My App
-            </Typography>
+            </Typography> */}
             <SearchBar />
           </Toolbar>
         </AppBar>

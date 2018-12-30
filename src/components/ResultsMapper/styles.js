@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   padding: 2rem 0rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   /* overflow-x: scroll; */
   @media (max-width: 900px) {
     padding: 0;
@@ -31,7 +31,7 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0.5rem 0.4rem;
+  margin: 0.5rem auto;
   height: 24rem;
   width: 14rem;
   transition: all 0.3s ease-in-out;
