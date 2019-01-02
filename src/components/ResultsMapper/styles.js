@@ -5,6 +5,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  /* background: '#282c34'; */
+
   /* overflow-x: scroll; */
   @media (max-width: 900px) {
     padding: 0;

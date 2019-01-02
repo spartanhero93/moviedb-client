@@ -9,7 +9,7 @@ class MovieList extends Component {
     this.fetchData()
   }
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (prevProps.match.params.list !== this.props.match.params.list) {
       this.fetchData()
     }
@@ -24,7 +24,7 @@ class MovieList extends Component {
     if (!movieState.results[1]) return <div>Loading...</div>
     return (
       <div>
-        <ResultsMapper {...movieState} mediaType="movie" />
+        <ResultsMapper {...movieState} mediaType='movie' />
         <Button
           onClick={() =>
             fetchMovies(
@@ -55,11 +55,11 @@ class MovieList extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   movieState: state.mediaReducer,
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   fetchMovies: (type, pageNum) => dispatch(fetchMovies(type, pageNum)),
 })
 

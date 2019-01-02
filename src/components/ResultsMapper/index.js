@@ -58,42 +58,40 @@ class ResultsMapper extends Component {
     )
     console.log(this.props.location)
     return (
-      <div>
-        <Wrapper>
-          {results.map(item => (
-            <Tooltip
-              key={item.id}
-              title={Title(item)}
-              disableFocusListener
-              disableTouchListener
-              TransitionComponent={Fade}
-              enterDelay={200}
-              leaveDelay={200}
-            >
-              <Card>
-                <CardImg src={getImageUrl(item)} />
-                <NavLink
-                  to={`/item/${mediaType ? mediaType : item.media_type}/${
-                    item.id
-                  }`}
-                  exact
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                  onClick={() =>
-                    mediaType
-                      ? getDetailedResults(mediaType, item.id)
-                      : getDetailedResults(item.media_type, item.id)
-                  }
-                >
-                  <CardTitle>{item.title ? item.title : item.name}</CardTitle>
-                </NavLink>
-                <CardRating>
-                  {item.vote_average ? item.vote_average : item.popularity}
-                </CardRating>
-              </Card>
-            </Tooltip>
-          ))}
-        </Wrapper>
-      </div>
+      <Wrapper>
+        {results.map(item => (
+          <Tooltip
+            key={item.id}
+            title={Title(item)}
+            disableFocusListener
+            disableTouchListener
+            TransitionComponent={Fade}
+            enterDelay={200}
+            leaveDelay={200}
+          >
+            <Card>
+              <CardImg src={getImageUrl(item)} />
+              <NavLink
+                to={`/item/${mediaType ? mediaType : item.media_type}/${
+                  item.id
+                }`}
+                exact
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                onClick={() =>
+                  mediaType
+                    ? getDetailedResults(mediaType, item.id)
+                    : getDetailedResults(item.media_type, item.id)
+                }
+              >
+                <CardTitle>{item.title ? item.title : item.name}</CardTitle>
+              </NavLink>
+              <CardRating>
+                {item.vote_average ? item.vote_average : item.popularity}
+              </CardRating>
+            </Card>
+          </Tooltip>
+        ))}
+      </Wrapper>
     )
   }
 }

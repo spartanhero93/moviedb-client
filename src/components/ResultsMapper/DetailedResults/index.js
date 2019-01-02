@@ -1,16 +1,17 @@
-import React, { Component } from "react"
-import { Route } from "react-router-dom"
-import { connect } from "react-redux"
-import { fetchDetails } from "../../../redux/actions"
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchDetails } from '../../../redux/actions'
 import {
   Wrapper,
   Container,
   ItemTitle,
   ItemYearReleased,
   ItemOverview,
-  TitleYearContainer
-} from "./styles"
-import { getImageUrl } from "../../../helpers"
+  TitleYearContainer,
+  Person,
+} from './styles'
+import { getImageUrl, getBackdropURL, getGenreFromId } from '../../../helpers'
 
 class DetailedResults extends Component {
   /** Renders the current selected item if page refreshes */
@@ -18,7 +19,7 @@ class DetailedResults extends Component {
     this.fetchDetailedData()
   }
 
-  componentWillReceiveProps = (prevProps) => {
+  componentWillReceiveProps = prevProps => {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.fetchDetailedData()
     }
@@ -36,30 +37,40 @@ class DetailedResults extends Component {
     console.log(item)
     return (
       <Wrapper>
-        <TitleYearContainer>
-          <ItemTitle>
-            {item.original_title ? item.original_title : item.name}
-            {", "}
-          </ItemTitle>
+        <TitleYearContainer backdrop={getBackdropURL(item.backdrop_path)}>
+          <ItemTitle>{item.title ? item.title : item.name}</ItemTitle>
           <ItemYearReleased>
+            Released{' '}
             {item.release_date ? item.release_date : item.first_air_date}
           </ItemYearReleased>
         </TitleYearContainer>
         <Container>
           <img src={getImageUrl(item)} alt={item.id} />
           <ItemOverview>{item.overview}</ItemOverview>
+          {item.genres ? (
+            item.genres.map(item => <span>{item.name}</span>)
+          ) : (
+            <Person>
+              {item.also_known_as.map(name => (
+                <div>{name}</div>
+              ))}
+              <h1>{item.place_of_birth}</h1>
+              <h1>{item.birthday}</h1>
+              <h1>{item.homepage}</h1>
+            </Person>
+          )}
         </Container>
       </Wrapper>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  details: state.detailsReducer
+const mapStateToProps = state => ({
+  details: state.detailsReducer,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id))
+const mapDispatchToProps = dispatch => ({
+  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
 })
 
 const ConnectedDetailedResults = connect(
@@ -68,5 +79,5 @@ const ConnectedDetailedResults = connect(
 )(DetailedResults)
 
 export const DetailedResultsRoute = () => (
-  <Route path={"/item/:mediaType/:id"} component={ConnectedDetailedResults} />
+  <Route path={'/item/:mediaType/:id'} component={ConnectedDetailedResults} />
 )
