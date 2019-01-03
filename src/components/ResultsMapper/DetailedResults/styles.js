@@ -17,13 +17,13 @@ export const Wrapper = styled.div`
 
   img {
     height: 22rem;
-    padding: 1rem;
     width: 14rem;
     margin: 0 auto;
   }
 `
 export const Container = styled.div`
   display: flex;
+  padding: 1rem 0;
 
   @media (max-width: 900px) {
     flex-direction: column;
@@ -47,7 +47,6 @@ export const ItemYearReleased = styled.span`
   font-size: 1.5rem;
 `
 export const ItemOverview = styled.p`
-  padding: 1rem;
   font-size: 1.4rem;
 `
 export const Person = styled.div``

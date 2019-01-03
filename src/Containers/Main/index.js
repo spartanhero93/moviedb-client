@@ -2,7 +2,6 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
-import CssBaseline from '@material-ui/core/CssBaseline'
 
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -47,7 +46,6 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 2,
-    background: '#282c34',
     color: 'white',
   },
 })
@@ -72,7 +70,6 @@ class Main extends React.Component {
 
     return (
       <div className={classes.root}>
-        <CssBaseline />
         <AppBar position='fixed' color='primary' className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <IconButton

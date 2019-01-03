@@ -11,7 +11,7 @@ import {
   TitleYearContainer,
   Person,
 } from './styles'
-import { getImageUrl, getBackdropURL, getGenreFromId } from '../../../helpers'
+import { getImageUrl, getBackdropURL } from '../../../helpers'
 
 class DetailedResults extends Component {
   /** Renders the current selected item if page refreshes */
@@ -47,19 +47,37 @@ class DetailedResults extends Component {
         <Container>
           <img src={getImageUrl(item)} alt={item.id} />
           <ItemOverview>{item.overview}</ItemOverview>
+        </Container>
+        <div>
           {item.genres ? (
-            item.genres.map(item => <span>{item.name}</span>)
+            item.genres.map(item => <span key={item.id}>{item.name}</span>)
           ) : (
             <Person>
               {item.also_known_as.map(name => (
-                <div>{name}</div>
+                <div key={name}>{name}</div>
               ))}
               <h1>{item.place_of_birth}</h1>
               <h1>{item.birthday}</h1>
               <h1>{item.homepage}</h1>
             </Person>
           )}
-        </Container>
+          <div>
+            <a href={item.homepage}>{item.homepage}</a>
+          </div>
+          <div>
+            {item.seasons
+              ? item.seasons.map(season => (
+                  <div>
+                    <div>{season.air_date}</div>
+                    <div>{season.episode_count}</div>
+                    <div>
+                      <img src={getImageUrl(season)} alt={season.name} />
+                    </div>
+                  </div>
+                ))
+              : item.revenue}
+          </div>
+        </div>
       </Wrapper>
     )
   }

@@ -16,6 +16,15 @@ import { getGenreFromId, getImageUrl, returnOnlyYear } from '../../helpers'
 import { fetchDetails } from '../../redux/actions'
 import Tooltip from '@material-ui/core/Tooltip'
 import Fade from '@material-ui/core/Fade'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = theme => ({
+  Tooltip: {
+    color: 'white',
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
+  },
+})
 
 class ResultsMapper extends Component {
   /** Helper functions */
@@ -56,7 +65,7 @@ class ResultsMapper extends Component {
         <p>{item.overview}</p>
       </StyledToolTip>
     )
-    console.log(this.props.location)
+    const { classes } = this.props
     return (
       <Wrapper>
         {results.map(item => (
@@ -68,6 +77,7 @@ class ResultsMapper extends Component {
             TransitionComponent={Fade}
             enterDelay={200}
             leaveDelay={200}
+            classes={{ tooltip: classes.Tooltip }}
           >
             <Card>
               <CardImg src={getImageUrl(item)} />
@@ -104,4 +114,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(withRouter(ResultsMapper))
+)(withRouter(withStyles(styles)(ResultsMapper)))

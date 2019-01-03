@@ -10,6 +10,7 @@ import { mapTVLinksToNavLinks } from '../TVShows/Routes'
 const drawerWidth = 220
 
 const styles = theme => ({
+  root: {},
   button: {
     width: '100%',
     height: '3rem',
@@ -28,11 +29,11 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    background: '#20232a',
+    background: '#262f44',
     padding: '3rem 0rem',
   },
   titles: {
-    color: '#61dafb',
+    color: 'white',
     fontSize: '1.5rem',
     fontWeight: '200',
     textAlign: 'center',
@@ -48,7 +49,7 @@ const MyDrawer = ({
   container,
 }) => {
   const drawer = (
-    <div onClick={handleDrawerCloseOnTabClick}>
+    <div onClick={handleDrawerCloseOnTabClick} className={classes.root}>
       <div className={classes.toolbar} />
       <Divider />
 

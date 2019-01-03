@@ -1,4 +1,5 @@
 import React from 'react'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 /**redux */
 import { connect } from 'react-redux'
@@ -9,7 +10,10 @@ const ConnectedApp = () => {
   return (
     <div>
       <BrowserRouter>
-        <Main />
+        <React.Fragment>
+          <CssBaseline />
+          <Main />
+        </React.Fragment>
       </BrowserRouter>
     </div>
   )
