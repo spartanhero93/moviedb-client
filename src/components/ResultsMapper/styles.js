@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   padding: 2rem 0rem;
@@ -70,6 +70,7 @@ export const CardTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0.5rem 0 0;
 `
 export const CardGenre = styled.div`
   display: flex;

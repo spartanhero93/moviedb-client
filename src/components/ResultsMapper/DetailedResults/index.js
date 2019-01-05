@@ -45,7 +45,6 @@ class DetailedResults extends Component {
           </ItemYearReleased>
         </TitleYearContainer>
         <Container>
-          <img src={getImageUrl(item)} alt={item.id} />
           <ItemOverview>{item.overview}</ItemOverview>
         </Container>
         <div>
