@@ -43,4 +43,8 @@ const userAccountReducer = (state = {}, action) => {
   }
 }
 
-export default combineReducers({ mediaReducer, detailsReducer })
+export default combineReducers({
+  mediaReducer,
+  detailsReducer,
+  userAccountReducer
+})

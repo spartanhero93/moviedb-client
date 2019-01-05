@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { NavLink, withRouter } from "react-router-dom"
 import {
   Wrapper,
   StyledToolTip,
@@ -10,20 +10,20 @@ import {
   CardGenre,
   CardImg,
   CardRating,
-  CardTitle,
-} from './styles'
-import { getGenreFromId, getImageUrl, returnOnlyYear } from '../../helpers'
-import { fetchDetails } from '../../redux/actions'
-import Tooltip from '@material-ui/core/Tooltip'
-import Fade from '@material-ui/core/Fade'
-import { withStyles } from '@material-ui/core/styles'
+  CardTitle
+} from "./styles"
+import { getGenreFromId, getImageUrl, returnOnlyYear } from "../../helpers"
+import { fetchDetails } from "../../redux/actions"
+import Tooltip from "@material-ui/core/Tooltip"
+import Fade from "@material-ui/core/Fade"
+import { withStyles } from "@material-ui/core/styles"
 
-const styles = theme => ({
+const styles = (theme) => ({
   Tooltip: {
-    color: 'white',
+    color: "white",
     boxShadow: theme.shadows[1],
-    fontSize: 11,
-  },
+    fontSize: 11
+  }
 })
 
 class ResultsMapper extends Component {
@@ -34,7 +34,7 @@ class ResultsMapper extends Component {
 
   render() {
     const { results, mediaType, getDetailedResults } = this.props
-    const Title = item => (
+    const Title = (item) => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
         {item.release_date || item.first_air_date ? (
@@ -46,20 +46,20 @@ class ResultsMapper extends Component {
         ) : (
           <div>
             {item.known_for
-              ? item.known_for.map(item => <span>{item.name}</span>)
-              : ''}
+              ? item.known_for.map((item) => <span>{item.name}</span>)
+              : ""}
           </div>
         )}
         {item.genre_ids ? (
           <CardGenre>
-            {getGenreFromId(item.genre_ids).map(item => (
-              <span key={item.id ? item.id : ''}>
-                {item.name ? item.name + ',  ' : item.popularity}
+            {getGenreFromId(item.genre_ids).map((item) => (
+              <span key={item.id ? item.id : ""}>
+                {item.name ? item.name + ",  " : item.popularity}
               </span>
             ))}
           </CardGenre>
         ) : (
-          ''
+          ""
         )}
 
         <p>{item.overview}</p>
@@ -68,16 +68,16 @@ class ResultsMapper extends Component {
     const { classes } = this.props
     return (
       <Wrapper>
-        {results.map(item => (
+        {results.map((item) => (
           <Tooltip
             key={item.id}
             title={Title(item)}
-            disableFocusListener
             disableTouchListener
             TransitionComponent={Fade}
             enterDelay={200}
             leaveDelay={200}
             classes={{ tooltip: classes.Tooltip }}
+            PopperProps={{ style: { pointerEvents: "none" } }}
           >
             <Card>
               <CardImg src={getImageUrl(item)} />
@@ -86,7 +86,7 @@ class ResultsMapper extends Component {
                   item.id
                 }`}
                 exact
-                style={{ textDecoration: 'none', color: 'inherit' }}
+                style={{ textDecoration: "none", color: "inherit" }}
                 onClick={() =>
                   mediaType
                     ? getDetailedResults(mediaType, item.id)
@@ -106,9 +106,9 @@ class ResultsMapper extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  getDetailedResults: (mediaType = 'person', id) =>
-    dispatch(fetchDetails(mediaType, id)),
+const mapDispatchToProps = (dispatch) => ({
+  getDetailedResults: (mediaType = "person", id) =>
+    dispatch(fetchDetails(mediaType, id))
 })
 
 export default connect(

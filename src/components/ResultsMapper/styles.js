@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 export const Wrapper = styled.div`
   padding: 2rem 0rem;
@@ -15,7 +15,6 @@ export const Wrapper = styled.div`
 
 export const StyledToolTip = styled.div`
   text-align: left;
-  padding: 0.2rem 0.8rem;
   line-height: 1rem;
 `
 
@@ -33,7 +32,7 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0.5rem auto;
+  margin: 0.8rem auto;
   height: 24rem;
   width: 14rem;
   transition: all 0.3s ease-in-out;

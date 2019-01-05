@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from "styled-components"
 
 const fadeIn = keyframes`
   from {
@@ -33,15 +33,23 @@ export const TitleYearContainer = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  background: top center url(${props => props.backdrop});
+  background: top center url(${(props) => props.backdrop});
   height: 30rem;
   background-size: cover;
   box-shadow: inset 0 0 0 2000px rgba(25, 25, 25, 0.6);
-  line-height: 15rem;
+  justify-content: center;
+
+  @media (max-width: 900px) {
+    height: 25rem;
+  }
 `
 export const ItemTitle = styled.span`
   font-size: 3rem;
   font-weight: 600;
+
+  @media (max-width: 900px) {
+    font-size: 2rem;
+  }
 `
 export const ItemYearReleased = styled.span`
   font-size: 1.5rem;
