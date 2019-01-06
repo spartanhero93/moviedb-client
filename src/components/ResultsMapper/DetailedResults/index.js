@@ -9,9 +9,56 @@ import {
   ItemYearReleased,
   ItemOverview,
   TitleYearContainer,
-  Person,
+  TVDetailsContainer,
+  MovieDetailsContainer,
+  PersonDetailsContainer,
 } from './styles'
 import { getImageUrl, getBackdropURL } from '../../../helpers'
+
+function checkIfTVOrMovieOrPerson(item) {
+  if (item.first_air_date) {
+    return (
+      <TVDetailsContainer>
+        <Container>
+          <ItemOverview>{item.overview}</ItemOverview>
+        </Container>
+        <div>Released: {item.first_air_date}</div>
+        <div>Seasons: {item.number_of_seasons}</div>
+        <div>
+          Number of episodes: {item.number_of_episodes}
+          <br />
+          Next episode air date: {item.next_episode_to_air.air_date}
+        </div>
+      </TVDetailsContainer>
+    )
+  } else if (item.release_date) {
+    return (
+      <MovieDetailsContainer>
+        <Container>
+          <ItemOverview>{item.overview}</ItemOverview>
+        </Container>
+        <div>Released: {item.release_date}</div>
+        <div>
+          Budget: {item.budget}
+          <br />
+          Revenue: {item.revenue}
+        </div>
+        <div>Tagline: {item.tagline}</div>
+        <div>Rating: {item.vote_average}</div>
+      </MovieDetailsContainer>
+    )
+  } else {
+    return (
+      <PersonDetailsContainer>
+        <div>Biography: {item.biography}</div>
+        <div>Birthday: {item.birthday}</div>
+        <div>Died: {item.deathday ? item.deathday : 'Not Yet!'}</div>
+        <div>Place of birth: {item.place_of_birth}</div>
+        <div>Popularity: {item.popularity}</div>
+      </PersonDetailsContainer>
+    )
+  }
+}
 
 class DetailedResults extends Component {
   /** Renders the current selected item if page refreshes */
@@ -31,6 +78,7 @@ class DetailedResults extends Component {
       this.props.match.params.id
     )
   }
+
   render() {
     if (!this.props.details.id) return <div />
     const { details: item } = this.props
@@ -39,15 +87,10 @@ class DetailedResults extends Component {
       <Wrapper>
         <TitleYearContainer backdrop={getBackdropURL(item.backdrop_path)}>
           <ItemTitle>{item.title ? item.title : item.name}</ItemTitle>
-          <ItemYearReleased>
-            Released{' '}
-            {item.release_date ? item.release_date : item.first_air_date}
-          </ItemYearReleased>
         </TitleYearContainer>
-        <Container>
-          <ItemOverview>{item.overview}</ItemOverview>
-        </Container>
-        <div>
+
+        {checkIfTVOrMovieOrPerson(item)}
+        {/* <div>
           {item.genres ? (
             item.genres.map(item => <span key={item.id}>{item.name}</span>)
           ) : (
@@ -76,7 +119,7 @@ class DetailedResults extends Component {
                 ))
               : item.revenue}
           </div>
-        </div>
+        </div> */}
       </Wrapper>
     )
   }

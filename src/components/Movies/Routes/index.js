@@ -31,12 +31,12 @@ const Links = [
 ]
 
 export const MovieRoutes = () =>
-  Routes.map((item) => (
+  Routes.map(item => (
     <Route key={item.path} path={item.path} component={item.component} />
   ))
 
-export const mapMovieLinksToNavLinks = (styles) =>
-  Links.map((item) => (
+export const mapMovieLinksToNavLinks = styles =>
+  Links.map(item => (
     <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
       <Button className={styles.button}>{item.title}</Button>
     </NavLink>

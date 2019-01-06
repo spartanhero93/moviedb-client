@@ -51,25 +51,21 @@ const MyDrawer = ({
   const drawer = (
     <div onClick={handleDrawerCloseOnTabClick} className={classes.root}>
       <div className={classes.toolbar} />
-      <Divider />
-
-      <div className={classes.titles}>My Account</div>
       <NavLink to='/user/account' exact>
         <Button className={classes.button}>Account</Button>
       </NavLink>
-      <div className={classes.titles}>Movies</div>
+
+      <hr />
+      <div style={{ textAlign: 'center', color: 'white' }}>Movies</div>
       {mapMovieLinksToNavLinks(classes, handleDrawerToggle)}
-      <Divider />
-      <div className={classes.titles}>TV Shows</div>
+      <hr />
+      <div style={{ textAlign: 'center', color: 'white' }}>TV Shows</div>
       {mapTVLinksToNavLinks(classes)}
-      <Divider />
-      <div className={classes.titles}>Discover</div>
+      <hr />
       <NavLink to='/discover/movies' exact>
         <Button className={classes.button}>Discover</Button>
       </NavLink>
       <Button className={classes.button}>TV Shows</Button>
-      <Divider />
-      <div className={classes.titles}>People</div>
     </div>
   )
   return (

@@ -1,67 +1,67 @@
-import React from "react"
-import { Route } from "react-router-dom"
-import PropTypes from "prop-types"
-import AppBar from "@material-ui/core/AppBar"
+import React from 'react'
+import { Route } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import AppBar from '@material-ui/core/AppBar'
 
-import IconButton from "@material-ui/core/IconButton"
-import MenuIcon from "@material-ui/icons/Menu"
-import Toolbar from "@material-ui/core/Toolbar"
-import { withStyles } from "@material-ui/core/styles"
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import Toolbar from '@material-ui/core/Toolbar'
+import { withStyles } from '@material-ui/core/styles'
 
 /** Components */
-import MyDrawer from "../../components/MyDrawer"
-import { HeroRoute } from "../../components/Hero"
-import SearchBar from "../../components/SearchBar"
-import DiscoverMovies from "../Discover"
+import MyDrawer from '../../components/MyDrawer'
+import { HeroRoute } from '../../components/Hero'
+import SearchBar from '../../components/SearchBar'
+import DiscoverMovies from '../Discover'
 
 /** Routes */
-import { MovieRoutes } from "../../components/Movies/Routes"
-import { mapTVRoutesToRouter } from "../../components/TVShows/Routes"
-import { SearchBarRoute } from "../../components/SearchBar/SearchBarRoute"
-import { UserAccountRoute } from "../UserAccount"
-import { DetailedResultsRoute } from "../../components/ResultsMapper/DetailedResults"
+import { MovieRoutes } from '../../components/Movies/Routes'
+import { mapTVRoutesToRouter } from '../../components/TVShows/Routes'
+import { SearchBarRoute } from '../../components/SearchBar/SearchBarRoute'
+import { UserAccountRoute } from '../UserAccount'
+import { DetailedResultsRoute } from '../../components/ResultsMapper/DetailedResults'
 
 const drawerWidth = 220
 
-const styles = (theme) => ({
+const styles = theme => ({
   root: {
-    display: "flex"
+    display: 'flex',
   },
 
   appBar: {
     marginLeft: drawerWidth,
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
   toolbar: theme.mixins.toolbar,
 
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 2,
-    color: "white"
-  }
+    color: 'white',
+  },
 })
 
 class Main extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
   }
 
   handleDrawerToggle = () => {
-    this.setState((state) => ({
-      mobileOpen: !state.mobileOpen
+    this.setState(state => ({
+      mobileOpen: !state.mobileOpen,
     }))
   }
 
   handleDrawerCloseOnTabClick = () => {
-    this.setState((state) => ({ mobileOpen: (state.mobileOpen = false) }))
+    this.setState(state => ({ mobileOpen: (state.mobileOpen = false) }))
   }
 
   render() {
@@ -79,9 +79,6 @@ class Main extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            {/* <Typography variant='h6' color='inherit' noWrap>
-              My App
-            </Typography> */}
             <SearchBar />
           </Toolbar>
         </AppBar>
@@ -108,7 +105,7 @@ class Main extends React.Component {
 Main.propTypes = {
   classes: PropTypes.object.isRequired,
   container: PropTypes.object,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles, { withTheme: true })(Main)

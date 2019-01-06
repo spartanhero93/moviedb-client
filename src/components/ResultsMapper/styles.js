@@ -53,8 +53,8 @@ export const Card = styled.div`
   }
 
   @media (max-width: 500px) {
-    height: 26rem;
-    width: 16rem;
+    height: 14rem;
+    width: 8rem;
   }
 `
 export const CardImg = styled.img`
