@@ -33,6 +33,7 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
+    backgroundColor: '#606c88',
   },
   menuButton: {
     marginRight: 20,
@@ -69,7 +70,7 @@ class Main extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position='fixed' color='primary' className={classes.appBar}>
+        <AppBar position='fixed' className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <IconButton
               color='inherit'

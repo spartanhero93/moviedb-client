@@ -30,14 +30,21 @@ const Links = [
   },
 ]
 
+const activeStyling = {}
+
 export const MovieRoutes = () =>
   Routes.map(item => (
     <Route key={item.path} path={item.path} component={item.component} />
   ))
 
 export const mapMovieLinksToNavLinks = styles =>
-  Links.map(item => (
-    <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
-      <Button className={styles.button}>{item.title}</Button>
-    </NavLink>
-  ))
+  Links.map(item => {
+    const MyLink = props => (
+      <NavLink to={item.to} activeStyle={{ background: 'red' }} {...props} />
+    )
+    return (
+      <Button component={MyLink} key={item.title} className={styles.button}>
+        {item.title}
+      </Button>
+    )
+  })
