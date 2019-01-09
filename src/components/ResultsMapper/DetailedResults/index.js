@@ -22,13 +22,39 @@ function checkIfTVOrMovieOrPerson(item) {
         <Container>
           <ItemOverview>{item.overview}</ItemOverview>
         </Container>
-        <div>Released: {item.first_air_date}</div>
-        <div>Seasons: {item.number_of_seasons}</div>
-        <div>
-          Number of episodes: {item.number_of_episodes}
-          <br />
-          Next episode air date: {item.next_episode_to_air.air_date}
-        </div>
+        <Container>
+          <div>
+            <div>Released: {item.first_air_date}</div>
+            <div>Seasons: {item.number_of_seasons}</div>
+            Number of episodes: {item.number_of_episodes}
+            <br />
+            {item.next_episode_to_air ? (
+              <div>
+                Next episode air date: {item.next_episode_to_air.air_date}
+              </div>
+            ) : (
+              <div>Last aired episode: {item.last_air_date}</div>
+            )}
+          </div>
+          <div>
+            <h4>Homepage: {item.homepage}</h4>
+            <div>
+              {item.networks.map(network => (
+                <div key={network.id}>
+                  <img
+                    src={getImageUrl(network)}
+                    style={{
+                      height: '8rem',
+                      width: '16rem',
+                      padding: '1rem 0',
+                    }}
+                  />
+                  <div>{network.name}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
       </TVDetailsContainer>
     )
   } else if (item.release_date) {

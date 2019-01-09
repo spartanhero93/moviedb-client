@@ -60,6 +60,8 @@ export const Card = styled.div`
 export const CardImg = styled.img`
   height: 90%;
   transition: box-shadow 0.5s ease-in-out;
+  border-radius: 0.2rem;
+
   :hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
@@ -81,7 +83,7 @@ export const CardRating = styled.span`
   text-align: center;
   height: 2rem;
   width: 2rem;
-  background: white;
+  background: #606c88;
   display: block;
   position: relative;
   bottom: 80%;
@@ -89,6 +91,5 @@ export const CardRating = styled.span`
   z-index: 2;
   line-height: 2rem;
   border-radius: 5rem;
-  background: #20232a;
   color: white;
 `

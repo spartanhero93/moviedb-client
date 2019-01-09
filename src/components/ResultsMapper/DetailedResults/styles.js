@@ -29,6 +29,7 @@ export const PersonDetailsContainer = styled.div``
 export const Container = styled.div`
   display: flex;
   padding: 1rem 0;
+  justify-content: space-between;
 
   @media (max-width: 900px) {
     flex-direction: column;
@@ -51,6 +52,8 @@ export const TitleYearContainer = styled.div`
 export const ItemTitle = styled.span`
   font-size: 3rem;
   font-weight: 600;
+  color: white;
+  letter-spacing: 0.2rem;
 
   @media (max-width: 900px) {
     font-size: 2rem;

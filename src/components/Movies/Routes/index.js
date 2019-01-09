@@ -1,8 +1,9 @@
 import React from 'react'
-import { NavLink, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 
 import MovieList from './MovieList'
+import styled from 'styled-components'
 
 const Routes = [
   {
@@ -30,7 +31,17 @@ const Links = [
   },
 ]
 
-const activeStyling = {}
+const NavItem = styled(Link)`
+  color: blue;
+
+  &.${props => props.activeClassName} {
+    color: red;
+  }
+`
+
+NavItem.defaultProps = {
+  activeClassName: 'active',
+}
 
 export const MovieRoutes = () =>
   Routes.map(item => (
@@ -39,9 +50,7 @@ export const MovieRoutes = () =>
 
 export const mapMovieLinksToNavLinks = styles =>
   Links.map(item => {
-    const MyLink = props => (
-      <NavLink to={item.to} activeStyle={{ background: 'red' }} {...props} />
-    )
+    const MyLink = props => <NavItem to={item.to} {...props} />
     return (
       <Button component={MyLink} key={item.title} className={styles.button}>
         {item.title}

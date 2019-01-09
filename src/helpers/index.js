@@ -7,6 +7,8 @@ export const getImageUrl = item => {
     return imgURLPoster + item.poster_path
   } else if (item.profile_path) {
     return imgURLPoster + item.profile_path
+  } else if (item.logo_path) {
+    return imgURLPoster + item.logo_path
   } else {
     return NoImage2
   }
