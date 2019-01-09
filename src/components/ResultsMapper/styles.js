@@ -67,7 +67,7 @@ export const CardImg = styled.img`
   }
 `
 export const CardTitle = styled.div`
-  font-weight: 400;
+  font-weight: 600;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -83,11 +83,11 @@ export const CardRating = styled.span`
   text-align: center;
   height: 2rem;
   width: 2rem;
-  background: #606c88;
+  background: #38496f;
   display: block;
   position: relative;
-  bottom: 80%;
-  left: 92%;
+  bottom: 105%;
+  left: 41%;
   z-index: 2;
   line-height: 2rem;
   border-radius: 5rem;
