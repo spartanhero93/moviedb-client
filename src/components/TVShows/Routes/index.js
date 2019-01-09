@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
+import styled from 'styled-components'
 
 /** Pages */
 import TVList from './TVList'
@@ -32,15 +33,32 @@ const Links = [
   },
 ]
 
-export const mapTVLinksToNavLinks = (styles) =>
-  Links.map((item) => (
-    <NavLink key={item.title} to={item.to} style={{ textDecoration: 'none' }}>
-      <Button className={styles.button}>{item.title}</Button>
-    </NavLink>
-  ))
+const NavItem = styled(NavLink)`
+  transition: all 0.5s ease-in-out;
+
+  &.${props => props.activeClassName} {
+    &::after {
+      content: '>';
+    }
+  }
+`
+
+NavItem.defaultProps = {
+  activeClassName: 'active',
+}
+
+export const mapTVLinksToNavLinks = styles =>
+  Links.map(item => {
+    const MyLink = props => <NavItem to={item.to} {...props} />
+    return (
+      <Button component={MyLink} key={item.title} className={styles.button}>
+        {item.title}
+      </Button>
+    )
+  })
 
 export const mapTVRoutesToRouter = () =>
-  Routes.map((item) => (
+  Routes.map(item => (
     <Route
       key={item.path}
       exact={item.exact}

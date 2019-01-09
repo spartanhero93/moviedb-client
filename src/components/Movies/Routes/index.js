@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link, Route } from 'react-router-dom'
+import { NavLink, Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 
 import MovieList from './MovieList'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 const Routes = [
   {
@@ -31,11 +31,23 @@ const Links = [
   },
 ]
 
-const NavItem = styled(Link)`
-  color: blue;
+const anim = keyframes`
+  from {
+    
+  }
+  to {
+
+  }
+
+`
+
+const NavItem = styled(NavLink)`
+  transition: all 0.5s ease-in-out;
 
   &.${props => props.activeClassName} {
-    color: red;
+    &::after {
+      content: '>';
+    }
   }
 `
 
