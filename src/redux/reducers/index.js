@@ -38,6 +38,8 @@ const userAccountReducer = (state = {}, action) => {
   switch (action.type) {
     case "CREATE_GUEST_ACCOUNT":
       return { ...action.data }
+    case "SIGN_IN_TMDB_ACCOUNT":
+      return { ...action.data }
     default:
       return state
   }

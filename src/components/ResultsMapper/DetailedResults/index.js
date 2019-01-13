@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { fetchDetails } from '../../../redux/actions'
+import React, { Component } from "react"
+import { Route } from "react-router-dom"
+import { connect } from "react-redux"
+import { fetchDetails } from "../../../redux/actions"
 import {
   Wrapper,
   Container,
@@ -11,9 +11,9 @@ import {
   TitleYearContainer,
   TVDetailsContainer,
   MovieDetailsContainer,
-  PersonDetailsContainer,
-} from './styles'
-import { getImageUrl, getBackdropURL } from '../../../helpers'
+  PersonDetailsContainer
+} from "./styles"
+import { getImageUrl, getBackdropURL } from "../../../helpers"
 
 function checkIfTVOrMovieOrPerson(item) {
   if (item.first_air_date) {
@@ -39,14 +39,14 @@ function checkIfTVOrMovieOrPerson(item) {
           <div>
             <h4>Homepage: {item.homepage}</h4>
             <div>
-              {item.networks.map(network => (
+              {item.networks.map((network) => (
                 <div key={network.id}>
                   <img
                     src={getImageUrl(network)}
                     style={{
-                      height: '8rem',
-                      width: '16rem',
-                      padding: '1rem 0',
+                      height: "8rem",
+                      width: "16rem",
+                      padding: "1rem 0"
                     }}
                   />
                   <div>{network.name}</div>
@@ -78,7 +78,7 @@ function checkIfTVOrMovieOrPerson(item) {
       <PersonDetailsContainer>
         <div>Biography: {item.biography}</div>
         <div>Birthday: {item.birthday}</div>
-        <div>Died: {item.deathday ? item.deathday : 'Not Yet!'}</div>
+        <div>Died: {item.deathday ? item.deathday : "Not Yet!"}</div>
         <div>Place of birth: {item.place_of_birth}</div>
         <div>Popularity: {item.popularity}</div>
       </PersonDetailsContainer>
@@ -92,10 +92,11 @@ class DetailedResults extends Component {
     this.fetchDetailedData()
   }
 
-  componentWillReceiveProps = prevProps => {
+  componentWillReceiveProps = (prevProps) => {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.fetchDetailedData()
     }
+    window.scrollTo(0, 0)
   }
 
   fetchDetailedData() {
@@ -116,47 +117,17 @@ class DetailedResults extends Component {
         </TitleYearContainer>
 
         {checkIfTVOrMovieOrPerson(item)}
-        {/* <div>
-          {item.genres ? (
-            item.genres.map(item => <span key={item.id}>{item.name}</span>)
-          ) : (
-            <Person>
-              {item.also_known_as.map(name => (
-                <div key={name}>{name}</div>
-              ))}
-              <h1>{item.place_of_birth}</h1>
-              <h1>{item.birthday}</h1>
-              <h1>{item.homepage}</h1>
-            </Person>
-          )}
-          <div>
-            <a href={item.homepage}>{item.homepage}</a>
-          </div>
-          <div>
-            {item.seasons
-              ? item.seasons.map(season => (
-                  <div>
-                    <div>{season.air_date}</div>
-                    <div>{season.episode_count}</div>
-                    <div>
-                      <img src={getImageUrl(season)} alt={season.name} />
-                    </div>
-                  </div>
-                ))
-              : item.revenue}
-          </div>
-        </div> */}
       </Wrapper>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  details: state.detailsReducer,
+const mapStateToProps = (state) => ({
+  details: state.detailsReducer
 })
 
-const mapDispatchToProps = dispatch => ({
-  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
+const mapDispatchToProps = (dispatch) => ({
+  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id))
 })
 
 const ConnectedDetailedResults = connect(
@@ -165,5 +136,5 @@ const ConnectedDetailedResults = connect(
 )(DetailedResults)
 
 export const DetailedResultsRoute = () => (
-  <Route path={'/item/:mediaType/:id'} component={ConnectedDetailedResults} />
+  <Route path={"/item/:mediaType/:id"} component={ConnectedDetailedResults} />
 )
