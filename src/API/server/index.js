@@ -35,7 +35,8 @@ export const fetchDetailedResultsFromDatabase = async (mediaType, id) => {
   try {
     const type = mediaType ? mediaType : 'person'
     const { data } = await axios.get(`${URL}/api/detailed/${type}/${id}`)
-    return await data
+    const { data: media } = await data
+    return await media
   } catch (error) {
     console.error(error)
   }

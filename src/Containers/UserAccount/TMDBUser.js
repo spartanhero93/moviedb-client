@@ -18,41 +18,42 @@ const RatedTVShows = () => (
 )
 
 const accountRoutes = [
-  { path: '/account/watchList', component: WatchList },
-  { path: '/account/rated_movies', component: RatedMovies },
-  { path: 'account/rated_tv_shows', component: RatedTVShows }
+  { path: '/watchList', component: WatchList },
+  { path: '/rated_movies', component: RatedMovies },
+  { path: '/rated_tv_shows', component: RatedTVShows },
 ]
 
 const accountLinks = [
-  { to: '/account/watchList', exact: true, title: 'Watch List' },
-  { to: '/account/rated_movies', exact: true, title: 'Rated Movies' },
-  { to: 'account/rated_tv_shows', exact: true, title: 'Rated TV Shows' }
+  { to: '/watchList', exact: 'true', title: 'Watch List' },
+  { to: '/rated_movies', exact: 'true', title: 'Rated Movies' },
+  { to: '/rated_tv_shows', exact: 'true', title: 'Rated TV Shows' },
 ]
 
 const mapAccountLinks = () =>
-  accountLinks.map((item) => (
-    <Link to={item.to} exact={item.exact}>
+  accountLinks.map(item => (
+    <Link key={item.title} to={item.to} exact={item.exact}>
       {item.title}
     </Link>
   ))
 const mapAccountRoutes = () =>
-  accountRoutes.map((item) => (
-    <Route path={item.path} component={item.component} />
+  accountRoutes.map(item => (
+    <Route key={item.path} path={item.path} component={item.component} />
   ))
 
 class TMDBAccount extends Component {
   state = {
-    data: {}
+    data: {},
   }
 
   async componentDidMount() {}
 
   render() {
+    console.log(this.props)
     return (
-      <div>
+      <div style={{ padding: '2rem 0' }}>
         <h1>Hello TMDB User</h1>
         <div>{mapAccountLinks()}</div>
-        <Switch>{mapAccountRoutes()}</Switch>
+        {mapAccountRoutes()}
       </div>
     )
   }

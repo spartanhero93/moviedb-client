@@ -58,9 +58,6 @@ export const ItemTitle = styled.span`
     font-size: 2rem;
   }
 `
-export const ItemYearReleased = styled.span`
-  font-size: 1.5rem;
-`
 export const ItemOverview = styled.p`
   font-size: 1.4rem;
 `

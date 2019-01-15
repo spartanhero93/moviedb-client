@@ -6,7 +6,6 @@ import {
   Wrapper,
   Container,
   ItemTitle,
-  ItemYearReleased,
   ItemOverview,
   TitleYearContainer,
   TVDetailsContainer,
@@ -49,6 +48,7 @@ function checkIfTVOrMovieOrPerson(item) {
             </div>
           </div>
         </Container>
+        <div>Rating: {item.vote_average}</div>
       </TVDetailsContainer>
     )
   } else if (item.release_date) {
@@ -81,7 +81,10 @@ function checkIfTVOrMovieOrPerson(item) {
 }
 
 class DetailedResults extends Component {
-  /** Renders the current selected item if page refreshes */
+  state = {
+    rating: 0,
+  }
+
   componentDidMount() {
     this.fetchDetailedData()
   }
@@ -100,17 +103,43 @@ class DetailedResults extends Component {
     )
   }
 
+  handleRating = event => {
+    this.setState({ rating: event.target.value })
+  }
+
+  submitRating = async () => {
+    try {
+      alert(this.state.rating)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   render() {
     if (!this.props.details.id) return <div />
     const { details: item } = this.props
-    console.log(this.props)
+    console.log(item)
     return (
       <Wrapper>
         <TitleYearContainer backdrop={getBackdropURL(item.backdrop_path)}>
           <ItemTitle>{item.title ? item.title : item.name}</ItemTitle>
         </TitleYearContainer>
 
-        <div style={{ padding: '1rem' }}>{checkIfTVOrMovieOrPerson(item)}</div>
+        <div style={{ padding: '1rem' }}>
+          {checkIfTVOrMovieOrPerson(item)}
+          <div>
+            <h1>Rate this {item.mediaType.toUpperCase()}</h1>
+            <div>
+              <input
+                onChange={this.handleRating}
+                type='number'
+                min='0'
+                max='10'
+              />
+              <button onClick={this.submitRating}>Rate me</button>
+            </div>
+          </div>
+        </div>
       </Wrapper>
     )
   }

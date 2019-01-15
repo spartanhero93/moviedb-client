@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 
-import MovieList from './MovieList'
 import styled from 'styled-components'
 
 const Routes = [
@@ -10,9 +9,30 @@ const Routes = [
     path: '/movies/:list',
     component: MovieList,
   },
+  {
+    path: '/tv/:list',
+    exact: true,
+    component: TVList,
+  },
 ]
 
 const Links = [
+  {
+    to: '/tv/airing_today',
+    title: 'Airing Today',
+  },
+  {
+    to: '/tv/popular',
+    title: 'Popular',
+  },
+  {
+    to: '/tv/top_rated',
+    title: 'Top Rated',
+  },
+  {
+    to: '/tv/on_the_air',
+    title: 'Currently on Air',
+  },
   {
     to: '/movies/top_rated',
     title: 'Top Rated',

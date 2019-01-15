@@ -2,14 +2,16 @@ import {
   fetchMoviesFromDatabase,
   fetchTVFromDatabase,
   querySearch,
-  fetchDetailedResultsFromDatabase
+  fetchDetailedResultsFromDatabase,
 } from '../../API/server'
 import { newGuestSession } from '../../API/MovieDB'
 
 /** Thunk */
-export const fetchMovies = (urlName, pageNum = 1, total_pages) => async (
-  dispatch
-) => {
+export const fetchMovies = (
+  urlName,
+  pageNum = 1,
+  total_pages
+) => async dispatch => {
   try {
     if (pageNum < 1 || pageNum > total_pages) return
     const data = await fetchMoviesFromDatabase(urlName, pageNum)
@@ -19,9 +21,11 @@ export const fetchMovies = (urlName, pageNum = 1, total_pages) => async (
   }
 }
 
-export const fetchTVShows = (urlName, pageNum = 1, total_pages) => async (
-  dispatch
-) => {
+export const fetchTVShows = (
+  urlName,
+  pageNum = 1,
+  total_pages
+) => async dispatch => {
   try {
     if (pageNum < 1 || pageNum > total_pages) return
     const data = await fetchTVFromDatabase(urlName, pageNum)
@@ -31,18 +35,23 @@ export const fetchTVShows = (urlName, pageNum = 1, total_pages) => async (
   }
 }
 
-export const fetchDetails = (mediaType, id) => async (dispatch) => {
+export const fetchDetails = (mediaTypeUsed, id) => async dispatch => {
   try {
-    const { data } = await fetchDetailedResultsFromDatabase(mediaType, id)
-    dispatch(getDetailedData(data))
+    const { data, mediaType } = await fetchDetailedResultsFromDatabase(
+      mediaTypeUsed,
+      id
+    )
+    dispatch(getDetailedData(data, mediaType))
   } catch (error) {
     console.error(error)
   }
 }
 
-export const searchAPI = (query, pageNum = 1, total_pages) => async (
-  dispatch
-) => {
+export const searchAPI = (
+  query,
+  pageNum = 1,
+  total_pages
+) => async dispatch => {
   try {
     if (pageNum < 1 || pageNum > total_pages) return
     if (!query) return
@@ -53,7 +62,7 @@ export const searchAPI = (query, pageNum = 1, total_pages) => async (
   }
 }
 
-export const createGuestSession = () => async (dispatch) => {
+export const createGuestSession = () => async dispatch => {
   try {
     const data = await newGuestSession()
     dispatch(createNewGuestSession(data))
@@ -62,34 +71,35 @@ export const createGuestSession = () => async (dispatch) => {
 
 /** Regular action */
 
-export const getData = (data) => ({
+export const getData = data => ({
   type: 'FETCH_DATA',
-  data
+  data,
 })
 
-export const getDetailedData = (data) => ({
+export const getDetailedData = (data, mediaType) => ({
   type: 'FETCH_DETAILS',
-  data
+  data,
+  mediaType,
 })
 
 export const getResultsFromQuerySearch = (data, query) => ({
   type: 'FETCH_QUERY_RESULTS',
   data,
-  query
+  query,
 })
 
 /** Account Reducer actions */
-export const createNewGuestSession = (data) => ({
+export const createNewGuestSession = data => ({
   type: 'CREATE_NEW_GUEST_SESSION',
-  data
+  data,
 })
 
-export const signInWithTMDBAccount = (data) => ({
+export const signInWithTMDBAccount = data => ({
   type: 'SIGN_IN_TMDB_ACCOUNT',
-  data
+  data,
 })
 
-export const fetchUserAccount = (data) => ({
+export const fetchUserAccount = data => ({
   type: 'FETCH_USER_ACCOUNT',
-  data
+  data,
 })
