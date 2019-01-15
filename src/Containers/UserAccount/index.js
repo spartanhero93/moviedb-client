@@ -12,11 +12,13 @@ export class UserAccount extends Component {
   }
 
   componentDidMount() {
-    window.localStorage['tmdb token']
+    window.localStorage['tmdb session_id']
       ? this.setState({ loggedIn: true, userName: 'TMDB User' })
       : window.sessionStorage['guest session_id']
       ? this.setState({ loggedIn: true, userName: 'Guest' })
       : this.setState({ loggedIn: false })
+
+    /** Used when the user gets redirected from TMDB auth */
   }
 
   testGuestSession = async () => {
@@ -53,7 +55,7 @@ export class UserAccount extends Component {
           request_token: window.localStorage.getItem('tmdb token'),
         }
       )
-      await window.localStorage.setItem('tmdb session_id', data.session_id)
+      window.localStorage.setItem('tmdb session_id', data.session_id)
       console.log(data)
       console.log(window.localStorage.getItem('tmdb session_id'))
     } catch (error) {
@@ -87,7 +89,7 @@ export class UserAccount extends Component {
   render() {
     const { userName, loggedIn } = this.state
     console.log(this.state.data)
-    console.log(window.localStorage['tmdb token'])
+    console.log(window.localStorage['tmdb session_id'])
     return (
       <div>
         <h1>Hello, {userName}</h1>
@@ -127,9 +129,6 @@ export class UserAccount extends Component {
             </div>
           </div>
         )}
-        <button onClick={this.removeGuestSessionID}>
-          Test if user has session stored
-        </button>
       </div>
     )
   }

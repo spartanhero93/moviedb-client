@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
+import Details from './Details'
 
 const WatchList = () => (
   <div>
@@ -21,12 +22,14 @@ const accountRoutes = [
   { path: '/watchList', component: WatchList },
   { path: '/rated_movies', component: RatedMovies },
   { path: '/rated_tv_shows', component: RatedTVShows },
+  { path: '/details', component: Details },
 ]
 
 const accountLinks = [
   { to: '/watchList', exact: 'true', title: 'Watch List' },
   { to: '/rated_movies', exact: 'true', title: 'Rated Movies' },
   { to: '/rated_tv_shows', exact: 'true', title: 'Rated TV Shows' },
+  { to: '/details', exact: 'true', title: 'Get account Details' },
 ]
 
 class TMDBAccount extends Component {
@@ -38,8 +41,7 @@ class TMDBAccount extends Component {
     console.log(this.props)
     const { match } = this.props
     return (
-      <div style={{ padding: '2rem' }}>
-        <h1>Hello TMDB User</h1>
+      <div>
         <div>
           {accountLinks.map(item => (
             <Link
@@ -48,16 +50,19 @@ class TMDBAccount extends Component {
               exact={item.exact}
             >
               {item.title}
+              <br />
             </Link>
           ))}
         </div>
-        {accountRoutes.map(item => (
-          <Route
-            key={item.path}
-            path={`${match.path + item.path}`}
-            component={item.component}
-          />
-        ))}
+        <div>
+          {accountRoutes.map(item => (
+            <Route
+              key={item.path}
+              path={`${match.path + item.path}`}
+              component={item.component}
+            />
+          ))}
+        </div>
       </div>
     )
   }
