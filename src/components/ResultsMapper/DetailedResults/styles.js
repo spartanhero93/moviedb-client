@@ -14,15 +14,14 @@ export const Wrapper = styled.div`
   animation: ${fadeIn} 1.5s ease-in-out;
   display: flex;
   flex-direction: column;
-
-  img {
-    height: 22rem;
-    width: 14rem;
-    margin: 0 auto;
-  }
 `
 
 export const TVDetailsContainer = styled.div``
+export const TVNetworks = styled.div`
+  > img {
+    height: 3rem;
+  }
+`
 export const MovieDetailsContainer = styled.div``
 export const PersonDetailsContainer = styled.div``
 
@@ -66,13 +65,3 @@ export const ItemOverview = styled.p`
   font-size: 1.4rem;
 `
 export const Person = styled.div``
-// const template = () => (
-//   <div>
-//     <div className="display flex">
-//       <div>Image of item</div>
-//       <div>
-//         <h1>Name of item</h1>
-//       </div>
-//     </div>
-//   </div>
-// )

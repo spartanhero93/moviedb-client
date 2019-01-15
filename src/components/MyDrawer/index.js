@@ -53,7 +53,6 @@ class MyDrawer extends Component {
       handleDrawerToggle,
       container,
     } = this.props
-    console.log(this.props)
 
     const drawer = (
       <div onClick={handleDrawerCloseOnTabClick} className={classes.root}>
@@ -61,14 +60,31 @@ class MyDrawer extends Component {
         <NavLink activeClassName={classes.active} to='/user/account' exact>
           <Button className={classes.button}>Account</Button>
         </NavLink>
+        <br />
 
-        <hr />
-        <div style={{ textAlign: 'center', color: 'white' }}>Movies</div>
+        <div
+          style={{
+            textAlign: 'center',
+            color: 'white',
+            fontSize: '1.6rem',
+            fontWeight: '800',
+          }}
+        >
+          Movies
+        </div>
         {mapMovieLinksToNavLinks(classes, handleDrawerToggle)}
-        <hr />
-        <div style={{ textAlign: 'center', color: 'white' }}>TV Shows</div>
+        <br />
+        <div
+          style={{
+            textAlign: 'center',
+            color: 'white',
+            fontSize: '1.6rem',
+            fontWeight: '800',
+          }}
+        >
+          TV Shows
+        </div>
         {mapTVLinksToNavLinks(classes)}
-        <hr />
         <NavLink to='/discover/movies' exact>
           <Button className={classes.button}>Discover</Button>
         </NavLink>

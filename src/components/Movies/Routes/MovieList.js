@@ -25,31 +25,33 @@ class MovieList extends Component {
     return (
       <div>
         <ResultsMapper {...movieState} mediaType='movie' />
-        <Button
-          onClick={() =>
-            fetchMovies(
-              this.props.match.params.list,
-              movieState.page - 1,
-              movieState.total_pages
-            )
-          }
-        >
-          Previous Page
-        </Button>
-        <span>
-          Current page {movieState.page} of {movieState.total_pages} pages
-        </span>
-        <Button
-          onClick={() =>
-            fetchMovies(
-              this.props.match.params.list,
-              movieState.page + 1,
-              movieState.total_pages
-            )
-          }
-        >
-          Next Page
-        </Button>
+        <div style={{ textAlign: 'center' }}>
+          <Button
+            onClick={() =>
+              fetchMovies(
+                this.props.match.params.list,
+                movieState.page - 1,
+                movieState.total_pages
+              )
+            }
+          >
+            Previous Page
+          </Button>
+          <span>
+            Current page {movieState.page} of {movieState.total_pages} pages
+          </span>
+          <Button
+            onClick={() =>
+              fetchMovies(
+                this.props.match.params.list,
+                movieState.page + 1,
+                movieState.total_pages
+              )
+            }
+          >
+            Next Page
+          </Button>
+        </div>
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 2rem 0rem;
+  padding: 2rem 1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 
   /* overflow-x: scroll; */
   @media (max-width: 900px) {
-    padding: 0;
+    padding: 1.5rem 0;
   }
 `
 
@@ -49,7 +49,6 @@ export const Card = styled.div`
     font-size: 1rem;
     height: 13rem;
     width: 7rem;
-    margin: 1rem 0.8rem;
   }
 
   @media (max-width: 500px) {
@@ -86,10 +85,14 @@ export const CardRating = styled.span`
   background: #38496f;
   display: block;
   position: relative;
-  bottom: 105%;
+  bottom: 100%;
   left: 41%;
   z-index: 2;
   line-height: 2rem;
   border-radius: 5rem;
   color: white;
+
+  @media (max-width: 900px) {
+    top: 5%;
+  }
 `

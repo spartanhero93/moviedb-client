@@ -1,7 +1,7 @@
-import React, { Component } from "react"
-import { Route } from "react-router-dom"
-import { connect } from "react-redux"
-import { fetchDetails } from "../../../redux/actions"
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchDetails } from '../../../redux/actions'
 import {
   Wrapper,
   Container,
@@ -10,10 +10,11 @@ import {
   ItemOverview,
   TitleYearContainer,
   TVDetailsContainer,
+  TVNetworks,
   MovieDetailsContainer,
-  PersonDetailsContainer
-} from "./styles"
-import { getImageUrl, getBackdropURL } from "../../../helpers"
+  PersonDetailsContainer,
+} from './styles'
+import { getImageUrl, getBackdropURL } from '../../../helpers'
 
 function checkIfTVOrMovieOrPerson(item) {
   if (item.first_air_date) {
@@ -39,18 +40,11 @@ function checkIfTVOrMovieOrPerson(item) {
           <div>
             <h4>Homepage: {item.homepage}</h4>
             <div>
-              {item.networks.map((network) => (
-                <div key={network.id}>
-                  <img
-                    src={getImageUrl(network)}
-                    style={{
-                      height: "8rem",
-                      width: "16rem",
-                      padding: "1rem 0"
-                    }}
-                  />
+              {item.networks.map(network => (
+                <TVNetworks key={network.id}>
+                  <img src={getImageUrl(network)} />
                   <div>{network.name}</div>
-                </div>
+                </TVNetworks>
               ))}
             </div>
           </div>
@@ -78,7 +72,7 @@ function checkIfTVOrMovieOrPerson(item) {
       <PersonDetailsContainer>
         <div>Biography: {item.biography}</div>
         <div>Birthday: {item.birthday}</div>
-        <div>Died: {item.deathday ? item.deathday : "Not Yet!"}</div>
+        <div>Died: {item.deathday ? item.deathday : 'Not Yet!'}</div>
         <div>Place of birth: {item.place_of_birth}</div>
         <div>Popularity: {item.popularity}</div>
       </PersonDetailsContainer>
@@ -92,7 +86,7 @@ class DetailedResults extends Component {
     this.fetchDetailedData()
   }
 
-  componentWillReceiveProps = (prevProps) => {
+  componentWillReceiveProps = prevProps => {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.fetchDetailedData()
     }
@@ -109,25 +103,25 @@ class DetailedResults extends Component {
   render() {
     if (!this.props.details.id) return <div />
     const { details: item } = this.props
-    console.log(item)
+    console.log(this.props)
     return (
       <Wrapper>
         <TitleYearContainer backdrop={getBackdropURL(item.backdrop_path)}>
           <ItemTitle>{item.title ? item.title : item.name}</ItemTitle>
         </TitleYearContainer>
 
-        {checkIfTVOrMovieOrPerson(item)}
+        <div style={{ padding: '1rem' }}>{checkIfTVOrMovieOrPerson(item)}</div>
       </Wrapper>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  details: state.detailsReducer
+const mapStateToProps = state => ({
+  details: state.detailsReducer,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id))
+const mapDispatchToProps = dispatch => ({
+  getDetailedResults: (mediaType, id) => dispatch(fetchDetails(mediaType, id)),
 })
 
 const ConnectedDetailedResults = connect(
@@ -136,5 +130,5 @@ const ConnectedDetailedResults = connect(
 )(DetailedResults)
 
 export const DetailedResultsRoute = () => (
-  <Route path={"/item/:mediaType/:id"} component={ConnectedDetailedResults} />
+  <Route path={'/item/:mediaType/:id'} component={ConnectedDetailedResults} />
 )

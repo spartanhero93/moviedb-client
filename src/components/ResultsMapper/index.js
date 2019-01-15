@@ -12,7 +12,12 @@ import {
   CardRating,
   CardTitle,
 } from './styles'
-import { getGenreFromId, getImageUrl, returnOnlyYear } from '../../helpers'
+import {
+  getGenreFromId,
+  getImageUrl,
+  returnOnlyYear,
+  arrowGenerator,
+} from '../../helpers'
 import { fetchDetails } from '../../redux/actions'
 import Tooltip from '@material-ui/core/Tooltip'
 import Fade from '@material-ui/core/Fade'
@@ -24,10 +29,36 @@ const styles = theme => ({
     boxShadow: theme.shadows[1],
     fontSize: 11,
   },
+  arrowPopper: arrowGenerator(theme.palette.grey[700]),
+  arrow: {
+    position: 'absolute',
+    fontSize: 7,
+    width: '4em',
+    height: '4em',
+    '&::before': {
+      content: '""',
+      margin: 'auto',
+      display: 'block',
+      width: 0,
+      height: 0,
+      borderStyle: 'solid',
+    },
+  },
+  placementRight: {
+    margin: '0 8px',
+  },
 })
 
 class ResultsMapper extends Component {
-  /** Helper functions */
+  state = {
+    arrowRef: null,
+  }
+
+  handleArrowRef = node => {
+    this.setState({
+      arrowRef: node,
+    })
+  }
   componentWillReceiveProps() {
     window.scrollTo(0, 0)
   }
@@ -37,6 +68,7 @@ class ResultsMapper extends Component {
     const Title = item => (
       <StyledToolTip>
         <ToolTipTitle>{item.name ? item.name : item.title}</ToolTipTitle>
+        <span className={classes.arrow} ref={this.handleArrowRef} />
         {item.release_date || item.first_air_date ? (
           <ToolTipReleaseDate>
             {item.release_date
@@ -76,8 +108,22 @@ class ResultsMapper extends Component {
             TransitionComponent={Fade}
             enterDelay={200}
             leaveDelay={200}
-            classes={{ tooltip: classes.Tooltip }}
-            PopperProps={{ style: { pointerEvents: 'none' } }}
+            classes={{
+              popper: classes.arrowPopper,
+              tooltip: classes.Tooltip,
+              tooltipPlacementRight: classes.placementRight,
+            }}
+            PopperProps={{
+              style: { pointerEvents: 'none' },
+              popperOptions: {
+                modifiers: {
+                  arrow: {
+                    enabled: Boolean(this.state.arrowRef),
+                    element: this.state.arrowRef,
+                  },
+                },
+              },
+            }}
           >
             <Card>
               <CardImg src={getImageUrl(item)} />
