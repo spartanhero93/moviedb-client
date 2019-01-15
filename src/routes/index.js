@@ -1,8 +1,10 @@
 import React from 'react'
 import { NavLink, Route } from 'react-router-dom'
 import { Button } from '@material-ui/core'
-
 import styled from 'styled-components'
+
+import MovieList from './MovieList'
+import TVList from './TVList'
 
 const Routes = [
   {
@@ -16,7 +18,7 @@ const Routes = [
   },
 ]
 
-const Links = [
+const TVLinks = [
   {
     to: '/tv/airing_today',
     title: 'Airing Today',
@@ -33,6 +35,9 @@ const Links = [
     to: '/tv/on_the_air',
     title: 'Currently on Air',
   },
+]
+
+const MovieLinks = [
   {
     to: '/movies/top_rated',
     title: 'Top Rated',
@@ -64,13 +69,23 @@ NavItem.defaultProps = {
   activeClassName: 'active',
 }
 
-export const MovieRoutes = () =>
+export const mappedRoutes = () =>
   Routes.map(item => (
     <Route key={item.path} path={item.path} component={item.component} />
   ))
 
-export const mapMovieLinksToNavLinks = styles =>
-  Links.map(item => {
+export const mapTVLinks = styles =>
+  TVLinks.map(item => {
+    const MyLink = props => <NavItem to={item.to} {...props} />
+    return (
+      <Button component={MyLink} key={item.title} className={styles.button}>
+        {item.title}
+      </Button>
+    )
+  })
+
+export const mapMovieLinks = styles =>
+  MovieLinks.map(item => {
     const MyLink = props => <NavItem to={item.to} {...props} />
     return (
       <Button component={MyLink} key={item.title} className={styles.button}>

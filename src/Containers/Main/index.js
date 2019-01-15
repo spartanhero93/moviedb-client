@@ -15,8 +15,7 @@ import SearchBar from '../../components/SearchBar'
 import DiscoverMovies from '../Discover'
 
 /** Routes */
-import { MovieRoutes } from '../../components/Movies/Routes'
-import { mapTVRoutesToRouter } from '../../components/TVShows/Routes'
+import { mappedRoutes } from '../../routes'
 import { SearchBarRoute } from '../../components/SearchBar/SearchBarRoute'
 import { UserAccountRoute } from '../UserAccount'
 import { DetailedResultsRoute } from '../../components/ResultsMapper/DetailedResults'
@@ -90,8 +89,7 @@ class Main extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <HeroRoute />
-          {MovieRoutes()}
-          {mapTVRoutesToRouter()}
+          {mappedRoutes()}
           <SearchBarRoute />
           <Route path='/discover/movies' component={DiscoverMovies} />
           <UserAccountRoute />

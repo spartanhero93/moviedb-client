@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchMovies } from '../../redux/actions'
+import { fetchMovies } from '../redux/actions'
 import { Button } from '@material-ui/core'
-import ResultsMapper from '../ResultsMapper'
+import ResultsMapper from '../components/ResultsMapper'
 
 class MovieList extends Component {
   componentDidMount() {

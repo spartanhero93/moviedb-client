@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchTVShows } from '../../../redux/actions'
-import ResultsMapper from '../../../components/ResultsMapper/'
-
+import { fetchTVShows } from '../redux/actions'
 import { Button } from '@material-ui/core'
+import ResultsMapper from '../components/ResultsMapper'
 
 class AiringToday extends Component {
   componentDidMount() {

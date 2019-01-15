@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Route } from 'react-router-dom'
 import { newGuestSession, get_API_KEY_FROM_SERVER } from '../../API/MovieDB'
-import { URL } from '../../API/serverURL'
 import TMDBAccount from './TMDBUser'
 
 export class UserAccount extends Component {
   state = {
     userName: 'Guest',
     data: {},
-    loggedIn: false
+    loggedIn: false,
   }
 
   componentDidMount() {
@@ -51,7 +50,7 @@ export class UserAccount extends Component {
       const { data } = await axios.post(
         `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}d`,
         {
-          request_token: window.localStorage.getItem('tmdb token')
+          request_token: window.localStorage.getItem('tmdb token'),
         }
       )
       await window.localStorage.setItem('tmdb session_id', data.session_id)
@@ -73,8 +72,8 @@ export class UserAccount extends Component {
         `https://api.themoviedb.org/3/authentication/session?api_key=${api_key}`,
         {
           data: {
-            session_id: window.localStorage.getItem('tmdb session_id')
-          }
+            session_id: window.localStorage.getItem('tmdb session_id'),
+          },
         }
       )
       window.localStorage.removeItem('tmdb session_id')

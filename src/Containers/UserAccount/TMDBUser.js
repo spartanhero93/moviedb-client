@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Route, Link, withRouter } from 'react-router-dom'
 
 const WatchList = () => (
   <div>
@@ -29,34 +29,38 @@ const accountLinks = [
   { to: '/rated_tv_shows', exact: 'true', title: 'Rated TV Shows' },
 ]
 
-const mapAccountLinks = () =>
-  accountLinks.map(item => (
-    <Link key={item.title} to={item.to} exact={item.exact}>
-      {item.title}
-    </Link>
-  ))
-const mapAccountRoutes = () =>
-  accountRoutes.map(item => (
-    <Route key={item.path} path={item.path} component={item.component} />
-  ))
-
 class TMDBAccount extends Component {
   state = {
     data: {},
   }
 
-  async componentDidMount() {}
-
   render() {
     console.log(this.props)
+    const { match } = this.props
     return (
-      <div style={{ padding: '2rem 0' }}>
+      <div style={{ padding: '2rem' }}>
         <h1>Hello TMDB User</h1>
-        <div>{mapAccountLinks()}</div>
-        {mapAccountRoutes()}
+        <div>
+          {accountLinks.map(item => (
+            <Link
+              key={item.title}
+              to={`${match.path + item.to}`}
+              exact={item.exact}
+            >
+              {item.title}
+            </Link>
+          ))}
+        </div>
+        {accountRoutes.map(item => (
+          <Route
+            key={item.path}
+            path={`${match.path + item.path}`}
+            component={item.component}
+          />
+        ))}
       </div>
     )
   }
 }
 
-export default TMDBAccount
+export default withRouter(TMDBAccount)

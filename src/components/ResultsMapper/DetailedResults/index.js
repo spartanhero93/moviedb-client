@@ -41,7 +41,7 @@ function checkIfTVOrMovieOrPerson(item) {
             <div>
               {item.networks.map(network => (
                 <TVNetworks key={network.id}>
-                  <img src={getImageUrl(network)} />
+                  <img alt={network.name} src={getImageUrl(network)} />
                   <div>{network.name}</div>
                 </TVNetworks>
               ))}

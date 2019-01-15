@@ -4,8 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import { Button } from '@material-ui/core'
-import { mapMovieLinksToNavLinks } from '../Movies/Routes'
-import { mapTVLinksToNavLinks } from '../TVShows/Routes'
+import { mapMovieLinks, mapTVLinks } from '../../routes'
 
 const drawerWidth = 220
 
@@ -72,7 +71,7 @@ class MyDrawer extends Component {
         >
           Movies
         </div>
-        {mapMovieLinksToNavLinks(classes, handleDrawerToggle)}
+        {mapMovieLinks(classes, handleDrawerToggle)}
         <br />
         <div
           style={{
@@ -84,7 +83,7 @@ class MyDrawer extends Component {
         >
           TV Shows
         </div>
-        {mapTVLinksToNavLinks(classes)}
+        {mapTVLinks(classes)}
         <NavLink to='/discover/movies' exact>
           <Button className={classes.button}>Discover</Button>
         </NavLink>
