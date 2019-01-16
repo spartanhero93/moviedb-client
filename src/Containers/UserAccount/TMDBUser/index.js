@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
-import Details from './Details'
+import Details from './details'
 
 const WatchList = () => (
   <div>
@@ -38,7 +38,6 @@ class TMDBAccount extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { match } = this.props
     return (
       <div>

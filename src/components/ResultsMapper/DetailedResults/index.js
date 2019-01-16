@@ -118,7 +118,6 @@ class DetailedResults extends Component {
   render() {
     if (!this.props.details.id) return <div />
     const { details: item } = this.props
-    console.log(item)
     return (
       <Wrapper>
         <TitleYearContainer backdrop={getBackdropURL(item.backdrop_path)}>
@@ -128,8 +127,8 @@ class DetailedResults extends Component {
         <div style={{ padding: '1rem' }}>
           {checkIfTVOrMovieOrPerson(item)}
           <div>
-            <h1>Rate this {item.mediaType.toUpperCase()}</h1>
             <div>
+              <h1>Rate this {item.mediaType.toUpperCase()}</h1>
               <input
                 onChange={this.handleRating}
                 type='number'
@@ -137,6 +136,10 @@ class DetailedResults extends Component {
                 max='10'
               />
               <button onClick={this.submitRating}>Rate me</button>
+            </div>
+            <div>
+              <button>Add to watchList</button>
+              <button>Add to favorites</button>
             </div>
           </div>
         </div>

@@ -19,6 +19,7 @@ export class UserAccount extends Component {
       : this.setState({ loggedIn: false })
 
     /** Used when the user gets redirected from TMDB auth */
+    this.props.history.push('/user/account')
   }
 
   testGuestSession = async () => {
@@ -32,13 +33,15 @@ export class UserAccount extends Component {
   handleSignUpWithTMDBAccount = async () => {
     try {
       const api_key = await get_API_KEY_FROM_SERVER()
-      const { data } = await axios.get(
+      const { data: initialData } = await axios.get(
         `https://api.themoviedb.org/3/authentication/token/new?api_key=${api_key}`
       )
-      await window.localStorage.setItem('tmdb token', data.request_token)
-      await document.location.assign(
+
+      alert(`request token: ${initialData.request_token}`)
+      window.localStorage.setItem('tmdb token', initialData.request_token)
+      document.location.assign(
         `https://www.themoviedb.org/authenticate/${
-          data.request_token
+          initialData.request_token
         }?redirect_to=http://localhost:3000/user/account`
       )
     } catch (error) {
@@ -50,14 +53,13 @@ export class UserAccount extends Component {
     try {
       const api_key = await get_API_KEY_FROM_SERVER()
       const { data } = await axios.post(
-        `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}d`,
+        `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}`,
         {
-          request_token: window.localStorage.getItem('tmdb token'),
+          request_token: window.localStorage['tmdb token'],
         }
       )
       window.localStorage.setItem('tmdb session_id', data.session_id)
-      console.log(data)
-      console.log(window.localStorage.getItem('tmdb session_id'))
+      this.setState({ loggedIn: true, userName: 'TMDB User' })
     } catch (error) {
       console.error(error)
     }
@@ -88,8 +90,6 @@ export class UserAccount extends Component {
 
   render() {
     const { userName, loggedIn } = this.state
-    console.log(this.state.data)
-    console.log(window.localStorage['tmdb session_id'])
     return (
       <div>
         <h1>Hello, {userName}</h1>
@@ -123,7 +123,7 @@ export class UserAccount extends Component {
               </button>
               <div>
                 <button onClick={this.createSessionWithToken}>
-                  Check if TMDB Validated token
+                  Create session
                 </button>
               </div>
             </div>
