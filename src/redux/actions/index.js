@@ -4,9 +4,9 @@ import {
   querySearch,
   fetchDetailedResultsFromDatabase,
   fetchToken,
+  createSession,
 } from '../../API/server'
 import { newGuestSession } from '../../API/MovieDB'
-import { URL } from '../../API/serverURL'
 
 /** Thunk */
 export const fetchMovies = (
@@ -74,8 +74,15 @@ export const createGuestSession = () => async dispatch => {
 export const requestToken = () => async dispatch => {
   try {
     const { data } = await fetchToken()
-    // dispatch(retrieveToken(data))
-    console.log(data)
+    return await data.request_token
+  } catch (error) {
+    console.error(error)
+  }
+}
+export const createSessionWithToken = token => async dispatch => {
+  try {
+    const data = await createSession(token)
+    console.log(token)
   } catch (error) {
     console.error(error)
   }

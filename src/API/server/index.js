@@ -50,3 +50,11 @@ export const fetchToken = async () => {
     console.error(error)
   }
 }
+export const createSession = async token => {
+  try {
+    const { data } = await axios.get(`${URL}/auth/create_session/:${token}`)
+    return await data
+  } catch (error) {
+    console.error(error)
+  }
+}
