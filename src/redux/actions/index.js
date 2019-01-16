@@ -3,8 +3,10 @@ import {
   fetchTVFromDatabase,
   querySearch,
   fetchDetailedResultsFromDatabase,
+  fetchToken,
 } from '../../API/server'
 import { newGuestSession } from '../../API/MovieDB'
+import { URL } from '../../API/serverURL'
 
 /** Thunk */
 export const fetchMovies = (
@@ -62,11 +64,21 @@ export const searchAPI = (
   }
 }
 
+/** Account thunks */
 export const createGuestSession = () => async dispatch => {
   try {
     const data = await newGuestSession()
     dispatch(createNewGuestSession(data))
   } catch (error) {}
+}
+export const requestToken = () => async dispatch => {
+  try {
+    const { data } = await fetchToken()
+    // dispatch(retrieveToken(data))
+    console.log(data)
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 /** Regular action */
@@ -101,5 +113,9 @@ export const signInWithTMDBAccount = data => ({
 
 export const fetchUserAccount = data => ({
   type: 'FETCH_USER_ACCOUNT',
+  data,
+})
+export const retrieveToken = data => ({
+  type: 'RETRIEVE_TOKEN',
   data,
 })

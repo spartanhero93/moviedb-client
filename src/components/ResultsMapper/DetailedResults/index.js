@@ -115,9 +115,12 @@ class DetailedResults extends Component {
     }
   }
 
+  handleMarkAsFavorite = async () => {}
+
   render() {
     if (!this.props.details.id) return <div />
     const { details: item } = this.props
+    console.log(this.props)
     return (
       <Wrapper>
         <TitleYearContainer backdrop={getBackdropURL(item.backdrop_path)}>

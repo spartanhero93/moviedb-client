@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import { Route } from 'react-router-dom'
 import { newGuestSession, get_API_KEY_FROM_SERVER } from '../../API/MovieDB'
+import { requestToken } from '../../redux/actions'
 import TMDBAccount from './TMDBUser'
 
-export class UserAccount extends Component {
+class UserAccount extends Component {
   state = {
     userName: 'Guest',
     data: {},
@@ -90,6 +92,7 @@ export class UserAccount extends Component {
 
   render() {
     const { userName, loggedIn } = this.state
+    const { requestToken } = this.props
     return (
       <div>
         <h1>Hello, {userName}</h1>
@@ -125,6 +128,7 @@ export class UserAccount extends Component {
                 <button onClick={this.createSessionWithToken}>
                   Create session
                 </button>
+                <button onClick={() => requestToken()}>Test Dispatch</button>
               </div>
             </div>
           </div>
@@ -134,6 +138,15 @@ export class UserAccount extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  requestToken: () => dispatch(requestToken()),
+})
+
+export const ConnectedUserAccount = connect(
+  null,
+  mapDispatchToProps
+)(UserAccount)
+
 export const UserAccountRoute = () => (
-  <Route path='/user/account' component={UserAccount} />
+  <Route path='/user/account' component={ConnectedUserAccount} />
 )

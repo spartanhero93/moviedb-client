@@ -41,3 +41,12 @@ export const fetchDetailedResultsFromDatabase = async (mediaType, id) => {
     console.error(error)
   }
 }
+
+export const fetchToken = async () => {
+  try {
+    const { data } = await axios.get(`${URL}/auth/get_token`)
+    return await data
+  } catch (error) {
+    console.error(error)
+  }
+}
