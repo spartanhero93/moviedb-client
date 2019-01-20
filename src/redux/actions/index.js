@@ -82,7 +82,11 @@ export const requestToken = () => async dispatch => {
 export const createSessionWithToken = token => async dispatch => {
   try {
     const data = await createSession(token)
-    dispatch(signInWithTMDBAccount(data))
+    if (data.success) {
+      dispatch(signInWithTMDBAccount(data))
+      window.localStorage.removeItem('token')
+      window.localStorage.setItem('session', data.session_id)
+    }
   } catch (error) {
     console.error(error)
   }
@@ -120,9 +124,5 @@ export const signInWithTMDBAccount = data => ({
 
 export const fetchUserAccount = data => ({
   type: 'FETCH_USER_ACCOUNT',
-  data,
-})
-export const retrieveToken = data => ({
-  type: 'RETRIEVE_TOKEN',
   data,
 })

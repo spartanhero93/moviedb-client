@@ -12,7 +12,7 @@ export default class Details extends Component {
       const api_key = await get_API_KEY_FROM_SERVER()
       const { data } = await axios.get(`
       https://api.themoviedb.org/3/account?api_key=${api_key}&session_id=${
-        window.localStorage['tmdb session_id']
+        window.localStorage['session_id']
       }`)
       window.sessionStorage.setItem('id', data.id)
       this.setState({ data })

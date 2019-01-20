@@ -13,9 +13,9 @@ class UserAccount extends Component {
   }
 
   componentDidMount() {
-    window.localStorage['tmdb session_id']
+    window.localStorage['session']
       ? this.setState({ loggedIn: true, userName: 'TMDB User' })
-      : window.sessionStorage['guest session_id']
+      : window.localStorage['guest session']
       ? this.setState({ loggedIn: true, userName: 'Guest' })
       : this.setState({ loggedIn: false })
 
@@ -105,7 +105,6 @@ class UserAccount extends Component {
     const { userName, loggedIn } = this.state
     const { requestToken, createSessionWithToken, data } = this.props
     console.log(window.localStorage)
-    console.log(data)
     return (
       <div>
         <h1>Hello, {userName}</h1>

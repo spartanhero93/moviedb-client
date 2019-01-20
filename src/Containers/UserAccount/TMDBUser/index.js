@@ -2,28 +2,24 @@ import React, { Component } from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
 import Details from './details'
 
-const WatchList = () => (
-  <div>
-    <h1>WatchList</h1>
-  </div>
-)
-const RatedMovies = () => (
-  <div>
-    <h1>RatedMovies</h1>
-  </div>
-)
-const RatedTVShows = () => (
-  <div>
-    <h1>RatedTVShows</h1>
-  </div>
-)
+class AccountInfo extends Component {
+  componentWillReceiveProps(prevProps) {
+    if (this.props.match.params != prevProps.match.params) {
+      alert('changed!')
+    }
+  }
 
-const accountRoutes = [
-  { path: '/watchList', component: WatchList },
-  { path: '/rated_movies', component: RatedMovies },
-  { path: '/rated_tv_shows', component: RatedTVShows },
-  { path: '/details', component: Details },
-]
+  render() {
+    console.log(this.props)
+    return (
+      <div>
+        <h1>Match {this.props.match.params.type}</h1>
+      </div>
+    )
+  }
+}
+
+const accountRoutes = [{ path: '/:type', component: AccountInfo }]
 
 const accountLinks = [
   { to: '/watchList', exact: 'true', title: 'Watch List' },
@@ -43,11 +39,7 @@ class TMDBAccount extends Component {
       <div>
         <div>
           {accountLinks.map(item => (
-            <Link
-              key={item.title}
-              to={`${match.path + item.to}`}
-              exact={item.exact}
-            >
+            <Link key={item.title} to={`${match.path + item.to}`}>
               {item.title}
               <br />
             </Link>
