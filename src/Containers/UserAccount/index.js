@@ -103,7 +103,9 @@ class UserAccount extends Component {
 
   render() {
     const { userName, loggedIn } = this.state
-    const { requestToken, createSessionWithToken } = this.props
+    const { requestToken, createSessionWithToken, data } = this.props
+    console.log(window.localStorage)
+    console.log(data)
     return (
       <div>
         <h1>Hello, {userName}</h1>
@@ -141,6 +143,10 @@ class UserAccount extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  data: state.userAccountReducer,
+})
+
 const mapDispatchToProps = dispatch => ({
   requestToken: () => dispatch(requestToken()),
   createSessionWithToken: () =>
@@ -148,7 +154,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export const ConnectedUserAccount = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UserAccount)
 

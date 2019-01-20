@@ -82,7 +82,7 @@ export const requestToken = () => async dispatch => {
 export const createSessionWithToken = token => async dispatch => {
   try {
     const data = await createSession(token)
-    console.log(token)
+    dispatch(signInWithTMDBAccount(data))
   } catch (error) {
     console.error(error)
   }
