@@ -5,7 +5,7 @@ const initialState = {
   results: [],
   total_pages: 1,
   total_results: 1,
-  query: '',
+  query: ''
 }
 
 const mediaReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const mediaReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        query: action.query,
+        query: action.query
       }
     case 'DETAILED_DATA':
       return { ...state, ...state.details, ...action.data }
@@ -48,5 +48,5 @@ const userAccountReducer = (state = {}, action) => {
 export default combineReducers({
   mediaReducer,
   detailsReducer,
-  userAccountReducer,
+  userAccountReducer
 })

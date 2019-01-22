@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
-import Details from './details'
 
 class AccountInfo extends Component {
   componentWillReceiveProps(prevProps) {
-    if (this.props.match.params != prevProps.match.params) {
+    if (this.props.match.params !== prevProps.match.params) {
       alert('changed!')
     }
   }
@@ -25,12 +24,12 @@ const accountLinks = [
   { to: '/watchList', exact: 'true', title: 'Watch List' },
   { to: '/rated_movies', exact: 'true', title: 'Rated Movies' },
   { to: '/rated_tv_shows', exact: 'true', title: 'Rated TV Shows' },
-  { to: '/details', exact: 'true', title: 'Get account Details' },
+  { to: '/details', exact: 'true', title: 'Get account Details' }
 ]
 
 class TMDBAccount extends Component {
   state = {
-    data: {},
+    data: {}
   }
 
   render() {
@@ -38,7 +37,7 @@ class TMDBAccount extends Component {
     return (
       <div>
         <div>
-          {accountLinks.map(item => (
+          {accountLinks.map((item) => (
             <Link key={item.title} to={`${match.path + item.to}`}>
               {item.title}
               <br />
@@ -46,7 +45,7 @@ class TMDBAccount extends Component {
           ))}
         </div>
         <div>
-          {accountRoutes.map(item => (
+          {accountRoutes.map((item) => (
             <Route
               key={item.path}
               path={`${match.path + item.path}`}
