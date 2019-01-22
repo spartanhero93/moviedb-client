@@ -87,7 +87,6 @@ class MyDrawer extends Component {
         <NavLink to='/discover/movies' exact>
           <Button className={classes.button}>Discover</Button>
         </NavLink>
-        <Button className={classes.button}>TV Shows</Button>
       </div>
     )
 
