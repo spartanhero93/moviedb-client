@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import {
   requestToken,
   createSessionWithToken,
-  removeTMDBSession
+  removeTMDBSession,
 } from '../../redux/actions'
 import TMDBAccount from './TMDBUser'
 
@@ -12,7 +12,7 @@ class UserAccount extends Component {
   state = {
     userName: 'Guest',
     data: {},
-    loggedIn: false
+    loggedIn: false,
   }
 
   async componentDidMount() {
@@ -59,9 +59,22 @@ class UserAccount extends Component {
     }
   }
 
+  handleRemoveTMDBSession = async () => {
+    try {
+      const data = await this.props.removeSession()
+      if (data.success) {
+        window.localStorage.removeItem('session')
+        alert('logged out!')
+      } else {
+        console.log(data)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   render() {
     const { userName, loggedIn } = this.state
-    const { removeSession } = this.props
     console.log(window.localStorage)
     return (
       <div>
@@ -73,7 +86,7 @@ class UserAccount extends Component {
               Remove guest session ID
             </button>
             <TMDBAccount />
-            <button onClick={() => removeSession()}>Logout</button>
+            <button onClick={this.handleRemoveTMDBSession}>Logout</button>
           </div>
         ) : (
           <div>
@@ -91,15 +104,15 @@ class UserAccount extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  data: state.userAccountReducer
+const mapStateToProps = state => ({
+  data: state.userAccountReducer,
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   requestToken: () => dispatch(requestToken()),
   createSessionWithToken: () =>
     dispatch(createSessionWithToken(window.localStorage['token'])),
-  removeSession: () => dispatch(removeTMDBSession(window.localStorage['session']))
+  removeSession: () => dispatch(removeTMDBSession(window.localStorage['session'])),
 })
 
 export const ConnectedUserAccount = connect(
