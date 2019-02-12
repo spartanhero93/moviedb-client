@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
+import Details from './details'
 
 class AccountInfo extends Component {
   componentWillReceiveProps(prevProps) {
@@ -24,19 +25,20 @@ const accountLinks = [
   { to: '/watchList', exact: 'true', title: 'Watch List' },
   { to: '/rated_movies', exact: 'true', title: 'Rated Movies' },
   { to: '/rated_tv_shows', exact: 'true', title: 'Rated TV Shows' },
-  { to: '/details', exact: 'true', title: 'Get account Details' }
+  { to: '/details', exact: 'true', title: 'Get account Details' },
 ]
 
 class TMDBAccount extends Component {
   state = {
-    data: {}
+    data: {},
   }
 
   render() {
     const { match } = this.props
     return (
       <div>
-        <div>
+        <Details />
+        {/* <div>
           {accountLinks.map((item) => (
             <Link key={item.title} to={`${match.path + item.to}`}>
               {item.title}
@@ -52,7 +54,7 @@ class TMDBAccount extends Component {
               component={item.component}
             />
           ))}
-        </div>
+        </div> */}
       </div>
     )
   }

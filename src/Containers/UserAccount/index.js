@@ -28,13 +28,6 @@ class UserAccount extends Component {
     if (window.localStorage['session']) {
       this.setState({ loggedIn: true, userName: 'TMDB user' })
     }
-    // window.localStorage['session']
-    //   ? this.setState({ loggedIn: true, userName: 'TMDB User' })
-    //   : window.localStorage['guest session']
-    //   ? this.setState({ loggedIn: true, userName: 'Guest' })
-    //   : this.setState({ loggedIn: false })
-
-    /** Used when the user gets redirected from TMDB auth */
     this.props.history.push('/user/account')
   }
 

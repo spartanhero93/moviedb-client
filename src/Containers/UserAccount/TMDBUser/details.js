@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { get_API_KEY_FROM_SERVER } from '../../../API/MovieDB'
 
 export default class Details extends Component {
   state = {
@@ -9,7 +8,6 @@ export default class Details extends Component {
 
   fetchDetails = async () => {
     try {
-      const api_key = await get_API_KEY_FROM_SERVER()
       const { data } = await axios.get(`
       https://api.themoviedb.org/3/account?api_key=${api_key}&session_id=${
         window.localStorage['session_id']
