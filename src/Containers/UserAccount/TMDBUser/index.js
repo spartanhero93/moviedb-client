@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
-import Details from './details'
 
 class AccountInfo extends Component {
   componentWillReceiveProps(prevProps) {
@@ -37,9 +36,8 @@ class TMDBAccount extends Component {
     const { match } = this.props
     return (
       <div>
-        <Details />
-        {/* <div>
-          {accountLinks.map((item) => (
+        <div>
+          {accountLinks.map(item => (
             <Link key={item.title} to={`${match.path + item.to}`}>
               {item.title}
               <br />
@@ -47,14 +45,14 @@ class TMDBAccount extends Component {
           ))}
         </div>
         <div>
-          {accountRoutes.map((item) => (
+          {accountRoutes.map(item => (
             <Route
               key={item.path}
               path={`${match.path + item.path}`}
               component={item.component}
             />
           ))}
-        </div> */}
+        </div>
       </div>
     )
   }
