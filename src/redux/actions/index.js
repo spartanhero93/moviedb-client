@@ -116,8 +116,3 @@ export const signInWithTMDBAccount = data => ({
   type: 'SIGN_IN_TMDB_ACCOUNT',
   data,
 })
-
-export const fetchUserAccount = data => ({
-  type: 'FETCH_USER_ACCOUNT',
-  data,
-})

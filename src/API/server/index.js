@@ -42,27 +42,35 @@ export const fetchDetailedResultsFromDatabase = async (mediaType, id) => {
   }
 }
 
+/** Account actions */
+
 export const fetchToken = async () => {
   try {
-    const { data } = await axios.get(`${URL}/auth/get_token`)
+    const { data } = await axios.get(`${URL}/user/get_token`)
     return await data
   } catch (error) {
     console.error(error)
   }
 }
-export const createSession = async (token) => {
+export const createSession = async token => {
   try {
-    const { data } = await axios.get(`${URL}/auth/create_session/${token}`)
+    const { data } = await axios.get(`${URL}/user/create_session/${token}`)
     return await data
   } catch (error) {
     console.error(error)
   }
 }
-export const removeSession = async (session) => {
+export const removeSession = async session => {
   try {
-    const { data } = await axios.get(`${URL}/auth/remove_session/${session}`)
+    const { data } = await axios.get(`${URL}/user/remove_session/${session}`)
     return await data
   } catch (error) {
     console.error(error)
   }
+}
+
+export const postRating = async (mediaType, rating) => {
+  try {
+    const { data } = await axios.get(`${URL}/user`)
+  } catch (error) {}
 }

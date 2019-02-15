@@ -41,7 +41,7 @@ export const TitleYearContainer = styled.div`
   background: top center url(${props => props.backdrop});
   height: 30rem;
   background-size: cover;
-  box-shadow: inset 0 0 0 2000px rgba(25, 25, 25, 0.6);
+  box-shadow: inset 0 0 0 2000px rgba(25, 25, 25, 0.7);
   justify-content: center;
 
   @media (max-width: 900px) {
