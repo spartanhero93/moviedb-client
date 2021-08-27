@@ -72,5 +72,8 @@ export const removeSession = async session => {
 export const postRating = async (mediaType, rating) => {
   try {
     const { data } = await axios.get(`${URL}/user`)
-  } catch (error) {}
+    console.log(data)
+  } catch (error) {
+
+  }
 }
