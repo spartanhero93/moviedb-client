@@ -1,23 +1,28 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import { createRoot } from 'react-dom/client'
+// import { Provider } from 'react-redux'
+// import { MuiThemeProvider } from '@material-ui/core/styles'
 
 import './index.css'
 import App from './App'
 //import registerServiceWorker from './registerServiceWorker';
 
-import store from './redux/store'
-import theme from './MuiTheme'
+// import store from './redux/store'
+// import theme from './MuiTheme'
 
-ReactDOM.render(
-  <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
-      <App />
-    </MuiThemeProvider>
-  </Provider>,
-  document.getElementById('root')
-)
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <MuiThemeProvider theme={theme}>
+//       <App />
+//     </MuiThemeProvider>
+//   </Provider>,
+//   document.getElementById('root')
+// )
+const container = document.getElementById('root') 
+const root = createRoot(container)
+
+root.render(<App />)
+
 //registerServiceWorker();
 /**
  * Credits
