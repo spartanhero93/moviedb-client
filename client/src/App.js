@@ -17,11 +17,13 @@ function Results({serverData}){
     return(
       <div>
         {resultsArray.map(item => (
-          <div>
-            <h4>Title: {item.title}</h4>
-            <img width='300' src='' alt='' />
+          <div key={item.id}>
+            <h4>Title: {item.title}, Language: {item.original_language}</h4>
+            <img width='300' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt='' />
             <p>{item.overview}</p>
+            <p>Released on: {item.release_date}</p>
             <p>Vote average: {item.vote_average}</p>
+            <p>Vote count: {item.vote_count}</p>
           </div>
         ))}
       </div>
