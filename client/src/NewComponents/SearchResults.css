@@ -1,0 +1,54 @@
+#SearchResults {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+#SearchResults > div {
+  width: 600px;
+
+}
+
+#SearchResults .container {
+  width: 400px;
+}
+
+#SearchResults .image-hover-container {
+  position: relative;
+  width: 50%; /* or any desired width */
+  display: inline-block; /* Keeps the container to the size of the image */
+}
+
+#SearchResults .image-hover-container img {
+  display: block; /* Removes bottom margin/gap */
+  width: 100%; /* Makes the image responsive */
+  height: auto;
+}
+
+#SearchResults .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(0,0,0,0.7); /* Dim the image with dark overlay */
+}
+
+#SearchResults .image-hover-container:hover .overlay {
+  opacity: 1;
+}
+
+#SearchResults .text {
+  color: white;
+  font-size: 14px;
+  width: 100%;
+  padding: 0 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

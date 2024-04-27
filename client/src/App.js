@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
+
+import Sidebar from './NewComponents/SideBar'
+import SearchResults from './NewComponents/SearchResults'
 // import CssBaseline from '@material-ui/core/CssBaseline'
 
 /**redux */
@@ -8,30 +11,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 // import Main from './Containers/Main'
 const URL = 'http://localhost:3001/api/movies/'
 
-function Results({serverData}){
-  console.log('results')
-  console.log(serverData)
 
-  if(serverData){
-    const resultsArray = serverData;
-    return(
-      <div>
-        {resultsArray.map(item => (
-          <div key={item.id}>
-            <h4>Title: {item.title}, Language: {item.original_language}</h4>
-            <img width='300' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt='' />
-            <p>{item.overview}</p>
-            <p>Released on: {item.release_date}</p>
-            <p>Vote average: {item.vote_average}</p>
-            <p>Vote count: {item.vote_count}</p>
-          </div>
-        ))}
-      </div>
-    )
-  } else {
-    return <div>Loading...</div>
-  }
-}
 
 function App() {
   const [serverData, handleServerData] = useState({})
@@ -55,15 +35,15 @@ function App() {
 
   return(
     <div>
-      <h1>Hello World</h1>
       
-
+      <h1>Hello World</h1>
       <input type='text' onChange={e => handleUserQuery(e.target.value)} />
       <button onClick={() => fetchData()}>Search!</button>
       <button onClick={() => console.log(serverData)}>Log data!</button>
-
-      <h3>Results!</h3>
-      <Results serverData={serverData.results}/>
+      <div style={{display: 'flex', marginTop: '40px'}}>
+        <Sidebar />
+        <SearchResults serverData={serverData.results}/>
+      </div>
     </div>
   )
 }
