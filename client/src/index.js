@@ -1,5 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 // import { Provider } from 'react-redux'
 // import { MuiThemeProvider } from '@material-ui/core/styles'
 
@@ -20,8 +22,18 @@ import App from './App'
 // )
 const container = document.getElementById('root') 
 const root = createRoot(container)
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />
+  }
+])
 
-root.render(<App />)
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+)
 
 //registerServiceWorker();
 /**
