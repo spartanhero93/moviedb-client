@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 #SearchResults > div {
   width: 600px;

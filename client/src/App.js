@@ -40,10 +40,8 @@ function App() {
       <input type='text' onChange={e => handleUserQuery(e.target.value)} />
       <button onClick={() => fetchData()}>Search!</button>
       <button onClick={() => console.log(serverData)}>Log data!</button>
-      <div style={{display: 'flex', marginTop: '40px'}}>
-        <Sidebar />
-        <SearchResults serverData={serverData.results}/>
-      </div>
+      <Sidebar />
+      <SearchResults serverData={serverData.results}/>
     </div>
   )
 }

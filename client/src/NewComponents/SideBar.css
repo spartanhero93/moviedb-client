@@ -1,0 +1,29 @@
+.hamburger {
+  cursor: pointer;
+  font-size: 30px; /* Icon size */
+  user-select: none;
+  padding: 10px;
+}
+
+.menu li {
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd; /* optional */
+}
+
+/* Style to add a full-screen overlay effect */
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000; /* Make sure it is above other content */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu.open {
+  transform: translateX(0);
+}
